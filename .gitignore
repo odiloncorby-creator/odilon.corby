@@ -1,0 +1,9 @@
+# Brainstorming companion (fichiers temporaires)
+.superpowers/
+
+# macOS
+.DS_Store
+**/.DS_Store
+
+# Fichiers système
+Thumbs.db

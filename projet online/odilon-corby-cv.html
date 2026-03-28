@@ -1,0 +1,1475 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Odilon Corby — Direction Communication</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=IBM+Plex+Mono:wght@300;400;500&family=EB+Garamond:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --black: #080808;
+    --deep: #0f0f0f;
+    --surface: #141414;
+    --oxide: #c0392b;
+    --oxide-dim: #8a2820;
+    --oxide-glow: rgba(192,57,43,0.15);
+    --white: #f0ede6;
+    --white-dim: rgba(240,237,230,0.5);
+    --white-ghost: rgba(240,237,230,0.08);
+    --mono: 'IBM Plex Mono', monospace;
+    --serif: 'Playfair Display', Georgia, serif;
+    --body: 'EB Garamond', Georgia, serif;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--black);
+    color: var(--white);
+    font-family: var(--body);
+    font-size: 18px;
+    line-height: 1.6;
+  }
+
+  /* ─── GRAIN OVERLAY ─── */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='1'/%3E%3C/svg%3E");
+    opacity: 0.03;
+    pointer-events: none;
+    z-index: 1000;
+  }
+
+  /* ─── LAYOUT ─── */
+  .site-wrapper {
+    min-height: 100vh;
+  }
+
+  /* ─── SIDEBAR ─── */
+  .sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 220px;
+    height: 100vh;
+    background: var(--deep);
+    border-right: 1px solid rgba(240,237,230,0.06);
+    display: flex;
+    flex-direction: column;
+    padding: 40px 24px;
+    z-index: 100;
+    opacity: 0;
+    animation: fadeIn 1.2s ease 0.2s forwards;
+    overflow-y: auto;
+    overflow-x: hidden;
+  }
+
+  .sidebar-logo {
+    margin-bottom: 48px;
+  }
+
+  .sidebar-logo .name {
+    font-family: var(--serif);
+    font-size: 15px;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    color: var(--white);
+    display: block;
+    line-height: 1.2;
+  }
+
+  .sidebar-logo .role {
+    font-family: var(--mono);
+    font-size: 9px;
+    font-weight: 300;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--oxide);
+    display: block;
+    margin-top: 6px;
+  }
+
+  .sidebar-logo .signal-line {
+    display: block;
+    width: 100%;
+    height: 1px;
+    background: linear-gradient(90deg, var(--oxide) 0%, transparent 100%);
+    margin-top: 16px;
+  }
+
+  nav {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    flex: 1;
+  }
+
+  nav a {
+    font-family: var(--mono);
+    font-size: 10px;
+    font-weight: 400;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--white-dim);
+    text-decoration: none;
+    padding: 10px 12px;
+    border-left: 2px solid transparent;
+    transition: all 0.3s ease;
+    position: relative;
+  }
+
+  nav a:hover, nav a.active {
+    color: var(--white);
+    border-left-color: var(--oxide);
+    background: var(--white-ghost);
+  }
+
+  nav a .nav-index {
+    color: var(--oxide);
+    margin-right: 8px;
+    font-size: 9px;
+  }
+
+  .sidebar-footer {
+    font-family: var(--mono);
+    font-size: 8px;
+    letter-spacing: 0.12em;
+    color: rgba(240,237,230,0.2);
+    text-transform: uppercase;
+    line-height: 1.8;
+  }
+
+  .sidebar-footer a {
+    color: rgba(240,237,230,0.3);
+    text-decoration: none;
+    display: block;
+    transition: color 0.2s;
+  }
+
+  .sidebar-footer a:hover { color: var(--oxide); }
+
+  /* ─── MAIN ─── */
+  main {
+    margin-left: 220px;
+    position: relative;
+  }
+
+  /* ─── SECTIONS ─── */
+  section {
+    min-height: 100vh;
+    padding: 80px 72px 80px 64px;
+    position: relative;
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+  }
+
+  section.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  section + section {
+    border-top: 1px solid rgba(240,237,230,0.06);
+  }
+
+  /* ─── HERO ─── */
+  #hero {
+    display: grid;
+    grid-template-columns: 1fr 280px;
+    gap: 48px;
+    align-items: start;
+    padding-top: 100px;
+    /* Hero visible immédiatement, ses enfants ont leurs propres animations */
+    opacity: 1;
+    transform: none;
+  }
+
+
+  .hero-content {}
+
+  .hero-eyebrow {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--oxide);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 32px;
+    opacity: 0;
+    animation: slideRight 0.8s ease 0.6s forwards;
+  }
+
+  .hero-eyebrow::before {
+    content: '';
+    display: block;
+    width: 32px;
+    height: 1px;
+    background: var(--oxide);
+  }
+
+  .hero-title {
+    font-family: var(--serif);
+    font-size: clamp(52px, 6vw, 88px);
+    font-weight: 900;
+    line-height: 0.92;
+    letter-spacing: -0.02em;
+    color: var(--white);
+    margin-bottom: 40px;
+    opacity: 0;
+    animation: slideRight 0.9s ease 0.8s forwards;
+  }
+
+  .hero-title em {
+    font-style: italic;
+    color: var(--oxide);
+  }
+
+  .hero-concept {
+    font-family: var(--body);
+    font-size: 20px;
+    font-style: italic;
+    line-height: 1.55;
+    color: var(--white-dim);
+    max-width: 520px;
+    border-left: 2px solid var(--oxide);
+    padding-left: 20px;
+    margin-bottom: 48px;
+    opacity: 0;
+    animation: slideRight 1s ease 1s forwards;
+  }
+
+  .hero-meta {
+    display: flex;
+    gap: 32px;
+    opacity: 0;
+    animation: slideRight 1s ease 1.2s forwards;
+  }
+
+  .hero-meta-item {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--white-dim);
+  }
+
+  .hero-meta-item span {
+    display: block;
+    font-size: 13px;
+    color: var(--white);
+    margin-top: 4px;
+    letter-spacing: 0.04em;
+  }
+
+  .hero-portrait {
+    position: relative;
+    opacity: 0;
+    animation: fadeIn 1.2s ease 1.4s forwards;
+  }
+
+  .hero-portrait img {
+    width: 100%;
+    display: block;
+    filter: grayscale(100%) contrast(1.1);
+    mix-blend-mode: luminosity;
+  }
+
+  .hero-portrait::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, var(--oxide-glow) 0%, transparent 60%);
+    z-index: 1;
+    pointer-events: none;
+  }
+
+  .hero-portrait::after {
+    content: '';
+    position: absolute;
+    bottom: -1px;
+    left: 0;
+    right: 0;
+    height: 40%;
+    background: linear-gradient(to top, var(--black), transparent);
+    z-index: 2;
+  }
+
+  .portrait-frame {
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    bottom: 8px;
+    left: 8px;
+    border: 1px solid var(--oxide-dim);
+    z-index: 0;
+    pointer-events: none;
+  }
+
+  /* ─── SECTION HEADERS ─── */
+  .section-header {
+    display: flex;
+    align-items: baseline;
+    gap: 16px;
+    margin-bottom: 64px;
+  }
+
+  .section-index {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--oxide);
+    letter-spacing: 0.15em;
+  }
+
+  .section-title {
+    font-family: var(--serif);
+    font-size: 48px;
+    font-weight: 900;
+    line-height: 1;
+    color: var(--white);
+  }
+
+  .section-line {
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(90deg, rgba(240,237,230,0.15) 0%, transparent 100%);
+    margin-left: 16px;
+  }
+
+  /* ─── PARCOURS ─── */
+  .timeline {
+    position: relative;
+    padding-left: 32px;
+  }
+
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 8px;
+    bottom: 0;
+    width: 1px;
+    background: linear-gradient(180deg, var(--oxide) 0%, transparent 100%);
+  }
+
+  .timeline-item {
+    position: relative;
+    margin-bottom: 56px;
+    opacity: 0;
+    transform: translateX(-12px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+
+  .timeline-item.visible {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  .timeline-item::before {
+    content: '';
+    position: absolute;
+    left: -36px;
+    top: 8px;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--oxide);
+    box-shadow: 0 0 12px var(--oxide-glow);
+  }
+
+  .timeline-dates {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    color: var(--oxide);
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+
+  .timeline-org {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    color: var(--white-dim);
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+
+  .timeline-role {
+    font-family: var(--serif);
+    font-size: 28px;
+    font-weight: 700;
+    line-height: 1.1;
+    color: var(--white);
+    margin-bottom: 16px;
+  }
+
+  .timeline-keyword {
+    display: inline-block;
+    font-family: var(--mono);
+    font-size: 9px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--oxide);
+    border: 1px solid var(--oxide-dim);
+    padding: 3px 8px;
+    margin-bottom: 16px;
+  }
+
+  .timeline-desc {
+    font-family: var(--body);
+    font-size: 16px;
+    line-height: 1.7;
+    color: var(--white-dim);
+    max-width: 600px;
+  }
+
+  /* ─── APPROCHE ─── */
+  #approche {
+    background: var(--deep);
+  }
+
+  .approche-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2px;
+    margin-bottom: 64px;
+  }
+
+  .approche-cell {
+    background: var(--surface);
+    padding: 36px 32px;
+    position: relative;
+    overflow: hidden;
+    transition: background 0.3s ease;
+  }
+
+  .approche-cell:hover {
+    background: #1a1a1a;
+  }
+
+  .approche-cell::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 3px;
+    height: 0;
+    background: var(--oxide);
+    transition: height 0.4s ease;
+  }
+
+  .approche-cell:hover::before {
+    height: 100%;
+  }
+
+  .approche-cell-index {
+    font-family: var(--mono);
+    font-size: 9px;
+    letter-spacing: 0.18em;
+    color: var(--oxide);
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+
+  .approche-cell-title {
+    font-family: var(--serif);
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--white);
+    margin-bottom: 12px;
+    line-height: 1.2;
+  }
+
+  .approche-cell-text {
+    font-family: var(--body);
+    font-size: 15px;
+    line-height: 1.65;
+    color: var(--white-dim);
+  }
+
+  .approche-statement {
+    font-family: var(--serif);
+    font-size: 28px;
+    font-style: italic;
+    font-weight: 400;
+    line-height: 1.4;
+    color: var(--white);
+    max-width: 680px;
+    border-left: 3px solid var(--oxide);
+    padding-left: 28px;
+  }
+
+  /* ─── PROJETS ─── */
+  .projets-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2px;
+  }
+
+  .projet-card {
+    background: var(--surface);
+    padding: 48px 40px;
+    position: relative;
+    overflow: hidden;
+    cursor: default;
+    transition: background 0.4s ease;
+  }
+
+  .projet-card:hover {
+    background: #1a1a1a;
+  }
+
+  .projet-card-bg {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    pointer-events: none;
+    background: radial-gradient(circle at 80% 20%, var(--oxide-glow) 0%, transparent 60%);
+    transition: opacity 0.5s ease;
+  }
+
+  .projet-card:hover .projet-card-bg {
+    opacity: 1;
+  }
+
+  .projet-tag {
+    font-family: var(--mono);
+    font-size: 9px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--oxide);
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .projet-tag::before {
+    content: '';
+    display: block;
+    width: 16px;
+    height: 1px;
+    background: var(--oxide);
+  }
+
+  .projet-title {
+    font-family: var(--serif);
+    font-size: 32px;
+    font-weight: 900;
+    line-height: 1.05;
+    color: var(--white);
+    margin-bottom: 20px;
+  }
+
+  .projet-desc {
+    font-family: var(--body);
+    font-size: 16px;
+    line-height: 1.65;
+    color: var(--white-dim);
+    margin-bottom: 28px;
+  }
+
+  .projet-details {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .projet-detail {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    color: rgba(240,237,230,0.35);
+  }
+
+  .projet-detail strong {
+    color: var(--white-dim);
+    font-weight: 500;
+  }
+
+  .projet-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--oxide);
+    text-decoration: none;
+    margin-top: 24px;
+    border-bottom: 1px solid transparent;
+    padding-bottom: 2px;
+    transition: border-color 0.2s;
+  }
+
+  .projet-link:hover {
+    border-color: var(--oxide);
+  }
+
+  .projet-link::after {
+    content: '→';
+    transition: transform 0.2s;
+  }
+
+  .projet-link:hover::after {
+    transform: translateX(4px);
+  }
+
+  /* Music card - full width */
+  .projet-card.wide {
+    grid-column: 1 / -1;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 48px;
+    align-items: center;
+  }
+
+  .music-waveform {
+    display: flex;
+    align-items: center;
+    gap: 3px;
+    height: 80px;
+    margin-top: 24px;
+  }
+
+  .music-waveform .bar {
+    flex: 1;
+    background: var(--oxide);
+    opacity: 0.3;
+    border-radius: 1px;
+    transition: opacity 0.2s;
+    animation: waveAnim var(--dur, 1.2s) ease-in-out infinite alternate;
+  }
+
+  .projet-card:hover .music-waveform .bar {
+    opacity: 0.7;
+  }
+
+  @keyframes waveAnim {
+    from { transform: scaleY(0.3); }
+    to { transform: scaleY(1); }
+  }
+
+  /* ─── SPLASH OVERLAYS ─── */
+  .splash-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.5s ease;
+  }
+
+  .splash-overlay.active {
+    opacity: 1;
+    pointer-events: all;
+  }
+
+  .splash-close {
+    position: absolute;
+    top: 32px;
+    right: 40px;
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.3);
+    cursor: pointer;
+    z-index: 10;
+    transition: color 0.2s;
+    background: none;
+    border: none;
+  }
+
+  .splash-close:hover { color: rgba(255,255,255,0.7); }
+
+  .splash-content {
+    position: relative;
+    z-index: 10;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+  }
+
+  .splash-tag {
+    font-family: var(--mono);
+    font-size: 9px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+  }
+
+  .splash-title {
+    font-family: var(--serif);
+    font-size: clamp(28px, 5vw, 56px);
+    font-weight: 900;
+    line-height: 1.15;
+    color: var(--white);
+  }
+
+  .splash-ctas {
+    display: flex;
+    gap: 12px;
+    margin-top: 8px;
+  }
+
+  .splash-cta {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    padding: 12px 28px;
+    text-decoration: none;
+    transition: background 0.2s, color 0.2s;
+  }
+
+  /* ── Marine splash ── */
+  #splash-marine {
+    background: linear-gradient(180deg, #050d1a 0%, #0a1f3d 45%, #0d2d52 100%);
+  }
+
+  #splash-marine .splash-tag { color: rgba(100,180,255,0.55); }
+
+  #splash-marine .splash-cta {
+    color: rgba(100,180,255,0.9);
+    border: 1px solid rgba(100,180,255,0.35);
+  }
+
+  #splash-marine .splash-cta:hover {
+    background: rgba(100,180,255,0.08);
+  }
+
+  .marine-stars {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+  }
+
+  .marine-waves {
+    position: absolute;
+    bottom: 0;
+    left: -50%;
+    width: 200%;
+    pointer-events: none;
+  }
+
+  .marine-waves svg { display: block; }
+
+  .marine-wave-1 { animation: waveScroll 10s linear infinite; opacity: 0.45; }
+  .marine-wave-2 { animation: waveScroll 15s linear infinite reverse; opacity: 0.3; position: absolute; bottom: -8px; left: -50%; width: 200%; }
+  .marine-wave-3 { animation: waveScroll 7s linear infinite; opacity: 0.2; position: absolute; bottom: 6px; left: -50%; width: 200%; }
+
+  @keyframes waveScroll {
+    from { transform: translateX(0); }
+    to   { transform: translateX(50%); }
+  }
+
+  .marine-boat {
+    position: absolute;
+    bottom: 22%;
+    left: 50%;
+    transform: translateX(-50%);
+    pointer-events: none;
+    animation: boatRock 6s ease-in-out infinite;
+  }
+
+  @keyframes boatRock {
+    0%, 100% { transform: translateX(-50%) rotate(-1deg) translateY(0); }
+    50%       { transform: translateX(-50%) rotate(1deg) translateY(-4px); }
+  }
+
+  /* ── Ground Control splash ── */
+  #splash-ground {
+    background: #0d0806;
+  }
+
+  #splash-ground .splash-tag { color: rgba(255,120,60,0.55); }
+
+  #splash-ground .splash-cta {
+    color: rgba(255,120,60,0.9);
+    border: 1px solid rgba(255,120,60,0.35);
+  }
+
+  #splash-ground .splash-cta:hover {
+    background: rgba(255,120,60,0.08);
+  }
+
+  #splash-ground .splash-cta.alt {
+    color: rgba(255,255,255,0.45);
+    border-color: rgba(255,255,255,0.12);
+  }
+
+  #splash-ground .splash-cta.alt:hover {
+    background: rgba(255,255,255,0.04);
+    color: rgba(255,255,255,0.7);
+  }
+
+  .ground-beams {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    overflow: hidden;
+  }
+
+  .g-beam {
+    position: absolute;
+    bottom: 0;
+    width: 2px;
+    transform-origin: bottom center;
+    opacity: 0;
+    animation: beamFlash 3.5s ease-in-out infinite;
+  }
+
+  @keyframes beamFlash {
+    0%, 100% { opacity: 0; transform: scaleX(1); }
+    25%       { opacity: 1; transform: scaleX(4); }
+    55%       { opacity: 0.5; transform: scaleX(2); }
+  }
+
+  .ground-glow {
+    position: absolute;
+    bottom: 0; left: 0; right: 0; height: 45%;
+    background: radial-gradient(ellipse at 50% 100%, rgba(255,80,30,0.12) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .ground-crowd {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    pointer-events: none;
+  }
+
+  .projet-card.clickable {
+    cursor: pointer;
+  }
+
+  .projet-card.clickable::after {
+    content: '→ Voir le site';
+    position: absolute;
+    bottom: 24px;
+    right: 32px;
+    font-family: var(--mono);
+    font-size: 9px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: rgba(192,57,43,0.4);
+    transition: color 0.3s;
+  }
+
+  .projet-card.clickable:hover::after {
+    color: rgba(192,57,43,0.8);
+  }
+
+  /* ─── CONTACT ─── */
+  #contact {
+    min-height: auto;
+    padding-bottom: 120px;
+  }
+
+  .contact-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 48px;
+    align-items: start;
+  }
+
+  .contact-main {}
+
+  .contact-address {
+    font-family: var(--serif);
+    font-size: 32px;
+    font-style: italic;
+    color: var(--white);
+    line-height: 1.3;
+    margin-bottom: 40px;
+  }
+
+  .contact-links {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .contact-link {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    text-decoration: none;
+    padding: 16px 20px;
+    background: var(--surface);
+    border: 1px solid rgba(240,237,230,0.06);
+    transition: border-color 0.3s, background 0.3s;
+  }
+
+  .contact-link:hover {
+    border-color: var(--oxide);
+    background: var(--white-ghost);
+  }
+
+  .contact-link-label {
+    font-family: var(--mono);
+    font-size: 9px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--oxide);
+    width: 64px;
+    flex-shrink: 0;
+  }
+
+  .contact-link-value {
+    font-family: var(--body);
+    font-size: 16px;
+    color: var(--white-dim);
+    transition: color 0.2s;
+  }
+
+  .contact-link:hover .contact-link-value {
+    color: var(--white);
+  }
+
+  .contact-skills {}
+
+  .skills-title {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--oxide);
+    margin-bottom: 24px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .skills-title::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: rgba(240,237,230,0.08);
+  }
+
+  .skills-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 40px;
+  }
+
+  .skill-tag {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    color: var(--white-dim);
+    border: 1px solid rgba(240,237,230,0.12);
+    padding: 6px 12px;
+    transition: all 0.2s;
+  }
+
+  .skill-tag:hover {
+    border-color: var(--oxide);
+    color: var(--white);
+  }
+
+  /* ─── ANIMATIONS ─── */
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  @keyframes slideRight {
+    from { opacity: 0; transform: translateX(-20px); }
+    to { opacity: 1; transform: translateX(0); }
+  }
+
+  /* ─── SCROLLBAR ─── */
+  ::-webkit-scrollbar { width: 4px; }
+  ::-webkit-scrollbar-track { background: var(--black); }
+  ::-webkit-scrollbar-thumb { background: var(--oxide-dim); }
+
+  /* ─── RESPONSIVE ─── */
+  @media (max-width: 1100px) {
+    .sidebar { display: none; }
+    main { margin-left: 0; }
+    section { padding: 64px 32px; }
+    #hero { grid-template-columns: 1fr; padding-top: 64px; }
+    .hero-portrait { max-width: 240px; }
+    .approche-grid, .projets-grid { grid-template-columns: 1fr; }
+    .projet-card.wide { grid-column: auto; grid-template-columns: 1fr; }
+    .contact-grid { grid-template-columns: 1fr; }
+    .hero-title { font-size: 52px; }
+  }
+
+  @media (max-width: 480px) {
+    section { padding: 48px 20px; }
+    .section-title { font-size: 36px; }
+    .hero-title { font-size: 42px; }
+    .hero-concept { font-size: 17px; }
+    .hero-meta { flex-direction: column; gap: 16px; }
+    .projet-card { padding: 32px 20px; }
+    .approche-cell { padding: 24px 20px; }
+    .contact-address { font-size: 24px; }
+    .timeline-role { font-size: 22px; }
+    .approche-statement { font-size: 20px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="site-wrapper">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <div class="sidebar-logo">
+      <span class="name">Odilon Corby</span>
+      <span class="role">Expert Communication</span>
+      <span class="signal-line"></span>
+    </div>
+    <nav>
+      <a href="#hero" class="active"><span class="nav-index">00</span>Signal</a>
+      <a href="#parcours"><span class="nav-index">01</span>Parcours</a>
+      <a href="#approche"><span class="nav-index">02</span>Approche</a>
+      <a href="#projets"><span class="nav-index">03</span>Projets</a>
+      <a href="#contact"><span class="nav-index">04</span>Contact</a>
+    </nav>
+    <div class="sidebar-footer">
+      <a href="mailto:odilon.corby@gmail.com">odilon.corby@gmail.com</a>
+      <a href="#">+33 6 50 88 16 22</a>
+      <br>
+      Paris, 75020
+    </div>
+  </aside>
+
+  <!-- MAIN -->
+  <main>
+
+    <!-- HERO -->
+    <section id="hero">
+      <div class="hero-content">
+        <div class="hero-eyebrow">Expert Communication &amp; Récit</div>
+        <h1 class="hero-title">
+          Odilon<br>
+          <em>Corby</em>
+        </h1>
+        <p class="hero-concept">
+          Je traduis la complexité en récits qui tiennent — pour des projets à la croisée de la culture, de l'événementiel et de l'innovation.
+        </p>
+        <div class="hero-meta">
+          <div class="hero-meta-item">
+            Localisation
+            <span>Paris, FR</span>
+          </div>
+          <div class="hero-meta-item">
+            Disponibilité
+            <span>Sur demande</span>
+          </div>
+          <div class="hero-meta-item">
+            Expérience
+            <span>+10 ans</span>
+          </div>
+        </div>
+      </div>
+      <div class="hero-portrait">
+        <div class="portrait-frame"></div>
+        <img src="portrait LLR 0251387 - Grande.jpeg" alt="Portrait Odilon Corby" onerror="this.closest('.hero-portrait').style.display='none';this.closest('#hero').style.gridTemplateColumns='1fr'">
+      </div>
+    </section>
+
+    <!-- PARCOURS -->
+    <section id="parcours">
+      <div class="section-header">
+        <span class="section-index">01</span>
+        <h2 class="section-title">Parcours</h2>
+        <span class="section-line"></span>
+      </div>
+
+      <div class="timeline">
+
+        <div class="timeline-item">
+          <div class="timeline-dates">2023 — En poste</div>
+          <div class="timeline-org">La Lune Rousse · Ground Control</div>
+          <div class="timeline-role">Responsable Communication</div>
+          <div class="timeline-keyword">Rayonnement</div>
+          <p class="timeline-desc">Pilotage de stratégies 360° — du stratégique à l'opérationnel. Direction éditoriale, relations presse, management d'équipe, supervision de la production de contenus (réseaux, newsletters, vidéos, podcasts). Activation d'audience et reporting de performance.</p>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-dates">2018 — 2023</div>
+          <div class="timeline-org">Musée national de la Marine · Paris</div>
+          <div class="timeline-role">Chargé de Communication Senior</div>
+          <div class="timeline-keyword">Récit</div>
+          <p class="timeline-desc">Déploiement opérationnel d'une communication interne et externe. Stratégie éditoriale, pilotage budgétaire, production graphique (Adobe Suite), community management de comptes à +100K followers, partenariats institutionnels (Marine Nationale).</p>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-dates">2017 — 2018</div>
+          <div class="timeline-org">Grand Format · Paris</div>
+          <div class="timeline-role">Chargé de Communication — Pôle Ressources</div>
+          <div class="timeline-keyword">Valorisation</div>
+          <p class="timeline-desc">Gestion des ressources et support communication dans un environnement éditorial exigeant.</p>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-dates">2014 — 2016</div>
+          <div class="timeline-org">Carreau du Temple · Paris</div>
+          <div class="timeline-role">Chargé de Communication</div>
+          <div class="timeline-keyword">Amorce</div>
+          <p class="timeline-desc">Premières armes dans un lieu culturel hybride à forte identité parisienne.</p>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- APPROCHE -->
+    <section id="approche">
+      <div class="section-header">
+        <span class="section-index">02</span>
+        <h2 class="section-title">Approche</h2>
+        <span class="section-line"></span>
+      </div>
+
+      <div class="approche-grid">
+        <div class="approche-cell">
+          <div class="approche-cell-index">01 · Narratif</div>
+          <div class="approche-cell-title">Traduire la complexité</div>
+          <p class="approche-cell-text">Pas de communication sans récit structuré. Chaque projet commence par une question de sens — pourquoi cette marque, pourquoi maintenant, pour qui.</p>
+        </div>
+        <div class="approche-cell">
+          <div class="approche-cell-index">02 · Éditorial</div>
+          <div class="approche-cell-title">La ligne, avant le canal</div>
+          <p class="approche-cell-text">La stratégie éditoriale précède la tactique social media. Le ton d'une marque est son architecture invisible.</p>
+        </div>
+        <div class="approche-cell">
+          <div class="approche-cell-index">03 · Culturel</div>
+          <div class="approche-cell-title">Comprendre les imaginaires</div>
+          <p class="approche-cell-text">Dix ans dans des environnements culturels exigeants ont forgé une sensibilité aux codes, aux publics et aux territoires symboliques des marques.</p>
+        </div>
+        <div class="approche-cell">
+          <div class="approche-cell-index">04 · Opérationnel</div>
+          <div class="approche-cell-title">Du concept à l'exécution</div>
+          <p class="approche-cell-text">Management d'équipe, pilotage budgétaire, coordination de prestataires. La vision stratégique n'a de valeur que livrée.</p>
+        </div>
+      </div>
+
+      <p class="approche-statement">
+        "Ce qui m'intéresse, c'est l'endroit où la culture devient communication — et où la communication redevient culture."
+      </p>
+    </section>
+
+    <!-- PROJETS -->
+    <section id="projets">
+      <div class="section-header">
+        <span class="section-index">03</span>
+        <h2 class="section-title">Projets</h2>
+        <span class="section-line"></span>
+      </div>
+
+      <div class="projets-grid">
+
+        <div class="projet-card clickable" onclick="openSplash('splash-ground')">
+          <div class="projet-card-bg"></div>
+          <div class="projet-tag">Responsable Communication · 2023–présent</div>
+          <h3 class="projet-title">Ground Control &amp; La Lune Rousse</h3>
+          <p class="projet-desc">Stratégie de communication 360° pour l'un des espaces culturels et gastronomiques les plus singuliers de Paris. Direction éditoriale, relations presse, gestion d'équipe et activation d'audience sur l'ensemble des canaux. Enjeux de trafic et d'attractivité : faire venir, fidéliser, générer de l'engagement sur le lieu.</p>
+          <div class="projet-details">
+            <div class="projet-detail"><strong>Enjeu ·</strong> Faire venir, générer du trafic et activer les audiences sur le lieu</div>
+            <div class="projet-detail"><strong>Leviers ·</strong> Storytelling, social media, presse, partenariats</div>
+          </div>
+        </div>
+
+        <div class="projet-card clickable" onclick="openSplash('splash-marine')">
+          <div class="projet-card-bg"></div>
+          <div class="projet-tag">Communication institutionnelle · 2018–2023</div>
+          <h3 class="projet-title">Musée national de la Marine</h3>
+          <p class="projet-desc">Cinq ans de construction d'une présence éditoriale pour un musée national en rénovation. Community management de communautés à +100K abonnés, partenariats institutionnels de haut niveau, production de contenus audiovisuels et communication des expositions.</p>
+          <div class="projet-details">
+            <div class="projet-detail"><strong>Enjeu ·</strong> Maintenir et renforcer l'audience durant une période de fermeture</div>
+            <div class="projet-detail"><strong>Partenaire ·</strong> Marine Nationale</div>
+          </div>
+        </div>
+
+        <!-- Music card - wide -->
+        <div class="projet-card wide">
+          <div class="projet-card-bg"></div>
+          <div>
+            <div class="projet-tag">Production musicale · en cours</div>
+            <h3 class="projet-title">Musiques électroniques</h3>
+            <p class="projet-desc">Production de musiques électroniques — techno, ambient, drum &amp; bass. Travail sur hardware (Roland TR-8S, TD-3-MO) et Ableton Live. Une pratique parallèle qui informe l'œil éditorial : rythme, texture, structure narrative.</p>
+            <a href="https://odilonwav.bandcamp.com/" target="_blank" class="projet-link">Écouter sur Bandcamp</a>
+          </div>
+          <div>
+            <div class="music-waveform" id="waveform"></div>
+            <div class="projet-details" style="margin-top: 24px;">
+              <div class="projet-detail"><strong>Outils ·</strong> Roland TR-8S · TD-3-MO · Ableton Live</div>
+              <div class="projet-detail"><strong>Registres ·</strong> Techno · Ambient · Drum &amp; Bass · Post-punk</div>
+              <div class="projet-detail"><strong>Format ·</strong> Production indépendante</div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact">
+      <div class="section-header">
+        <span class="section-index">04</span>
+        <h2 class="section-title">Contact</h2>
+        <span class="section-line"></span>
+      </div>
+
+      <div class="contact-grid">
+        <div class="contact-main">
+          <p class="contact-address">Un projet,<br>une direction éditoriale,<br>une conversation.</p>
+          <div class="contact-links">
+            <a href="mailto:odilon.corby@gmail.com" class="contact-link">
+              <span class="contact-link-label">Email</span>
+              <span class="contact-link-value">odilon.corby@gmail.com</span>
+            </a>
+            <a href="tel:+33650881622" class="contact-link">
+              <span class="contact-link-label">Téléphone</span>
+              <span class="contact-link-value">+33 6 50 88 16 22</span>
+            </a>
+            <a href="https://www.linkedin.com/in/odiloncorby" target="_blank" class="contact-link">
+              <span class="contact-link-label">LinkedIn</span>
+              <span class="contact-link-value">linkedin.com/in/odiloncorby</span>
+            </a>
+            <a href="https://odilonwav.bandcamp.com/" target="_blank" class="contact-link">
+              <span class="contact-link-label">Bandcamp</span>
+              <span class="contact-link-value">odilonwav.bandcamp.com</span>
+            </a>
+          </div>
+        </div>
+
+        <div class="contact-skills">
+          <div class="skills-title">Compétences</div>
+          <div class="skills-list">
+            <span class="skill-tag">Stratégie éditoriale</span>
+            <span class="skill-tag">Storytelling</span>
+            <span class="skill-tag">Direction communication</span>
+            <span class="skill-tag">Relations presse</span>
+            <span class="skill-tag">Social media</span>
+            <span class="skill-tag">Management</span>
+            <span class="skill-tag">Gestion de projets</span>
+            <span class="skill-tag">Adobe Suite</span>
+            <span class="skill-tag">Email marketing</span>
+            <span class="skill-tag">WordPress</span>
+            <span class="skill-tag">Production vidéo</span>
+            <span class="skill-tag">Brevo</span>
+          </div>
+
+          <div class="skills-title">Intelligence artificielle</div>
+          <div class="skills-list">
+            <span class="skill-tag">ChatGPT</span>
+            <span class="skill-tag">Claude</span>
+            <span class="skill-tag">Claude Code</span>
+            <span class="skill-tag">Midjourney</span>
+            <span class="skill-tag">NanoBanana</span>
+            <span class="skill-tag">VS Code</span>
+          </div>
+
+          <div class="skills-title">Formation</div>
+          <div class="skills-list">
+            <span class="skill-tag">Masters Communication — Cesacom / Cergy · 2015</span>
+            <span class="skill-tag">BTS Communication — CFA SACEF · 2012</span>
+          </div>
+
+          <div class="skills-title">Langues</div>
+          <div class="skills-list">
+            <span class="skill-tag">Français — natif</span>
+            <span class="skill-tag">Anglais — courant</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<!-- ─── SPLASH MARINE ─── -->
+<div class="splash-overlay" id="splash-marine" role="dialog" aria-modal="true">
+  <button class="splash-close" onclick="closeSplash()">✕ Fermer</button>
+
+  <!-- Stars -->
+  <div class="marine-stars" id="marine-stars"></div>
+
+  <!-- Waves -->
+  <div class="marine-waves marine-wave-1">
+    <svg viewBox="0 0 800 100" xmlns="http://www.w3.org/2000/svg">
+      <path d="M0,50 C100,15 200,80 300,50 C400,15 500,80 600,50 C700,15 800,80 800,50 L800,100 L0,100Z" fill="rgba(20,80,160,0.4)"/>
+    </svg>
+  </div>
+  <div class="marine-wave-2">
+    <svg viewBox="0 0 800 100" xmlns="http://www.w3.org/2000/svg">
+      <path d="M0,60 C130,25 260,80 390,55 C520,25 650,75 800,55 L800,100 L0,100Z" fill="rgba(10,50,120,0.5)"/>
+    </svg>
+  </div>
+  <div class="marine-wave-3">
+    <svg viewBox="0 0 800 100" xmlns="http://www.w3.org/2000/svg">
+      <path d="M0,65 C90,42 180,72 270,58 C360,42 450,68 540,58 C630,48 720,68 800,58 L800,100 L0,100Z" fill="rgba(5,30,80,0.7)"/>
+    </svg>
+  </div>
+
+  <!-- Boat -->
+  <div class="marine-boat">
+    <svg width="120" height="66" viewBox="0 0 120 66" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M8,40 L112,40 L98,60 L22,60Z" fill="rgba(5,20,50,0.95)" stroke="rgba(100,160,220,0.25)" stroke-width="0.8"/>
+      <line x1="60" y1="6" x2="60" y2="40" stroke="rgba(100,160,220,0.45)" stroke-width="1.2"/>
+      <path d="M60,9 L60,38 L26,30Z" fill="rgba(180,210,240,0.12)" stroke="rgba(100,160,220,0.18)" stroke-width="0.6"/>
+      <path d="M60,12 L60,35 L88,27Z" fill="rgba(180,210,240,0.08)" stroke="rgba(100,160,220,0.12)" stroke-width="0.6"/>
+    </svg>
+  </div>
+
+  <div class="splash-content">
+    <div class="splash-tag">Communication institutionnelle · 2018–2023</div>
+    <div class="splash-title">Musée national<br>de la Marine</div>
+    <div style="font-family:var(--mono);font-size:10px;letter-spacing:0.14em;color:rgba(100,180,255,0.45);margin-top:-8px;text-align:center;line-height:1.8;">
+      Présence éditoriale · Community management · Communication des expositions
+    </div>
+    <div class="splash-ctas">
+      <a href="https://www.musee-marine.fr/" target="_blank" class="splash-cta" onclick="closeSplash()">Visiter le site →</a>
+    </div>
+  </div>
+</div>
+
+<!-- ─── SPLASH GROUND CONTROL ─── -->
+<div class="splash-overlay" id="splash-ground" role="dialog" aria-modal="true">
+  <button class="splash-close" onclick="closeSplash()">✕ Fermer</button>
+
+  <!-- Beams -->
+  <div class="ground-beams" id="ground-beams"></div>
+  <div class="ground-glow"></div>
+
+  <!-- Crowd silhouette -->
+  <div class="ground-crowd">
+    <svg width="100%" height="80" viewBox="0 0 1200 80" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M0,80 L0,45 Q15,38 22,44 Q30,35 38,42 Q46,30 54,40 Q62,26 70,36 Q78,30 86,38 Q94,24 102,33 Q110,28 118,35 Q126,22 134,31 Q142,26 150,33 Q158,20 166,28 Q174,24 182,31 Q190,18 198,26 Q206,22 214,29 Q222,16 230,24 Q238,20 246,27 Q254,14 262,22 Q270,18 278,25 Q286,12 294,20 Q302,16 310,23 Q318,10 326,18 Q334,14 342,21 Q350,8 358,16 Q366,12 374,19 Q382,16 390,22 Q398,10 406,18 Q414,14 422,21 Q430,18 438,24 Q446,12 454,20 Q462,16 470,23 Q478,10 486,18 Q494,14 502,21 Q510,8 518,16 Q526,12 534,19 Q542,14 550,21 Q558,18 566,24 Q574,12 582,20 Q590,16 598,23 Q606,10 614,18 Q622,14 630,21 Q638,8 646,16 Q654,12 662,19 Q670,16 678,22 Q686,10 694,18 Q702,14 710,21 Q718,18 726,24 Q734,14 742,22 Q750,18 758,25 Q766,12 774,20 Q782,16 790,23 Q798,20 806,26 Q814,14 822,22 Q830,18 838,25 Q846,22 854,28 Q862,18 870,26 Q878,22 886,29 Q894,26 902,32 Q910,20 918,28 Q926,24 934,31 Q942,28 950,34 Q958,26 966,33 Q974,30 982,36 Q990,28 998,35 Q1006,32 1014,38 Q1022,30 1030,37 Q1038,34 1046,40 Q1054,36 1062,42 Q1070,38 1078,44 Q1086,40 1094,46 Q1102,38 1110,44 Q1116,41 1122,46 Q1128,42 1134,47 Q1140,44 1148,50 Q1156,46 1162,50 Q1170,46 1178,51 Q1184,48 1190,52 Q1196,50 1200,52 L1200,80 Z" fill="rgba(0,0,0,0.97)"/>
+    </svg>
+  </div>
+
+  <div class="splash-content">
+    <div class="splash-tag">Responsable Communication · 2023–présent</div>
+    <div class="splash-title">Ground Control<br>&amp; La Lune Rousse</div>
+    <div style="font-family:var(--mono);font-size:10px;letter-spacing:0.14em;color:rgba(255,120,60,0.45);margin-top:-8px;text-align:center;line-height:1.8;">
+      Faire venir · Générer du trafic · Activer les audiences
+    </div>
+    <div class="splash-ctas">
+      <a href="https://www.groundcontrolparis.com/" target="_blank" class="splash-cta" onclick="closeSplash()">Ground Control →</a>
+      <a href="https://lalunerousse.com/" target="_blank" class="splash-cta alt" onclick="closeSplash()">La Lune Rousse →</a>
+    </div>
+  </div>
+</div>
+
+<script>
+  // ─── INTERSECTION OBSERVER for section reveals ───
+  const sections = document.querySelectorAll('section');
+  const timelineItems = document.querySelectorAll('.timeline-item');
+
+  const sectionObs = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) e.target.classList.add('visible');
+    });
+  }, { threshold: 0.08 });
+
+  sections.forEach(s => sectionObs.observe(s));
+
+  const itemObs = new IntersectionObserver((entries) => {
+    entries.forEach((e, i) => {
+      if (e.isIntersecting) {
+        setTimeout(() => e.target.classList.add('visible'), i * 120);
+      }
+    });
+  }, { threshold: 0.1 });
+
+  timelineItems.forEach(item => itemObs.observe(item));
+
+  // ─── ACTIVE NAV on scroll ───
+  const navLinks = document.querySelectorAll('nav a');
+  const sectionIds = ['hero', 'parcours', 'approche', 'projets', 'contact'];
+
+  window.addEventListener('scroll', () => {
+    let current = '';
+    sectionIds.forEach(id => {
+      const el = document.getElementById(id);
+      if (el && el.getBoundingClientRect().top < window.innerHeight * 0.4) {
+        current = id;
+      }
+    });
+    navLinks.forEach(link => {
+      link.classList.toggle('active', link.getAttribute('href') === `#${current}`);
+    });
+  });
+
+  // ─── SPLASH ───
+  function openSplash(id) {
+    document.getElementById(id).classList.add('active');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeSplash() {
+    document.querySelectorAll('.splash-overlay').forEach(el => el.classList.remove('active'));
+    document.body.style.overflow = '';
+  }
+
+  document.querySelectorAll('.splash-overlay').forEach(overlay => {
+    overlay.addEventListener('click', e => {
+      if (e.target === overlay) closeSplash();
+    });
+  });
+
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') closeSplash();
+  });
+
+  // Generate marine stars
+  const marineStars = document.getElementById('marine-stars');
+  for (let i = 0; i < 80; i++) {
+    const s = document.createElement('div');
+    s.style.cssText = `position:absolute;border-radius:50%;background:white;
+      left:${Math.random()*100}%;top:${Math.random()*55}%;
+      width:${Math.random()*1.8+0.4}px;height:${Math.random()*1.8+0.4}px;
+      opacity:${Math.random()*0.5+0.1}`;
+    marineStars.appendChild(s);
+  }
+
+  // Generate ground control beams
+  const beamColors = [
+    'rgba(255,80,30,0.7)', 'rgba(255,160,0,0.6)', 'rgba(255,50,120,0.7)',
+    'rgba(80,150,255,0.6)', 'rgba(255,80,30,0.5)', 'rgba(180,80,255,0.6)', 'rgba(255,200,0,0.5)'
+  ];
+  const beamsContainer = document.getElementById('ground-beams');
+  beamColors.forEach((color, i) => {
+    const b = document.createElement('div');
+    b.className = 'g-beam';
+    b.style.cssText = `left:${10 + i*13}%;height:${45+Math.random()*35}%;
+      background:linear-gradient(to top,${color},transparent);
+      animation-delay:${i*0.45}s;animation-duration:${3+Math.random()*2}s`;
+    beamsContainer.appendChild(b);
+  });
+
+  // ─── WAVEFORM BARS ───
+  const waveform = document.getElementById('waveform');
+  const heights = [20, 45, 30, 65, 40, 80, 55, 35, 70, 50, 85, 45, 60, 30, 75, 50, 40, 65, 35, 55, 80, 45, 70, 30, 60, 50, 40, 75, 55, 35];
+  heights.forEach((h, i) => {
+    const bar = document.createElement('div');
+    bar.className = 'bar';
+    bar.style.height = h + '%';
+    bar.style.setProperty('--dur', (0.8 + Math.random() * 0.8) + 's');
+    bar.style.animationDelay = (Math.random() * 0.6) + 's';
+    waveform.appendChild(bar);
+  });
+</script>
+</body>
+</html>
