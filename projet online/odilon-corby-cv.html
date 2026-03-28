@@ -1037,8 +1037,8 @@
   @media (max-width: 1100px) {
     .sidebar { display: none; }
     main { margin-left: 0; }
-    section { padding: 64px 32px; scroll-margin-top: 56px; }
-    #hero { grid-template-columns: 1fr; padding-top: 80px; }
+    section { padding: 64px 32px; scroll-margin-top: 72px; }
+    #hero { grid-template-columns: 1fr; padding-top: 96px; }
     .hero-portrait { max-width: 240px; margin: 32px auto 0; }
     .approche-grid, .projets-grid { grid-template-columns: 1fr; }
     .projet-card.wide { grid-column: auto; grid-template-columns: 1fr; }
@@ -1047,20 +1047,21 @@
 
     .mobile-header {
       display: flex;
+      flex-direction: column;
       position: fixed;
       top: 0;
       left: 0;
       right: 0;
-      height: 56px;
-      background: rgba(8,8,8,0.96);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      border-bottom: 1px solid rgba(240,237,230,0.06);
+      background: #080808;
+      border-bottom: 2px solid var(--oxide);
       z-index: 200;
+    }
+
+    .mobile-header-top {
+      height: 40px;
+      display: flex;
       align-items: center;
-      justify-content: space-between;
       padding: 0 20px;
-      gap: 16px;
     }
 
     .mobile-logo {
@@ -1069,7 +1070,6 @@
       font-weight: 700;
       color: var(--white);
       white-space: nowrap;
-      flex-shrink: 0;
     }
 
     .mobile-logo em {
@@ -1078,14 +1078,13 @@
     }
 
     .mobile-nav {
+      height: 32px;
       display: flex;
-      gap: 0;
-      flex: 1;
-      min-width: 0;
+      flex-direction: row;
+      align-items: stretch;
       overflow-x: auto;
       -webkit-overflow-scrolling: touch;
       scrollbar-width: none;
-      align-items: center;
     }
 
     .mobile-nav::-webkit-scrollbar { display: none; }
@@ -1093,31 +1092,33 @@
     .mobile-nav a {
       font-family: var(--mono);
       font-size: 9px;
-      letter-spacing: 0.12em;
+      letter-spacing: 0.10em;
       text-transform: uppercase;
-      color: var(--white-dim);
+      color: rgba(240,237,230,0.35);
       text-decoration: none;
-      padding: 8px 10px;
+      padding: 0 13px;
+      display: flex;
+      align-items: center;
       white-space: nowrap;
-      border-bottom: 2px solid transparent;
-      transition: all 0.2s;
+      border-right: 1px solid rgba(240,237,230,0.05);
+      gap: 5px;
+      transition: color 0.2s, background 0.2s;
     }
 
     .mobile-nav a .nav-index {
       color: var(--oxide);
-      margin-right: 4px;
-      font-size: 9px;
+      font-size: 8px;
     }
 
     .mobile-nav a.active,
     .mobile-nav a:hover {
       color: var(--white);
-      border-bottom-color: var(--oxide);
+      background: rgba(192,57,43,0.08);
     }
   }
 
   @media (max-width: 480px) {
-    section { padding: 48px 16px; scroll-margin-top: 56px; }
+    section { padding: 48px 16px; scroll-margin-top: 72px; }
     .section-title { font-size: 32px; }
     .section-line { display: none; }
     .hero-title { font-size: 36px; }
@@ -1162,7 +1163,9 @@
 
   <!-- MOBILE HEADER -->
   <header class="mobile-header">
-    <span class="mobile-logo">Odilon <em>Corby</em></span>
+    <div class="mobile-header-top">
+      <span class="mobile-logo">Odilon <em>Corby</em></span>
+    </div>
     <nav class="mobile-nav">
       <a href="#hero" class="active"><span class="nav-index">00</span>Signal</a>
       <a href="#parcours"><span class="nav-index">01</span>Parcours</a>
