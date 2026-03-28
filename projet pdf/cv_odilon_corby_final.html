@@ -71,12 +71,24 @@ body {
 @media print {
   body { background: none; padding: 0; margin: 0; }
   .preview-label { display: none; }
+
   .a4 {
     width: 210mm;
     height: 297mm;
     box-shadow: none;
-    page-break-after: avoid;
+    overflow: visible;
   }
+
+  /* Forcer les couleurs sombres à l'impression */
+  .sb { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  .projet-card { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  .tl-kw { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  .sb-hook { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+
+  /* Éviter les coupures dans les éléments */
+  .tl-item { break-inside: avoid; }
+  .approche-cell { break-inside: avoid; }
+  .projet-card { break-inside: avoid; }
 }
 
 /* ══════════════════════════════
