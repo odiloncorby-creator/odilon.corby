@@ -4,7 +4,38 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Odilon Corby — Direction Communication</title>
+
+<!-- ─── SÉCURITÉ ─── -->
+<!-- Content Security Policy : autorise uniquement fonts Google, bloque tout le reste -->
+<meta http-equiv="Content-Security-Policy" content="
+  default-src 'self';
+  style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
+  font-src 'self' https://fonts.gstatic.com;
+  img-src 'self' data:;
+  script-src 'self';
+  object-src 'none';
+  base-uri 'self';
+  form-action 'none';
+  frame-ancestors 'none';
+  upgrade-insecure-requests;
+">
+<!-- Empêche le sniffing de type MIME -->
+<meta http-equiv="X-Content-Type-Options" content="nosniff">
+<!-- Politique de referrer stricte -->
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<!-- Pas d'indexation des informations de contact par défaut -->
+<meta name="robots" content="index, follow">
+<!-- Empêche la détection de format par IE -->
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+<!-- ─── SEO & SOCIAL ─── -->
+<meta name="description" content="Odilon Corby — Directeur de Communication. Stratégie éditoriale, storytelling, direction de projets culturels. Paris.">
+<meta property="og:title" content="Odilon Corby — Direction Communication">
+<meta property="og:description" content="Je traduis la complexité en récits qui tiennent — culture, événementiel, innovation.">
+<meta property="og:type" content="profile">
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=IBM+Plex+Mono:wght@300;400;500&family=EB+Garamond:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
 <style>
   :root {
