@@ -104,3 +104,9 @@ ChatGPT · Claude · Claude Code · Midjourney · NanoBanana · VS Code
 - Toute modification de contenu = répercuter sur les **deux** fichiers HTML
 - Pas de frameworks à introduire — rester en vanilla
 - Spec de design complète : `docs/superpowers/specs/2026-03-28-cv-pdf-design.md`
+
+## Autonomie & outils
+
+- **Toujours utiliser `gh` CLI** pour toutes les opérations GitHub (push, PR, Pages, tokens) — ne jamais demander à l'utilisateur de faire des manipulations manuelles que Claude peut faire lui-même
+- **Vérifier les outils disponibles avant de déléguer** — `gh`, `git`, `python3`, `curl` sont disponibles ; les utiliser directement
+- L'utilisateur ne doit pas avoir à faire de manips Git/GitHub manuellement
