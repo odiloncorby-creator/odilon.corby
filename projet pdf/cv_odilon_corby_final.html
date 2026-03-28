@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Odilon Corby — CV</title>
+
+<!-- Sécurité -->
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; script-src 'self' https://cdn.jsdelivr.net; object-src 'none'; frame-ancestors 'none'; upgrade-insecure-requests;">
+<meta http-equiv="X-Content-Type-Options" content="nosniff">
+
+<!-- Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,400&family=IBM+Plex+Mono:wght@300;400;500&family=EB+Garamond:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+
+<style>
+/* ─── RESET ─── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+/* ─── VARIABLES ─── */
+:root {
+  --deep:    #0f0f0f;
+  --surface: #141414;
+  --oxide:   #c0392b;
+  --oxide-dim: rgba(192,57,43,0.35);
+  --oxide-glow: rgba(192,57,43,0.15);
+  --white:   #f0ede6;
+  --white-dim: rgba(240,237,230,0.45);
+  --white-ghost: rgba(240,237,230,0.2);
+  --ink:     #080808;
+  --ink-dim: rgba(8,8,8,0.5);
+  --paper:   #f8f6f2;
+  --mono:    'IBM Plex Mono', monospace;
+  --serif:   'Playfair Display', Georgia, serif;
+  --body:    'EB Garamond', Georgia, serif;
+}
+
+/* ─── PAGE SCREEN ─── */
+body {
+  background: #1a1a2e;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 32px 20px;
+  min-height: 100vh;
+}
+
+.preview-label {
+  font-family: var(--mono);
+  font-size: 9px;
+  color: rgba(240,237,230,0.3);
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  margin-bottom: 16px;
+}
+
+/* ─── A4 WRAPPER ─── */
+.a4 {
+  width: 595px;
+  height: 842px;
+  display: flex;
+  background: var(--paper);
+  box-shadow: 0 24px 64px rgba(0,0,0,0.7), 0 0 0 1px rgba(192,57,43,0.2);
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+/* ─── PRINT ─── */
+@media print {
+  body { background: none; padding: 0; margin: 0; }
+  .preview-label { display: none; }
+  .a4 {
+    width: 210mm;
+    height: 297mm;
+    box-shadow: none;
+    page-break-after: avoid;
+  }
+}
+</style>
+</head>
+<body>
+
+<div class="preview-label">CV PDF · http://localhost:54550 · Cmd+P → Enregistrer en PDF · A4 · Marges : Aucune · Arrière-plan : Activé</div>
+
+<div class="a4">
+  <!-- SIDEBAR -->
+  <aside class="sb"></aside>
+  <!-- MAIN -->
+  <main class="mn"></main>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
+</body>
+</html>
