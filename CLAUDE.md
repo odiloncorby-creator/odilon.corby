@@ -61,7 +61,7 @@ Progression narrative — ne pas modifier sans validation :
 
 ## Phrase signature (ne pas modifier)
 
-> "Ce qui m'intéresse, c'est l'endroit où la culture devient communication — et où la communication redevient culture."
+> "Faire tenir ensemble le fond, la forme et le ton."
 
 ## Serveurs locaux
 
