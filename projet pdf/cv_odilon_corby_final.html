@@ -77,6 +77,214 @@ body {
     page-break-after: avoid;
   }
 }
+
+/* ══════════════════════════════
+   SIDEBAR
+══════════════════════════════ */
+.sb {
+  width: 172px;
+  background: var(--deep);
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+/* Ligne signal verticale oxide */
+.sb::after {
+  content: '';
+  position: absolute;
+  right: 0; top: 0; bottom: 0; width: 1px;
+  background: linear-gradient(180deg, var(--oxide) 0%, rgba(192,57,43,0.06) 55%, transparent 100%);
+  z-index: 1;
+}
+
+/* ── Portrait ── */
+.sb-portrait {
+  width: 100%;
+  height: 158px;
+  background: var(--surface);
+  position: relative;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.sb-portrait img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+  filter: grayscale(100%) contrast(1.1);
+  mix-blend-mode: luminosity;
+  display: block;
+}
+
+/* Overlay oxide */
+.sb-portrait::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: linear-gradient(135deg, var(--oxide-glow), transparent 55%);
+  z-index: 1;
+  pointer-events: none;
+}
+
+/* Fondu bas */
+.sb-portrait::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0; right: 0; height: 45%;
+  background: linear-gradient(to top, var(--deep), transparent);
+  z-index: 2;
+  pointer-events: none;
+}
+
+/* Cadre décalé */
+.sb-portrait-frame {
+  position: absolute;
+  top: -7px; right: -7px; bottom: 7px; left: 7px;
+  border: 1px solid var(--oxide-dim);
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* ── Corps sidebar ── */
+.sb-body {
+  padding: 10px 10px 0;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.sb-role {
+  font-family: var(--mono);
+  font-size: 6px;
+  color: var(--oxide);
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  margin-bottom: 3px;
+}
+
+.sb-name {
+  font-family: var(--serif);
+  font-size: 17px;
+  font-weight: 900;
+  color: var(--white);
+  line-height: 0.95;
+  margin-bottom: 2px;
+}
+
+.sb-name em {
+  color: var(--oxide);
+  font-size: 19px;
+  font-style: italic;
+}
+
+.sb-sig {
+  width: 100%;
+  height: 1px;
+  background: linear-gradient(90deg, var(--oxide), transparent);
+  margin: 6px 0 10px;
+}
+
+/* ── Sections sidebar ── */
+.sb-sec {
+  font-family: var(--mono);
+  font-size: 5.5px;
+  color: rgba(192,57,43,0.75);
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  margin-bottom: 3px;
+  margin-top: 8px;
+}
+
+.sb-val {
+  font-family: var(--mono);
+  font-size: 5.5px;
+  color: var(--white-ghost);
+  line-height: 1.9;
+}
+
+.sb-sk {
+  font-family: var(--mono);
+  font-size: 5.5px;
+  color: var(--white-dim);
+  line-height: 1.85;
+}
+
+.sb-sk.ai {
+  color: rgba(192,57,43,0.55);
+}
+
+/* ── Hook CV online ── */
+.sb-hook {
+  margin: auto 8px 10px;
+  border: 1px solid rgba(192,57,43,0.5);
+  padding: 8px 7px 7px;
+  background: rgba(192,57,43,0.04);
+  position: relative;
+}
+
+.sb-hook-label {
+  position: absolute;
+  top: -5px; left: 7px;
+  background: var(--deep);
+  padding: 0 3px;
+  font-family: var(--mono);
+  font-size: 4.5px;
+  color: var(--oxide);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.sb-hook-inner {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 5px;
+}
+
+#qr-code {
+  width: 44px;
+  height: 44px;
+  flex-shrink: 0;
+  background: var(--white);
+  padding: 2px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#qr-code canvas,
+#qr-code img {
+  width: 40px !important;
+  height: 40px !important;
+  display: block;
+}
+
+.sb-hook-url {
+  font-family: var(--serif);
+  font-size: 8px;
+  color: var(--white);
+  font-style: italic;
+  display: block;
+  margin-bottom: 1px;
+}
+
+.sb-hook-sub {
+  font-family: var(--mono);
+  font-size: 4.5px;
+  color: rgba(240,237,230,0.28);
+  letter-spacing: 0.06em;
+  display: block;
+}
+
+.sb-hook-tagline {
+  font-family: var(--mono);
+  font-size: 4px;
+  color: rgba(240,237,230,0.2);
+  font-style: italic;
+  line-height: 1.5;
+}
 </style>
 </head>
 <body>
@@ -85,11 +293,96 @@ body {
 
 <div class="a4">
   <!-- SIDEBAR -->
-  <aside class="sb"></aside>
+  <aside class="sb">
+
+  <!-- Portrait -->
+  <div class="sb-portrait">
+    <div class="sb-portrait-frame"></div>
+    <img
+      src="../projet online/portrait LLR 0251387 - Grande.jpeg"
+      alt="Portrait Odilon Corby"
+      onerror="this.style.display='none'"
+    >
+  </div>
+
+  <!-- Identité -->
+  <div class="sb-body">
+    <div class="sb-role">Dir. Communication</div>
+    <div class="sb-name">Odilon<br><em>Corby</em></div>
+    <div class="sb-sig"></div>
+
+    <div class="sb-sec">Contact</div>
+    <div class="sb-val">
+      Paris, FR · +10 ans<br>
+      +33 6 50 88 16 22<br>
+      odilon.corby@gmail.com<br>
+      linkedin/odiloncorby
+    </div>
+
+    <div class="sb-sec">Compétences</div>
+    <div class="sb-sk">
+      Stratégie éditoriale<br>
+      Storytelling &amp; copywriting<br>
+      Direction communication<br>
+      Relations presse<br>
+      Community management<br>
+      Management d'équipe<br>
+      Pilotage budgétaire<br>
+      Adobe Suite (Ps·Ai·Ind·Pr)<br>
+      WordPress / CMS<br>
+      Email marketing (Brevo)
+    </div>
+
+    <div class="sb-sec">Outils IA</div>
+    <div class="sb-sk ai">
+      Claude (Anthropic)<br>
+      ChatGPT / GPT-4<br>
+      Midjourney · Notion AI · Gemini
+    </div>
+
+    <div class="sb-sec">Formation</div>
+    <div class="sb-val">
+      Masters Communication<br>
+      Cesacom / Cergy · 2015<br>
+      BTS Communication<br>
+      CFA SACEF · 2012
+    </div>
+
+    <div class="sb-sec">Langues</div>
+    <div class="sb-val">
+      Français — natif<br>
+      Anglais — courant
+    </div>
+  </div>
+
+  <!-- Hook CV online -->
+  <div class="sb-hook">
+    <div class="sb-hook-label">CV interactif</div>
+    <div class="sb-hook-inner">
+      <div id="qr-code"></div>
+      <div>
+        <span class="sb-hook-url">odilon-corby.fr</span>
+        <span class="sb-hook-sub">Portfolio · Projets · Refs</span>
+      </div>
+    </div>
+    <div class="sb-hook-tagline">"Ce document est une introduction."</div>
+  </div>
+
+</aside>
   <!-- MAIN -->
   <main class="mn"></main>
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
+<script>
+  new QRCode(document.getElementById('qr-code'), {
+    text: 'https://odiloncorby-creator.github.io/odilon.corby/projet%20online/odilon-corby-cv.html',
+    width: 40,
+    height: 40,
+    colorDark: '#080808',
+    colorLight: '#f0ede6',
+    correctLevel: QRCode.CorrectLevel.M
+  });
+</script>
 </body>
 </html>
