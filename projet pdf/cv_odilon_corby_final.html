@@ -6,7 +6,7 @@
 <title>Odilon Corby — CV</title>
 
 <!-- Sécurité -->
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; script-src 'self' https://cdn.jsdelivr.net; object-src 'none'; frame-ancestors 'none'; upgrade-insecure-requests;">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net; object-src 'none'; frame-ancestors 'none'; upgrade-insecure-requests;">
 <meta http-equiv="X-Content-Type-Options" content="nosniff">
 
 <!-- Fonts -->
@@ -68,6 +68,8 @@ body {
 }
 
 /* ─── PRINT ─── */
+@page { margin: 0; }
+
 @media print {
   body { background: none; padding: 0; margin: 0; }
   .preview-label { display: none; }
@@ -752,7 +754,7 @@ body {
   </main>
 </div>
 
-<script async src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
 <script>
   new QRCode(document.getElementById('qr-code'), {
     text: 'https://odiloncorby-creator.github.io/odilon.corby/projet%20online/odilon-corby-cv.html',
