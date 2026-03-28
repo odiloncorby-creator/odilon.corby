@@ -451,6 +451,94 @@ body {
   line-height: 1.55;
   margin: 0;
 }
+
+/* ── Approche grid ── */
+.approche-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1px;
+  background: rgba(8,8,8,0.07);
+}
+
+.approche-cell {
+  background: var(--paper);
+  padding: 8px 9px;
+}
+
+.ac-idx {
+  font-family: var(--mono);
+  font-size: 5px;
+  color: var(--oxide);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-bottom: 2px;
+}
+
+.ac-title {
+  font-family: var(--serif);
+  font-size: 8.5px;
+  font-weight: 700;
+  color: var(--ink);
+  margin-bottom: 3px;
+  line-height: 1.1;
+}
+
+.ac-text {
+  font-family: var(--body);
+  font-size: 7.5px;
+  color: var(--ink-dim);
+  line-height: 1.45;
+  margin: 0;
+}
+
+/* ── Projet parallèle ── */
+.projet-card {
+  background: var(--deep);
+  padding: 10px 12px;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Top border oxide */
+.projet-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; height: 1px;
+  background: linear-gradient(90deg, var(--oxide), transparent);
+}
+
+.projet-tag {
+  font-family: var(--mono);
+  font-size: 5.5px;
+  color: var(--oxide);
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  margin-bottom: 3px;
+}
+
+.projet-title {
+  font-family: var(--serif);
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--white);
+  margin: 0 0 5px;
+  line-height: 1.1;
+}
+
+.projet-desc {
+  font-family: var(--body);
+  font-size: 8px;
+  color: rgba(240,237,230,0.48);
+  line-height: 1.55;
+  margin: 0 0 5px;
+}
+
+.projet-link {
+  font-family: var(--mono);
+  font-size: 5px;
+  color: rgba(192,57,43,0.6);
+  letter-spacing: 0.08em;
+}
 </style>
 </head>
 <body>
@@ -601,7 +689,53 @@ body {
       </div>
     </div>
 
-    <!-- Sections à venir -->
+    <!-- 02 Approche -->
+    <div>
+      <div class="sec-hdr">
+        <span class="si">02</span>
+        <span class="st">Approche</span>
+        <span class="sl"></span>
+      </div>
+
+      <div class="approche-grid">
+        <div class="approche-cell">
+          <div class="ac-idx">01 · Narratif</div>
+          <div class="ac-title">Traduire la complexité</div>
+          <p class="ac-text">Pas de communication sans récit structuré. Chaque projet commence par une question de sens — pourquoi cette marque, pour qui.</p>
+        </div>
+        <div class="approche-cell">
+          <div class="ac-idx">02 · Éditorial</div>
+          <div class="ac-title">La ligne, avant le canal</div>
+          <p class="ac-text">La stratégie éditoriale précède la tactique social media. Le ton d'une marque est son architecture invisible.</p>
+        </div>
+        <div class="approche-cell">
+          <div class="ac-idx">03 · Culturel</div>
+          <div class="ac-title">Comprendre les imaginaires</div>
+          <p class="ac-text">Dix ans dans des environnements culturels exigeants ont forgé une sensibilité aux codes, aux publics et aux territoires symboliques.</p>
+        </div>
+        <div class="approche-cell">
+          <div class="ac-idx">04 · Opérationnel</div>
+          <div class="ac-title">Du concept à l'exécution</div>
+          <p class="ac-text">Management d'équipe, pilotage budgétaire, coordination de prestataires. La vision stratégique n'a de valeur que livrée.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 03 Projet parallèle -->
+    <div>
+      <div class="sec-hdr">
+        <span class="si">03</span>
+        <span class="st">Projet parallèle</span>
+        <span class="sl"></span>
+      </div>
+
+      <div class="projet-card">
+        <div class="projet-tag">Production musicale · en cours</div>
+        <h3 class="projet-title">Musiques électroniques</h3>
+        <p class="projet-desc">Techno, ambient, drum &amp; bass — Roland TR-8S · TD-3-MO · Ableton Live. Production indépendante. Une pratique qui informe l'œil éditorial : rythme, texture, structure narrative.</p>
+        <div class="projet-link">odilonwav.bandcamp.com</div>
+      </div>
+    </div>
 
   </main>
 </div>
