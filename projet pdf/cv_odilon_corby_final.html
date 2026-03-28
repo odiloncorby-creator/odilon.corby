@@ -368,6 +368,89 @@ body {
   background: linear-gradient(90deg, rgba(8,8,8,0.12), transparent);
   margin-left: 4px;
 }
+
+/* ── Timeline ── */
+.timeline {
+  border-left: 1px solid var(--oxide);
+  padding-left: 12px;
+  margin-left: 4px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.tl-item {
+  position: relative;
+}
+
+.tl-dot {
+  position: absolute;
+  left: -16px;
+  top: 5px;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--oxide);
+  box-shadow: 0 0 7px var(--oxide-glow);
+}
+
+.tl-dot.dim {
+  background: rgba(192,57,43,0.4);
+  box-shadow: none;
+}
+
+.tl-hdr {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 8px;
+}
+
+.tl-role {
+  font-family: var(--serif);
+  font-size: 10.5px;
+  font-weight: 700;
+  color: var(--ink);
+  line-height: 1.1;
+}
+
+.tl-dates {
+  font-family: var(--mono);
+  font-size: 5.5px;
+  color: var(--oxide);
+  letter-spacing: 0.12em;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.tl-org {
+  font-family: var(--mono);
+  font-size: 5.5px;
+  color: #666;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-top: 1px;
+}
+
+.tl-kw {
+  display: inline-block;
+  font-family: var(--mono);
+  font-size: 5px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--oxide);
+  border: 1px solid var(--oxide-dim);
+  padding: 1px 6px;
+  margin: 3px 0 4px;
+}
+
+.tl-desc {
+  font-family: var(--body);
+  font-size: 8px;
+  color: var(--ink-dim);
+  line-height: 1.55;
+  margin: 0;
+}
 </style>
 </head>
 <body>
@@ -459,6 +542,63 @@ body {
     <div class="mn-intro">
       <div class="eyebrow">Direction &amp; Récit · Paris · +10 ans</div>
       <p class="intro-text">Je traduis la complexité en récits qui tiennent — pour des projets à la croisée de la culture, de l'événementiel et de l'innovation.</p>
+    </div>
+
+    <!-- 01 Parcours -->
+    <div>
+      <div class="sec-hdr">
+        <span class="si">01</span>
+        <span class="st">Parcours</span>
+        <span class="sl"></span>
+      </div>
+
+      <div class="timeline">
+
+        <div class="tl-item">
+          <div class="tl-dot"></div>
+          <div class="tl-hdr">
+            <span class="tl-role">Responsable Communication</span>
+            <span class="tl-dates">2023 — En poste</span>
+          </div>
+          <div class="tl-org">La Lune Rousse · Ground Control · Paris</div>
+          <span class="tl-kw">Rayonnement</span>
+          <p class="tl-desc">Pilotage de stratégies 360° — direction éditoriale, relations presse, management d'équipe, supervision de la production de contenus (réseaux, newsletters, vidéos, podcasts). Activation d'audience et reporting de performance.</p>
+        </div>
+
+        <div class="tl-item">
+          <div class="tl-dot"></div>
+          <div class="tl-hdr">
+            <span class="tl-role">Chargé de Communication Senior</span>
+            <span class="tl-dates">2018 — 2023</span>
+          </div>
+          <div class="tl-org">Musée national de la Marine · Paris</div>
+          <span class="tl-kw">Récit</span>
+          <p class="tl-desc">Déploiement d'une communication interne et externe. Stratégie éditoriale, pilotage budgétaire, production graphique (Adobe Suite), community management +100K abonnés, partenariats institutionnels (Marine Nationale).</p>
+        </div>
+
+        <div class="tl-item">
+          <div class="tl-dot dim"></div>
+          <div class="tl-hdr">
+            <span class="tl-role">Chargé de Communication · Pôle Ressources</span>
+            <span class="tl-dates">2017 — 2018</span>
+          </div>
+          <div class="tl-org">Grand Format · Paris</div>
+          <span class="tl-kw">Valorisation</span>
+          <p class="tl-desc">Gestion des ressources et support communication dans un environnement éditorial exigeant.</p>
+        </div>
+
+        <div class="tl-item">
+          <div class="tl-dot dim"></div>
+          <div class="tl-hdr">
+            <span class="tl-role">Chargé de Communication</span>
+            <span class="tl-dates">2014 — 2016</span>
+          </div>
+          <div class="tl-org">Carreau du Temple · Paris</div>
+          <span class="tl-kw">Amorce</span>
+          <p class="tl-desc">Premières armes dans un lieu culturel hybride à forte identité parisienne.</p>
+        </div>
+
+      </div>
     </div>
 
     <!-- Sections à venir -->
