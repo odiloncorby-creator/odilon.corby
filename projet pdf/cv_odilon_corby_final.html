@@ -39,6 +39,7 @@
 /* ─── PAGE SCREEN ─── */
 body {
   background: #1a1a2e;
+  font-family: var(--body);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -61,7 +62,7 @@ body {
   height: 842px;
   display: flex;
   background: var(--paper);
-  box-shadow: 0 24px 64px rgba(0,0,0,0.7), 0 0 0 1px rgba(192,57,43,0.2);
+  box-shadow: 0 24px 64px rgba(0,0,0,0.7), 0 0 0 1px var(--oxide-glow);
   overflow: hidden;
   flex-shrink: 0;
 }
@@ -373,7 +374,7 @@ body {
   <main class="mn"></main>
 </div>
 
-<script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
+<script async src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
 <script>
   new QRCode(document.getElementById('qr-code'), {
     text: 'https://odiloncorby-creator.github.io/odilon.corby/projet%20online/odilon-corby-cv.html',
