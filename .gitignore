@@ -1,6 +1,9 @@
 # Brainstorming companion (fichiers temporaires)
 .superpowers/
 
+# Worktrees isolés
+.worktrees/
+
 # macOS
 .DS_Store
 **/.DS_Store
