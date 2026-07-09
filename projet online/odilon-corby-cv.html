@@ -9,8 +9,8 @@
 <!-- Content Security Policy : autorise uniquement fonts Google, bloque tout le reste -->
 <meta http-equiv="Content-Security-Policy" content="
   default-src 'self';
-  style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
-  font-src 'self' https://fonts.gstatic.com;
+  style-src 'self' 'unsafe-inline';
+  font-src 'self';
   img-src 'self' data:;
   script-src 'self' 'unsafe-inline';
   object-src 'none';
@@ -34,23 +34,98 @@
 <meta property="og:description" content="Je traduis la complexité en récits cohérents pour des projets innovants.">
 <meta property="og:type" content="profile">
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=IBM+Plex+Mono:wght@300;400;500&family=EB+Garamond:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
 <style>
+  @font-face {
+    font-family: 'Geist';
+    src: url('Geist-Variable.woff2') format('woff2');
+    font-weight: 100 900;
+    font-style: normal;
+    font-display: swap;
+  }
+
+  @font-face {
+    font-family: 'Geist Mono';
+    src: url('GeistMono-Variable.woff2') format('woff2');
+    font-weight: 100 900;
+    font-style: normal;
+    font-display: swap;
+  }
+
+  @font-face {
+    font-family: 'VG5000';
+    src: url('VG5000-Regular_web.woff2') format('woff2');
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+  }
+
   :root {
-    --black: #080808;
-    --deep: #0f0f0f;
-    --surface: #141414;
-    --oxide: #c0392b;
-    --oxide-dim: #8a2820;
-    --oxide-glow: rgba(192,57,43,0.15);
-    --white: #f0ede6;
-    --white-dim: rgba(240,237,230,0.5);
-    --white-ghost: rgba(240,237,230,0.08);
-    --mono: 'IBM Plex Mono', monospace;
-    --serif: 'Playfair Display', Georgia, serif;
-    --body: 'EB Garamond', Georgia, serif;
+    /* --- Base palette --- */
+    --color-ink: #0A0A0A;
+    --color-paper: #EDEAE0;
+    --color-signal: #D9A441;
+    --color-phosphor: #6B9080;
+    --color-line: #3A3A38;
+    --color-muted: #8C887E;
+
+    /* --- Derived tints --- */
+    --color-ink-raised: color-mix(in srgb, var(--color-ink) 92%, var(--color-paper) 8%);
+    --color-ink-overlay: color-mix(in srgb, var(--color-ink) 80%, var(--color-paper) 20%);
+    --color-signal-dim: color-mix(in srgb, var(--color-signal) 55%, var(--color-ink) 45%);
+    --color-signal-glow: color-mix(in srgb, var(--color-signal) 20%, transparent);
+    --color-phosphor-dim: color-mix(in srgb, var(--color-phosphor) 55%, var(--color-ink) 45%);
+    --color-phosphor-glow: color-mix(in srgb, var(--color-phosphor) 22%, transparent);
+    --color-line-soft: color-mix(in srgb, var(--color-line) 55%, transparent);
+    --color-paper-ghost: color-mix(in srgb, var(--color-paper) 8%, transparent);
+    --color-paper-dim: color-mix(in srgb, var(--color-paper) 55%, transparent);
+
+    /* --- Semantic surfaces --- */
+    --surface-page: var(--color-ink);
+    --surface-raised: var(--color-ink-raised);
+    --surface-overlay: var(--color-ink-overlay);
+
+    /* --- Semantic text --- */
+    --text-primary: var(--color-paper);
+    --text-secondary: var(--color-muted);
+    --text-faint: var(--color-paper-dim);
+    --text-on-signal: var(--color-ink);
+
+    /* --- Semantic accents --- */
+    --accent-primary: var(--color-signal);
+    --accent-primary-dim: var(--color-signal-dim);
+    --accent-secondary: var(--color-phosphor);
+
+    /* --- Borders --- */
+    --border-color: var(--color-line);
+    --border-color-soft: var(--color-line-soft);
+    --border-color-accent: var(--color-signal-dim);
+    --border-hairline: 1px solid var(--border-color);
+    --border-hairline-soft: 1px solid var(--border-color-soft);
+    --border-accent: 1px solid var(--border-color-accent);
+    --glow-signal: 0 0 12px var(--color-signal-glow);
+
+    /* --- Type --- */
+    --font-display: 'VG5000', Georgia, serif;
+    --font-body: 'Geist', -apple-system, BlinkMacSystemFont, sans-serif;
+    --font-mono: 'Geist Mono', ui-monospace, 'SFMono-Regular', monospace;
+    --text-display-xl: clamp(2.75rem, 3rem + 3vw, 5.5rem);
+    --text-display-lg: clamp(2rem, 1.6rem + 2vw, 3.25rem);
+    --leading-tight: 1.05;
+    --leading-body: 1.6;
+    --tracking-mono: 0.02em;
+    --tracking-mono-label: 0.14em;
+    --tracking-display: -0.01em;
+
+    /* --- Radius --- */
+    --radius-sm: 2px;
+    --radius-md: 4px;
+    --radius-pill: 999px;
+
+    /* --- Motion --- */
+    --ease-standard: cubic-bezier(0.4, 0, 0.2, 1);
+    --duration-fast: 0.2s;
+    --duration-base: 0.3s;
+    --duration-slow: 0.6s;
   }
 
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -58,22 +133,11 @@
   html { scroll-behavior: smooth; }
 
   body {
-    background: var(--black);
-    color: var(--white);
-    font-family: var(--body);
-    font-size: 18px;
-    line-height: 1.6;
-  }
-
-  /* ─── GRAIN OVERLAY ─── */
-  body::before {
-    content: '';
-    position: fixed;
-    inset: 0;
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='1'/%3E%3C/svg%3E");
-    opacity: 0.03;
-    pointer-events: none;
-    z-index: 1000;
+    background: var(--surface-page);
+    color: var(--text-primary);
+    font-family: var(--font-body);
+    font-size: 1rem;
+    line-height: var(--leading-body);
   }
 
   /* ─── LAYOUT ─── */
