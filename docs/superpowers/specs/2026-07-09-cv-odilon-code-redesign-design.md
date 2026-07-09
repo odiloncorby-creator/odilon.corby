@@ -75,6 +75,8 @@ Puis, en fin de section, **carte Musiques électroniques** *(ajoutée vs proto)*
 ### 03:15 — Contact
 `SectionHeader`. Pull-quote « Un projet, une direction éditoriale, une conversation. ». `ContactLink` rows (Email, Téléphone, LinkedIn, Bandcamp). Groupes de tags : Outils & automatisation, Intelligence artificielle, Formation, Langues (contenu actuel du CV, inchangé).
 
+**Correction de contenu** : adresse email mise à jour vers `odilon.corby@proton.me` (remplace `odilon.corby@gmail.com`, partout — mailto + affichage + tout autre endroit du CV où elle apparaît).
+
 ## Composants (du design system, traduits en HTML/CSS vanilla — pas de JSX/React)
 
 `NavLink`, `SectionHeader`, `TimelineItem`, `FeatureCell`, `Badge`, `SkillTag`, `ContactLink`, `Button` (variantes primary/outline/ghost pour tout CTA). Le composant `ProjectCard` du design system inspire le style de la carte Musique (fond raised, glow radial au hover) mais les case studies Projets suivent le pattern accordéon du proto (pas `ProjectCard`).
