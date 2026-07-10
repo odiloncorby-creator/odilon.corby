@@ -875,10 +875,10 @@
   .contact-main {}
 
   .contact-address {
-    font-family: var(--serif);
-    font-size: 32px;
+    font-family: var(--font-display);
+    font-size: 28px;
     font-style: italic;
-    color: var(--white);
+    color: var(--text-primary);
     line-height: 1.3;
     margin-bottom: 40px;
   }
@@ -886,7 +886,7 @@
   .contact-links {
     display: flex;
     flex-direction: column;
-    gap: 16px;
+    gap: 14px;
   }
 
   .contact-link {
@@ -894,47 +894,46 @@
     align-items: center;
     gap: 16px;
     text-decoration: none;
-    padding: 16px 20px;
-    background: var(--surface);
-    border: 1px solid rgba(240,237,230,0.06);
-    transition: border-color 0.3s, background 0.3s;
+    padding: 14px 18px;
+    background: var(--surface-raised);
+    border: 1px solid var(--border-color-soft);
+    transition: all var(--duration-base) var(--ease-standard);
   }
 
   .contact-link:hover {
-    border-color: var(--oxide);
-    background: var(--white-ghost);
+    border-color: var(--border-color-accent);
   }
 
   .contact-link-label {
-    font-family: var(--mono);
+    font-family: var(--font-mono);
     font-size: 9px;
-    letter-spacing: 0.18em;
+    letter-spacing: var(--tracking-mono-label);
     text-transform: uppercase;
-    color: var(--oxide);
+    color: var(--accent-primary);
     width: 64px;
     flex-shrink: 0;
   }
 
   .contact-link-value {
-    font-family: var(--body);
-    font-size: 16px;
-    color: var(--white-dim);
-    transition: color 0.2s;
+    font-family: var(--font-body);
+    font-size: 15px;
+    color: var(--text-secondary);
+    transition: color var(--duration-fast) var(--ease-standard);
   }
 
   .contact-link:hover .contact-link-value {
-    color: var(--white);
+    color: var(--text-primary);
   }
 
   .contact-skills {}
 
   .skills-title {
-    font-family: var(--mono);
+    font-family: var(--font-mono);
     font-size: 10px;
-    letter-spacing: 0.18em;
+    letter-spacing: var(--tracking-mono-label);
     text-transform: uppercase;
-    color: var(--oxide);
-    margin-bottom: 24px;
+    color: var(--accent-primary);
+    margin-bottom: 16px;
     display: flex;
     align-items: center;
     gap: 12px;
@@ -944,29 +943,31 @@
     content: '';
     flex: 1;
     height: 1px;
-    background: rgba(240,237,230,0.08);
+    background: var(--border-color-soft);
   }
 
   .skills-list {
     display: flex;
     flex-wrap: wrap;
     gap: 8px;
-    margin-bottom: 40px;
+    margin-bottom: 32px;
   }
 
   .skill-tag {
-    font-family: var(--mono);
+    font-family: var(--font-mono);
     font-size: 10px;
-    letter-spacing: 0.12em;
-    color: var(--white-dim);
-    border: 1px solid rgba(240,237,230,0.12);
+    letter-spacing: var(--tracking-mono);
+    color: var(--text-secondary);
+    border: 1px solid var(--border-color-soft);
+    border-radius: var(--radius-sm);
     padding: 6px 12px;
-    transition: all 0.2s;
+    display: inline-block;
+    transition: all var(--duration-fast) var(--ease-standard);
   }
 
   .skill-tag:hover {
-    border-color: var(--oxide);
-    color: var(--white);
+    border-color: var(--border-color-accent);
+    color: var(--text-primary);
   }
 
   /* ─── ANIMATIONS ─── */
@@ -1428,9 +1429,9 @@
         <div class="contact-main">
           <p class="contact-address">Un projet,<br>une direction éditoriale,<br>une conversation.</p>
           <div class="contact-links">
-            <a href="mailto:odilon.corby@gmail.com" class="contact-link">
+            <a href="mailto:odilon.corby@proton.me" class="contact-link">
               <span class="contact-link-label">Email</span>
-              <span class="contact-link-value">odilon.corby@gmail.com</span>
+              <span class="contact-link-value">odilon.corby@proton.me</span>
             </a>
             <a href="tel:+33650881622" class="contact-link">
               <span class="contact-link-label">Téléphone</span>
@@ -1448,24 +1449,13 @@
         </div>
 
         <div class="contact-skills">
-          <div class="skills-title">Compétences</div>
+          <div class="skills-title">Outils &amp; automatisation</div>
           <div class="skills-list">
-            <span class="skill-tag">Stratégie éditoriale</span>
-            <span class="skill-tag">Storytelling</span>
-            <span class="skill-tag">Direction communication</span>
-            <span class="skill-tag">Relations presse</span>
-            <span class="skill-tag">Social media</span>
-            <span class="skill-tag">Management</span>
-            <span class="skill-tag">Gestion de projets</span>
             <span class="skill-tag">Adobe Suite</span>
             <span class="skill-tag">GitHub</span>
             <span class="skill-tag">WordPress</span>
             <span class="skill-tag">Cloudflare</span>
             <span class="skill-tag">Make (automatisation)</span>
-            <span class="skill-tag">Email marketing</span>
-            <span class="skill-tag">Production vidéo</span>
-            <span class="skill-tag">Brevo</span>
-            <span class="skill-tag">Make</span>
             <span class="skill-tag">Notion</span>
             <span class="skill-tag">Automatisation No-Code</span>
           </div>
