@@ -152,14 +152,14 @@
     left: 0;
     width: 220px;
     height: 100vh;
-    background: var(--deep);
-    border-right: 1px solid rgba(240,237,230,0.06);
+    background: var(--surface-raised);
+    border-right: var(--border-hairline);
     display: flex;
     flex-direction: column;
     padding: 40px 24px;
     z-index: 100;
     opacity: 0;
-    animation: fadeIn 1.2s ease 0.2s forwards;
+    animation: fadeIn var(--duration-slow) var(--ease-standard) 0.2s forwards;
     overflow-y: auto;
     overflow-x: hidden;
   }
@@ -169,22 +169,22 @@
   }
 
   .sidebar-logo .name {
-    font-family: var(--serif);
+    font-family: var(--font-display);
     font-size: 15px;
-    font-weight: 700;
-    letter-spacing: 0.02em;
-    color: var(--white);
+    font-weight: 400;
+    letter-spacing: var(--tracking-display);
+    color: var(--text-primary);
     display: block;
     line-height: 1.2;
   }
 
   .sidebar-logo .role {
-    font-family: var(--mono);
+    font-family: var(--font-mono);
     font-size: 9px;
-    font-weight: 300;
-    letter-spacing: 0.18em;
+    font-weight: 500;
+    letter-spacing: var(--tracking-mono-label);
     text-transform: uppercase;
-    color: var(--oxide);
+    color: var(--accent-primary);
     display: block;
     margin-top: 6px;
   }
@@ -193,7 +193,7 @@
     display: block;
     width: 100%;
     height: 1px;
-    background: linear-gradient(90deg, var(--oxide) 0%, transparent 100%);
+    background: linear-gradient(90deg, var(--accent-primary) 0%, transparent 100%);
     margin-top: 16px;
   }
 
@@ -205,48 +205,48 @@
   }
 
   nav a {
-    font-family: var(--mono);
+    font-family: var(--font-mono);
     font-size: 10px;
     font-weight: 400;
-    letter-spacing: 0.14em;
+    letter-spacing: var(--tracking-mono-label);
     text-transform: uppercase;
-    color: var(--white-dim);
+    color: var(--text-faint);
     text-decoration: none;
     padding: 10px 12px;
     border-left: 2px solid transparent;
-    transition: all 0.3s ease;
+    transition: all var(--duration-base) var(--ease-standard);
     position: relative;
   }
 
   nav a:hover, nav a.active {
-    color: var(--white);
-    border-left-color: var(--oxide);
-    background: var(--white-ghost);
+    color: var(--text-primary);
+    border-left-color: var(--accent-primary);
+    background: var(--color-paper-ghost);
   }
 
   nav a .nav-index {
-    color: var(--oxide);
+    color: var(--accent-primary);
     margin-right: 8px;
     font-size: 9px;
   }
 
   .sidebar-footer {
-    font-family: var(--mono);
+    font-family: var(--font-mono);
     font-size: 8px;
-    letter-spacing: 0.12em;
-    color: rgba(240,237,230,0.2);
+    letter-spacing: var(--tracking-mono);
+    color: var(--text-faint);
     text-transform: uppercase;
     line-height: 1.8;
   }
 
   .sidebar-footer a {
-    color: rgba(240,237,230,0.3);
+    color: var(--text-secondary);
     text-decoration: none;
     display: block;
-    transition: color 0.2s;
+    transition: color var(--duration-fast) var(--ease-standard);
   }
 
-  .sidebar-footer a:hover { color: var(--oxide); }
+  .sidebar-footer a:hover { color: var(--accent-primary); }
 
   /* ─── MAIN ─── */
   main {
@@ -1116,8 +1116,8 @@
       top: 0;
       left: 0;
       right: 0;
-      background: #080808;
-      border-bottom: 2px solid var(--oxide);
+      background: var(--surface-page);
+      border-bottom: 2px solid var(--accent-primary);
       z-index: 200;
     }
 
@@ -1129,16 +1129,16 @@
     }
 
     .mobile-logo {
-      font-family: var(--serif);
+      font-family: var(--font-display);
       font-size: 14px;
-      font-weight: 700;
-      color: var(--white);
+      font-weight: 400;
+      color: var(--text-primary);
       white-space: nowrap;
     }
 
     .mobile-logo em {
       font-style: italic;
-      color: var(--oxide);
+      color: var(--accent-primary);
     }
 
     .mobile-nav {
@@ -1154,30 +1154,30 @@
     .mobile-nav::-webkit-scrollbar { display: none; }
 
     .mobile-nav a {
-      font-family: var(--mono);
+      font-family: var(--font-mono);
       font-size: 9px;
-      letter-spacing: 0.10em;
+      letter-spacing: var(--tracking-mono);
       text-transform: uppercase;
-      color: rgba(240,237,230,0.35);
+      color: var(--text-faint);
       text-decoration: none;
       padding: 0 13px;
       display: flex;
       align-items: center;
       white-space: nowrap;
-      border-right: 1px solid rgba(240,237,230,0.05);
+      border-right: var(--border-hairline-soft);
       gap: 5px;
-      transition: color 0.2s, background 0.2s;
+      transition: color var(--duration-fast) var(--ease-standard), background var(--duration-fast) var(--ease-standard);
     }
 
     .mobile-nav a .nav-index {
-      color: var(--oxide);
+      color: var(--accent-primary);
       font-size: 8px;
     }
 
     .mobile-nav a.active,
     .mobile-nav a:hover {
-      color: var(--white);
-      background: rgba(192,57,43,0.08);
+      color: var(--text-primary);
+      background: var(--color-paper-ghost);
     }
   }
 
@@ -1211,14 +1211,14 @@
       <span class="signal-line"></span>
     </div>
     <nav>
-      <a href="#hero" class="active"><span class="nav-index">00</span>Signal</a>
-      <a href="#parcours"><span class="nav-index">01</span>Parcours</a>
-      <a href="#approche"><span class="nav-index">02</span>Approche</a>
-      <a href="#projets"><span class="nav-index">03</span>Projets</a>
-      <a href="#contact"><span class="nav-index">04</span>Contact</a>
+      <a href="#hero" class="active"><span class="nav-index">00:00</span>Signal</a>
+      <a href="#parcours"><span class="nav-index">00:47</span>Parcours</a>
+      <a href="#approche"><span class="nav-index">01:15</span>Approche</a>
+      <a href="#projets"><span class="nav-index">01:32</span>Projets</a>
+      <a href="#contact"><span class="nav-index">03:15</span>Contact</a>
     </nav>
     <div class="sidebar-footer">
-      <a href="mailto:odilon.corby@gmail.com">odilon.corby@gmail.com</a>
+      <a href="mailto:odilon.corby@proton.me">odilon.corby@proton.me</a>
       <a href="#">+33 6 50 88 16 22</a>
       <br>
       Paris, 75020
@@ -1231,11 +1231,11 @@
       <span class="mobile-logo">Odilon <em>Corby</em></span>
     </div>
     <nav class="mobile-nav">
-      <a href="#hero" class="active"><span class="nav-index">00</span>Signal</a>
-      <a href="#parcours"><span class="nav-index">01</span>Parcours</a>
-      <a href="#approche"><span class="nav-index">02</span>Approche</a>
-      <a href="#projets"><span class="nav-index">03</span>Projets</a>
-      <a href="#contact"><span class="nav-index">04</span>Contact</a>
+      <a href="#hero" class="active"><span class="nav-index">00:00</span>Signal</a>
+      <a href="#parcours"><span class="nav-index">00:47</span>Parcours</a>
+      <a href="#approche"><span class="nav-index">01:15</span>Approche</a>
+      <a href="#projets"><span class="nav-index">01:32</span>Projets</a>
+      <a href="#contact"><span class="nav-index">03:15</span>Contact</a>
     </nav>
   </header>
 
