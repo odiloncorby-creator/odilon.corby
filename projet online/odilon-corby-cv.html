@@ -458,12 +458,15 @@
   .timeline-item {
     position: relative;
     margin-bottom: 56px;
+  }
+
+  .reveal-stagger {
     opacity: 0;
     transform: translateX(-16px);
     transition: opacity var(--duration-slow) var(--ease-standard), transform var(--duration-slow) var(--ease-standard);
   }
 
-  .timeline-item.visible {
+  .reveal-stagger.visible {
     opacity: 1;
     transform: translateX(0);
   }
@@ -1085,6 +1088,20 @@
     .approche-cell { padding: 20px 16px; }
     .contact-address { font-size: 22px; }
     .timeline-role { font-size: 20px; }
+    .pull-quote { font-size: 18px; padding-left: 16px; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+    section, .reveal-stagger, .hero-eyebrow, .hero-title, .hero-concept, .hero-meta, .hero-portrait, .sidebar {
+      opacity: 1 !important;
+      transform: none !important;
+    }
   }
 </style>
 </head>
@@ -1173,7 +1190,7 @@
 
       <div class="timeline">
 
-        <div class="timeline-item">
+        <div class="timeline-item reveal-stagger">
           <div class="timeline-dates">2023 — En poste</div>
           <div class="timeline-org">La Lune Rousse · Ground Control</div>
           <div class="timeline-role">Responsable Communication</div>
@@ -1181,7 +1198,7 @@
           <p class="timeline-desc">Pilotage de stratégies 360° — du stratégique à l'opérationnel. Direction éditoriale, relations presse, management d'équipe, supervision de la production de contenus (réseaux, newsletters, vidéos, podcasts). Activation d'audience et reporting de performance.</p>
         </div>
 
-        <div class="timeline-item">
+        <div class="timeline-item reveal-stagger">
           <div class="timeline-dates">2018 — 2023</div>
           <div class="timeline-org">Musée national de la Marine · Paris</div>
           <div class="timeline-role">Chargé de Communication Senior</div>
@@ -1189,7 +1206,7 @@
           <p class="timeline-desc">Déploiement opérationnel d'une communication interne et externe. Stratégie éditoriale, pilotage budgétaire, production graphique (Adobe Suite), community management de comptes à +100K followers, partenariats institutionnels (Marine Nationale).</p>
         </div>
 
-        <div class="timeline-item">
+        <div class="timeline-item reveal-stagger">
           <div class="timeline-dates">2017 — 2018</div>
           <div class="timeline-org">Grand Format · Paris</div>
           <div class="timeline-role">Chargé de Communication — Pôle Ressources</div>
@@ -1197,7 +1214,7 @@
           <p class="timeline-desc">Gestion des ressources et support communication dans un environnement éditorial exigeant.</p>
         </div>
 
-        <div class="timeline-item">
+        <div class="timeline-item reveal-stagger">
           <div class="timeline-dates">2014 — 2016</div>
           <div class="timeline-org">Carreau du Temple · Paris</div>
           <div class="timeline-role">Chargé de Communication</div>
@@ -1235,22 +1252,22 @@
       </div>
 
       <div class="approche-grid">
-        <div class="approche-cell">
+        <div class="approche-cell reveal-stagger">
           <div class="approche-cell-index">01 · Narratif</div>
           <div class="approche-cell-title">Traduire la complexité</div>
           <p class="approche-cell-text">Pas de communication sans récit structuré. Chaque projet commence par une question de sens — pourquoi cette marque, pourquoi maintenant, pour qui.</p>
         </div>
-        <div class="approche-cell">
+        <div class="approche-cell reveal-stagger">
           <div class="approche-cell-index">02 · Éditorial</div>
           <div class="approche-cell-title">La ligne, avant le canal</div>
           <p class="approche-cell-text">La stratégie éditoriale précède la tactique social media. Le ton d'une marque est son architecture invisible.</p>
         </div>
-        <div class="approche-cell">
+        <div class="approche-cell reveal-stagger">
           <div class="approche-cell-index">03 · Culturel</div>
           <div class="approche-cell-title">Comprendre les imaginaires</div>
           <p class="approche-cell-text">Dix ans dans des environnements culturels exigeants ont forgé une sensibilité aux codes, aux publics et aux territoires symboliques des marques.</p>
         </div>
-        <div class="approche-cell">
+        <div class="approche-cell reveal-stagger">
           <div class="approche-cell-index">04 · Opérationnel</div>
           <div class="approche-cell-title">Du concept à l'exécution</div>
           <p class="approche-cell-text">Management d'équipe, pilotage budgétaire, coordination de prestataires. La vision stratégique n'a de valeur que livrée.</p>
@@ -1268,7 +1285,7 @@
 
       <div class="projets-stack">
 
-        <div class="case-study">
+        <div class="case-study reveal-stagger">
           <button class="case-study-toggle" aria-expanded="false" aria-controls="case-naiko">
             <span class="case-study-head">
               <span class="case-study-meta">01:32 — App PWA · Co-parent &amp; naissance</span>
@@ -1310,7 +1327,7 @@
           </div>
         </div>
 
-        <div class="case-study">
+        <div class="case-study reveal-stagger">
           <button class="case-study-toggle" aria-expanded="false" aria-controls="case-fmi">
             <span class="case-study-head">
               <span class="case-study-meta">02:05 — App PWA · Ground Control</span>
@@ -1354,7 +1371,7 @@
           </div>
         </div>
 
-        <div class="case-study">
+        <div class="case-study reveal-stagger">
           <button class="case-study-toggle" aria-expanded="false" aria-controls="case-make">
             <span class="case-study-head">
               <span class="case-study-meta">02:40 — Notion × Make × WordPress · Ground Control</span>
@@ -1530,7 +1547,7 @@
 
   // ─── INTERSECTION OBSERVER for section reveals ───
   const sections = document.querySelectorAll('section');
-  const timelineItems = document.querySelectorAll('.timeline-item');
+  const staggerItems = document.querySelectorAll('.reveal-stagger');
 
   const sectionObs = new IntersectionObserver((entries) => {
     entries.forEach(e => {
@@ -1543,12 +1560,12 @@
   const itemObs = new IntersectionObserver((entries) => {
     entries.forEach((e, i) => {
       if (e.isIntersecting) {
-        setTimeout(() => e.target.classList.add('visible'), i * 120);
+        setTimeout(() => e.target.classList.add('visible'), i * 80);
       }
     });
   }, { threshold: 0.1 });
 
-  timelineItems.forEach(item => itemObs.observe(item));
+  staggerItems.forEach(item => itemObs.observe(item));
 
   // ─── ACTIVE NAV on scroll ───
   const navLinks = document.querySelectorAll('nav a, .mobile-nav a');
