@@ -418,24 +418,24 @@
   }
 
   .section-index {
-    font-family: var(--mono);
+    font-family: var(--font-mono);
     font-size: 10px;
-    color: var(--oxide);
-    letter-spacing: 0.15em;
+    color: var(--accent-primary);
+    letter-spacing: var(--tracking-mono-label);
   }
 
   .section-title {
-    font-family: var(--serif);
-    font-size: 48px;
-    font-weight: 900;
+    font-family: var(--font-display);
+    font-size: var(--text-display-lg);
+    font-weight: 400;
     line-height: 1;
-    color: var(--white);
+    color: var(--text-primary);
   }
 
   .section-line {
     flex: 1;
     height: 1px;
-    background: linear-gradient(90deg, rgba(240,237,230,0.15) 0%, transparent 100%);
+    background: linear-gradient(90deg, var(--border-color-soft) 0%, transparent 100%);
     margin-left: 16px;
   }
 
@@ -452,15 +452,15 @@
     top: 8px;
     bottom: 0;
     width: 1px;
-    background: linear-gradient(180deg, var(--oxide) 0%, transparent 100%);
+    background: linear-gradient(180deg, var(--accent-primary) 0%, transparent 100%);
   }
 
   .timeline-item {
     position: relative;
     margin-bottom: 56px;
     opacity: 0;
-    transform: translateX(-12px);
-    transition: opacity 0.6s ease, transform 0.6s ease;
+    transform: translateX(-16px);
+    transition: opacity var(--duration-slow) var(--ease-standard), transform var(--duration-slow) var(--ease-standard);
   }
 
   .timeline-item.visible {
@@ -476,55 +476,78 @@
     width: 8px;
     height: 8px;
     border-radius: 50%;
-    background: var(--oxide);
-    box-shadow: 0 0 12px var(--oxide-glow);
+    background: var(--accent-primary);
+    box-shadow: var(--glow-signal);
   }
 
   .timeline-dates {
-    font-family: var(--mono);
+    font-family: var(--font-mono);
     font-size: 10px;
-    letter-spacing: 0.15em;
-    color: var(--oxide);
+    letter-spacing: var(--tracking-mono-label);
+    color: var(--accent-primary);
     text-transform: uppercase;
     margin-bottom: 6px;
   }
 
   .timeline-org {
-    font-family: var(--mono);
+    font-family: var(--font-mono);
     font-size: 11px;
-    letter-spacing: 0.1em;
-    color: var(--white-dim);
+    letter-spacing: var(--tracking-mono);
+    color: var(--text-secondary);
     text-transform: uppercase;
     margin-bottom: 8px;
   }
 
   .timeline-role {
-    font-family: var(--serif);
-    font-size: 28px;
-    font-weight: 700;
+    font-family: var(--font-display);
+    font-size: 22px;
+    font-weight: 400;
     line-height: 1.1;
-    color: var(--white);
+    color: var(--text-primary);
     margin-bottom: 16px;
   }
 
   .timeline-keyword {
     display: inline-block;
-    font-family: var(--mono);
+    font-family: var(--font-mono);
     font-size: 9px;
-    letter-spacing: 0.16em;
+    letter-spacing: var(--tracking-mono-label);
     text-transform: uppercase;
-    color: var(--oxide);
-    border: 1px solid var(--oxide-dim);
+    color: var(--accent-primary);
+    border: var(--border-accent);
+    border-radius: var(--radius-sm);
     padding: 3px 8px;
     margin-bottom: 16px;
   }
 
   .timeline-desc {
-    font-family: var(--body);
-    font-size: 16px;
-    line-height: 1.7;
-    color: var(--white-dim);
+    font-family: var(--font-body);
+    font-size: 15px;
+    line-height: var(--leading-body);
+    color: var(--text-secondary);
     max-width: 600px;
+  }
+
+  .pull-quote {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-weight: 400;
+    font-size: 22px;
+    line-height: 1.4;
+    color: var(--text-primary);
+    max-width: 560px;
+    border-left: var(--border-accent);
+    padding-left: 24px;
+    margin: 48px 0 40px;
+  }
+
+  .parcours-skills-title {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: var(--tracking-mono-label);
+    text-transform: uppercase;
+    color: var(--accent-primary);
+    margin-bottom: 16px;
   }
 
   /* ─── APPROCHE ─── */
@@ -1318,6 +1341,24 @@
         </div>
 
       </div>
+
+      <p class="pull-quote">
+        « Faire tenir ensemble le fond, la forme et le ton. »
+      </p>
+
+      <div class="parcours-skills-title">Compétences éditoriales</div>
+      <div class="skills-list">
+        <span class="skill-tag">Stratégie éditoriale</span>
+        <span class="skill-tag">Storytelling</span>
+        <span class="skill-tag">Direction communication</span>
+        <span class="skill-tag">Relations presse</span>
+        <span class="skill-tag">Social media</span>
+        <span class="skill-tag">Management</span>
+        <span class="skill-tag">Gestion de projets</span>
+        <span class="skill-tag">Email marketing</span>
+        <span class="skill-tag">Production vidéo</span>
+        <span class="skill-tag">Brevo</span>
+      </div>
     </section>
 
     <!-- APPROCHE -->
@@ -1350,10 +1391,6 @@
           <p class="approche-cell-text">Management d'équipe, pilotage budgétaire, coordination de prestataires. La vision stratégique n'a de valeur que livrée.</p>
         </div>
       </div>
-
-      <p class="approche-statement">
-        "Faire tenir ensemble le fond, la forme et le ton."
-      </p>
     </section>
 
     <!-- PROJETS -->
