@@ -289,17 +289,17 @@
   .hero-content {}
 
   .hero-eyebrow {
-    font-family: var(--mono);
+    font-family: var(--font-mono);
     font-size: 10px;
-    letter-spacing: 0.2em;
+    letter-spacing: var(--tracking-mono-label);
     text-transform: uppercase;
-    color: var(--oxide);
+    color: var(--accent-primary);
     display: flex;
     align-items: center;
     gap: 12px;
     margin-bottom: 32px;
     opacity: 0;
-    animation: slideRight 0.8s ease 0.6s forwards;
+    animation: slideRight var(--duration-slow) var(--ease-standard) 0.6s forwards;
   }
 
   .hero-eyebrow::before {
@@ -307,67 +307,68 @@
     display: block;
     width: 32px;
     height: 1px;
-    background: var(--oxide);
+    background: var(--accent-primary);
   }
 
   .hero-title {
-    font-family: var(--serif);
-    font-size: clamp(52px, 6vw, 88px);
-    font-weight: 900;
-    line-height: 0.92;
-    letter-spacing: -0.02em;
-    color: var(--white);
+    font-family: var(--font-display);
+    font-size: var(--text-display-xl);
+    font-weight: 400;
+    line-height: var(--leading-tight);
+    letter-spacing: var(--tracking-display);
+    color: var(--text-primary);
     margin-bottom: 40px;
     opacity: 0;
-    animation: slideRight 0.9s ease 0.8s forwards;
+    animation: slideRight var(--duration-slow) var(--ease-standard) 0.8s forwards;
   }
 
   .hero-title em {
     font-style: italic;
-    color: var(--oxide);
+    color: var(--accent-primary);
   }
 
   .hero-concept {
-    font-family: var(--body);
-    font-size: 20px;
+    font-family: var(--font-body);
+    font-size: 1.125rem;
     font-style: italic;
     line-height: 1.55;
-    color: var(--white-dim);
+    color: var(--text-secondary);
     max-width: 520px;
-    border-left: 2px solid var(--oxide);
+    border-left: var(--border-accent);
     padding-left: 20px;
     margin-bottom: 48px;
     opacity: 0;
-    animation: slideRight 1s ease 1s forwards;
+    animation: slideRight var(--duration-slow) var(--ease-standard) 1s forwards;
   }
 
   .hero-meta {
     display: flex;
     gap: 32px;
     opacity: 0;
-    animation: slideRight 1s ease 1.2s forwards;
+    animation: slideRight var(--duration-slow) var(--ease-standard) 1.2s forwards;
   }
 
   .hero-meta-item {
-    font-family: var(--mono);
+    font-family: var(--font-mono);
     font-size: 10px;
-    letter-spacing: 0.14em;
+    letter-spacing: var(--tracking-mono-label);
     text-transform: uppercase;
-    color: var(--white-dim);
+    color: var(--text-secondary);
   }
 
   .hero-meta-item span {
     display: block;
     font-size: 13px;
-    color: var(--white);
+    color: var(--text-primary);
     margin-top: 4px;
-    letter-spacing: 0.04em;
+    letter-spacing: var(--tracking-mono);
   }
 
   .hero-portrait {
     position: relative;
     opacity: 0;
-    animation: fadeIn 1.2s ease 1.4s forwards;
+    animation: fadeIn var(--duration-slow) var(--ease-standard) 1.4s forwards;
+    will-change: transform;
   }
 
   .hero-portrait img {
@@ -381,7 +382,7 @@
     content: '';
     position: absolute;
     inset: 0;
-    background: linear-gradient(135deg, var(--oxide-glow) 0%, transparent 60%);
+    background: linear-gradient(135deg, var(--color-signal-glow) 0%, transparent 60%);
     z-index: 1;
     pointer-events: none;
   }
@@ -393,7 +394,7 @@
     left: 0;
     right: 0;
     height: 40%;
-    background: linear-gradient(to top, var(--black), transparent);
+    background: linear-gradient(to top, var(--surface-page), transparent);
     z-index: 2;
   }
 
@@ -403,7 +404,7 @@
     right: -8px;
     bottom: 8px;
     left: 8px;
-    border: 1px solid var(--oxide-dim);
+    border: var(--border-accent);
     z-index: 0;
     pointer-events: none;
   }
@@ -1264,7 +1265,7 @@
           </div>
           <div class="hero-meta-item">
             Expérience
-            <span>+10 ans</span>
+            <span>+<span data-counter="10">0</span> ans</span>
           </div>
         </div>
       </div>
@@ -1566,6 +1567,45 @@
 </div>
 
 <script>
+  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // ─── HERO PORTRAIT PARALLAX ───
+  const heroPortrait = document.querySelector('.hero-portrait');
+  if (heroPortrait && !prefersReducedMotion) {
+    let ticking = false;
+    window.addEventListener('scroll', () => {
+      if (!ticking) {
+        requestAnimationFrame(() => {
+          const offset = Math.min(window.scrollY * 0.08, 40);
+          heroPortrait.style.transform = `translateY(${offset}px)`;
+          ticking = false;
+        });
+        ticking = true;
+      }
+    }, { passive: true });
+  }
+
+  // ─── ANIMATED COUNTERS ───
+  function animateCount(el, target, duration = 1200) {
+    if (prefersReducedMotion) { el.textContent = target; return; }
+    const start = performance.now();
+    function tick(now) {
+      const progress = Math.min((now - start) / duration, 1);
+      el.textContent = Math.round(progress * target);
+      if (progress < 1) requestAnimationFrame(tick);
+    }
+    requestAnimationFrame(tick);
+  }
+  document.querySelectorAll('[data-counter]').forEach(el => {
+    const target = parseInt(el.dataset.counter, 10);
+    const counterObs = new IntersectionObserver((entries, obs) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) { animateCount(e.target, target); obs.unobserve(e.target); }
+      });
+    }, { threshold: 0.5 });
+    counterObs.observe(el);
+  });
+
   // ─── INTERSECTION OBSERVER for section reveals ───
   const sections = document.querySelectorAll('section');
   const timelineItems = document.querySelectorAll('.timeline-item');
