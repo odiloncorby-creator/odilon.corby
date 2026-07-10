@@ -552,26 +552,26 @@
 
   /* ─── APPROCHE ─── */
   #approche {
-    background: var(--deep);
+    background: var(--surface-raised);
   }
 
   .approche-grid {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 2px;
-    margin-bottom: 64px;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1px;
+    background: var(--border-color-soft);
   }
 
   .approche-cell {
-    background: var(--surface);
-    padding: 36px 32px;
+    background: var(--surface-raised);
+    padding: 28px 24px;
     position: relative;
     overflow: hidden;
-    transition: background 0.3s ease;
+    transition: background var(--duration-base) var(--ease-standard);
   }
 
   .approche-cell:hover {
-    background: #1a1a1a;
+    background: var(--surface-overlay);
   }
 
   .approche-cell::before {
@@ -581,8 +581,8 @@
     left: 0;
     width: 3px;
     height: 0;
-    background: var(--oxide);
-    transition: height 0.4s ease;
+    background: var(--accent-primary);
+    transition: height var(--duration-slow) var(--ease-standard);
   }
 
   .approche-cell:hover::before {
@@ -590,40 +590,36 @@
   }
 
   .approche-cell-index {
-    font-family: var(--mono);
+    font-family: var(--font-mono);
     font-size: 9px;
-    letter-spacing: 0.18em;
-    color: var(--oxide);
+    letter-spacing: var(--tracking-mono-label);
+    color: var(--accent-primary);
     text-transform: uppercase;
     margin-bottom: 12px;
   }
 
   .approche-cell-title {
-    font-family: var(--serif);
-    font-size: 22px;
-    font-weight: 700;
-    color: var(--white);
-    margin-bottom: 12px;
+    font-family: var(--font-display);
+    font-size: 19px;
+    font-weight: 400;
+    color: var(--text-primary);
+    margin-bottom: 10px;
     line-height: 1.2;
   }
 
   .approche-cell-text {
-    font-family: var(--body);
-    font-size: 15px;
-    line-height: 1.65;
-    color: var(--white-dim);
+    font-family: var(--font-body);
+    font-size: 14px;
+    line-height: var(--leading-body);
+    color: var(--text-secondary);
   }
 
-  .approche-statement {
-    font-family: var(--serif);
-    font-size: 28px;
-    font-style: italic;
-    font-weight: 400;
-    line-height: 1.4;
-    color: var(--white);
-    max-width: 680px;
-    border-left: 3px solid var(--oxide);
-    padding-left: 28px;
+  @media (max-width: 900px) {
+    .approche-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+
+  @media (max-width: 560px) {
+    .approche-grid { grid-template-columns: 1fr; }
   }
 
   /* ─── PROJETS ─── */
@@ -1217,7 +1213,6 @@
     .approche-cell { padding: 20px 16px; }
     .contact-address { font-size: 22px; }
     .timeline-role { font-size: 20px; }
-    .approche-statement { font-size: 18px; padding-left: 16px; }
     .splash-ctas { flex-direction: column; align-items: center; gap: 8px; }
     .splash-close { top: 20px; right: 20px; }
   }
