@@ -1,0 +1,677 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>odilon.uncoded — terminal</title>
+<meta http-equiv="Content-Security-Policy" content="
+  default-src 'self';
+  style-src 'self' 'unsafe-inline';
+  font-src 'self';
+  img-src 'self' data:;
+  script-src 'self' 'unsafe-inline';
+  object-src 'none';
+  base-uri 'self';
+  form-action 'none';
+  upgrade-insecure-requests;
+">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<meta name="description" content="Odilon Corby — Product Builder No-Code & Communication expert. Le CV en mode terminal : tapez help.">
+<meta property="og:title" content="odilon.uncoded — terminal">
+<meta property="og:description" content="Relier le récit, la production et les outils. Tapez help.">
+<meta name="theme-color" content="#0A0A0A">
+
+<style>
+  @font-face { font-family: 'Geist Mono'; src: url('GeistMono-Variable.woff2') format('woff2'); font-weight: 100 900; font-display: swap; }
+  @font-face { font-family: 'VG5000'; src: url('VG5000-Regular_web.woff2') format('woff2'); font-weight: 400; font-display: swap; }
+
+  :root {
+    --color-ink: #0A0A0A;
+    --color-paper: #EDEAE0;
+    --color-signal: #D9A441;
+    --color-phosphor: #6B9080;
+    --color-line: #3A3A38;
+    --color-muted: #8C887E;
+    --raised: color-mix(in srgb, #0A0A0A 94%, #EDEAE0 6%);
+    --faint: color-mix(in srgb, #EDEAE0 45%, transparent);
+    --glow: color-mix(in srgb, #D9A441 30%, transparent);
+    --mono: 'Geist Mono', ui-monospace, 'SFMono-Regular', Menlo, monospace;
+    --display: 'VG5000', Georgia, serif;
+    --fs: 14px;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { height: 100%; }
+  body {
+    background: var(--color-ink);
+    color: var(--color-paper);
+    font-family: var(--mono);
+    font-size: var(--fs);
+    line-height: 1.55;
+    overflow: hidden;
+  }
+  ::selection { background: var(--color-signal); color: var(--color-ink); }
+  a { color: var(--color-signal); text-underline-offset: 3px; }
+  a:hover { background: var(--color-signal); color: var(--color-ink); text-decoration: none; }
+
+  #field { position: fixed; inset: 0; width: 100%; height: 100%; z-index: 0; }
+
+  /* CRT */
+  body::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 50;
+    background:
+      repeating-linear-gradient(0deg, rgba(0,0,0,0.22) 0 1px, transparent 1px 3px),
+      radial-gradient(ellipse at center, transparent 50%, rgba(0,0,0,0.6) 100%);
+  }
+  .flicker { animation: flicker 6s infinite; }
+  @keyframes flicker { 0%, 97%, 100% { opacity: 1 } 97.5% { opacity: .86 } 98.5% { opacity: .95 } }
+
+  /* Fenêtre */
+  .term {
+    position: relative;
+    z-index: 1;
+    height: 100%;
+    max-width: 1040px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    padding: 20px 20px 0;
+  }
+  .titlebar {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 12px;
+    color: var(--color-muted);
+    border: 1px solid var(--color-line);
+    border-bottom: none;
+    background: var(--raised);
+    padding: 8px 12px;
+  }
+  .dots { display: flex; gap: 6px; }
+  .dots i { width: 9px; height: 9px; border: 1px solid var(--color-line); display: block; }
+  .dots i:first-child { background: var(--color-signal); border-color: var(--color-signal); }
+  .titlebar .title { flex: 1; text-align: center; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .titlebar a { text-decoration: none; font-size: 12px; border: 1px solid color-mix(in srgb, var(--color-signal) 55%, transparent); padding: 2px 8px; }
+
+  .screen {
+    flex: 1;
+    min-height: 0;
+    overflow-y: auto;
+    border: 1px solid var(--color-line);
+    background: color-mix(in srgb, var(--color-ink) 82%, transparent);
+    backdrop-filter: blur(2px);
+    padding: 18px 20px 28px;
+    scrollbar-width: thin;
+    scrollbar-color: var(--color-signal) transparent;
+  }
+  .screen::-webkit-scrollbar { width: 4px; }
+  .screen::-webkit-scrollbar-thumb { background: var(--color-signal); }
+
+  .out > * + * { margin-top: 2px; }
+  .block { margin-bottom: 14px; }
+  .line { white-space: pre-wrap; word-break: break-word; }
+  .dim { color: var(--color-muted); }
+  .faint { color: var(--faint); }
+  .acc { color: var(--color-signal); }
+  .ph { color: var(--color-phosphor); }
+  .err { color: #E07A5F; }
+  .ok { color: var(--color-phosphor); }
+  .strong { color: var(--color-paper); font-weight: 600; }
+  .disp { font-family: var(--display); font-size: 1.9em; line-height: 1.05; color: var(--color-paper); }
+  .disp em { color: var(--color-signal); }
+  .quote { font-family: var(--display); font-style: italic; font-size: 1.2em; color: var(--color-paper); border-left: 1px solid var(--color-signal); padding-left: 14px; margin: 10px 0; }
+
+  pre.ascii { font-family: var(--mono); line-height: 1; letter-spacing: 0; white-space: pre; color: var(--color-signal); text-shadow: 0 0 8px var(--glow); overflow: hidden; }
+  pre.banner { line-height: 1.02; margin: 6px 0 12px; }
+
+  /* Prompt */
+  .ps1 { white-space: nowrap; }
+  .ps1 .u { color: var(--color-phosphor); }
+  .ps1 .h { color: var(--color-signal); }
+  .ps1 .s { color: var(--color-muted); }
+  .echo { margin-top: 6px; }
+  .echo .c { color: var(--color-paper); }
+
+  .input-line { display: flex; align-items: baseline; gap: 8px; margin-top: 6px; }
+  .input-line label { flex-shrink: 0; }
+  #cmd {
+    flex: 1;
+    min-width: 0;
+    background: transparent;
+    border: none;
+    outline: none;
+    color: var(--color-paper);
+    font: inherit;
+    caret-color: var(--color-signal);
+    caret-shape: block;
+  }
+  .input-line.busy { opacity: .45; }
+
+  /* Commandes cliquables */
+  button.cmd {
+    all: unset;
+    cursor: pointer;
+    color: var(--color-signal);
+    border-bottom: 1px dashed color-mix(in srgb, var(--color-signal) 55%, transparent);
+  }
+  button.cmd:hover, button.cmd:focus-visible { background: var(--color-signal); color: var(--color-ink); border-bottom-color: transparent; }
+
+  .chips {
+    display: flex;
+    gap: 6px;
+    overflow-x: auto;
+    padding: 10px 0 max(14px, env(safe-area-inset-bottom));
+    scrollbar-width: none;
+  }
+  .chips::-webkit-scrollbar { display: none; }
+  .chips button {
+    all: unset;
+    cursor: pointer;
+    flex-shrink: 0;
+    font-size: 12px;
+    color: var(--color-muted);
+    border: 1px solid var(--color-line);
+    background: var(--raised);
+    padding: 5px 10px;
+    transition: color .2s, border-color .2s, background .2s;
+  }
+  .chips button::before { content: '$ '; color: var(--faint); }
+  .chips button:hover, .chips button:focus-visible { color: var(--color-ink); background: var(--color-signal); border-color: var(--color-signal); }
+  .chips button:hover::before, .chips button:focus-visible::before { color: var(--color-ink); }
+
+  /* Tables / grilles */
+  .grid2 { display: grid; grid-template-columns: max-content 1fr; column-gap: 24px; row-gap: 2px; }
+  .whoami { display: flex; gap: 28px; align-items: flex-start; flex-wrap: wrap; }
+  .whoami .portrait { flex: 0 0 auto; width: min(300px, 100%); }
+  .whoami .info { flex: 1 1 320px; min-width: 0; }
+  .whoami .info > * + * { margin-top: 10px; }
+
+  .tl-item { border-left: 1px solid var(--color-line); padding: 0 0 14px 18px; position: relative; }
+  .tl-item::before { content: ''; position: absolute; left: -4px; top: 7px; width: 7px; height: 7px; background: var(--color-signal); box-shadow: 0 0 8px var(--glow); }
+
+  .box { border: 1px solid var(--color-line); border-left-color: var(--color-signal); padding: 12px 16px; margin: 6px 0 4px; position: relative; max-width: 780px; }
+  .box::before { content: '┌─'; position: absolute; top: -10px; left: -1px; color: var(--color-signal); background: var(--color-ink); line-height: 1; }
+  .box::after { content: '─┘'; position: absolute; bottom: -9px; right: -1px; color: var(--color-signal); background: var(--color-ink); line-height: 1; }
+  .box h3 { font-family: var(--display); font-weight: 400; font-size: 1.6em; color: var(--color-paper); margin: 2px 0 8px; }
+  .box .lbl { color: var(--color-signal); margin-top: 10px; }
+  .box .lbl::before { content: '## '; color: var(--faint); }
+  .box p { max-width: 70ch; color: color-mix(in srgb, var(--color-paper) 82%, transparent); }
+
+  .tags span { display: inline-block; margin: 0 10px 2px 0; }
+  .tags span::before { content: '['; color: var(--faint); margin-right: 4px; }
+  .tags span::after { content: ']'; color: var(--faint); margin-left: 4px; }
+
+  .wave { color: var(--color-signal); line-height: 1; font-size: 18px; letter-spacing: 1px; }
+
+  /* Glitch plein écran */
+  .term.glitching .screen { animation: gshift .12s steps(2) infinite; }
+  @keyframes gshift {
+    0% { transform: translate(0); filter: none; }
+    50% { transform: translate(-4px, 1px) skewX(-2deg); filter: drop-shadow(3px 0 0 rgba(107,144,128,.8)) drop-shadow(-3px 0 0 rgba(217,164,65,.8)); }
+    100% { transform: translate(3px, -1px); }
+  }
+
+  @media (max-width: 640px) {
+    :root { --fs: 13px; }
+    .term { padding: 0; }
+    .titlebar { border-left: none; border-right: none; }
+    .screen { border-left: none; border-right: none; padding: 14px 14px 24px; }
+    .chips { padding-left: 10px; padding-right: 10px; }
+    .grid2 { grid-template-columns: 1fr; }
+    .grid2 > :nth-child(odd) { margin-top: 6px; }
+    .disp { font-size: 1.6em; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .flicker, .term.glitching .screen { animation: none !important; }
+  }
+</style>
+</head>
+<body>
+<canvas id="field" aria-hidden="true"></canvas>
+
+<div class="term flicker" id="term">
+  <div class="titlebar">
+    <span class="dots" aria-hidden="true"><i></i><i></i><i></i></span>
+    <span class="title">visiteur@odilon.uncoded: ~ — zsh</span>
+    <a href="odilon-corby-cv.html">[mode lecture]</a>
+  </div>
+
+  <div class="screen" id="screen">
+    <noscript><p>Le mode terminal nécessite JavaScript. <a href="odilon-corby-cv.html">Ouvrir le mode lecture</a>.</p></noscript>
+    <div class="out" id="out" aria-live="polite"></div>
+    <div class="input-line" id="inputLine" hidden>
+      <label for="cmd" class="ps1"><span class="u">visiteur</span><span class="s">@</span><span class="h">odilon.uncoded</span><span class="s">:~$</span></label>
+      <input id="cmd" type="text" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" enterkeyhint="send" aria-label="Commande">
+    </div>
+  </div>
+
+  <nav class="chips" id="chips" aria-label="Commandes rapides"></nav>
+</div>
+
+<script src="cv-data.js"></script>
+<script src="uncoded-fx.js"></script>
+<script>
+(function () {
+  const CV = window.CV;
+  const R = UFX.reduced;
+  const $out = document.getElementById('out');
+  const $screen = document.getElementById('screen');
+  const $input = document.getElementById('cmd');
+  const $inputLine = document.getElementById('inputLine');
+  const $term = document.getElementById('term');
+  const isTouch = window.matchMedia('(hover: none)').matches;
+
+  UFX.field(document.getElementById('field'));
+
+  // ─── Utilitaires ───
+  const esc = (s) => String(s).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+  const cmd = (c, label) => `<button class="cmd" data-cmd="${esc(c)}">${esc(label || c)}</button>`;
+  const link = (href, label) => `<a href="${esc(href)}"${href.startsWith('http') ? ' target="_blank" rel="noreferrer"' : ''}>${esc(label)}</a>`;
+  const scrollDown = () => { $screen.scrollTop = $screen.scrollHeight; };
+
+  // ─── Typewriter : révèle les nœuds texte d'un bloc ───
+  let typing = null;
+  function typeBlock(el) {
+    if (R) { scrollDown(); return Promise.resolve(); }
+    const walker = document.createTreeWalker(el, NodeFilter.SHOW_TEXT, {
+      acceptNode: (n) => n.parentElement.closest('pre.ascii') ? NodeFilter.FILTER_REJECT : NodeFilter.FILTER_ACCEPT
+    });
+    const nodes = [];
+    while (walker.nextNode()) nodes.push({ n: walker.currentNode, t: walker.currentNode.nodeValue });
+    const total = nodes.reduce((a, b) => a + b.t.length, 0);
+    nodes.forEach((o) => { o.n.nodeValue = ''; });
+    const perFrame = Math.max(8, Math.ceil(total / 40));
+    let idx = 0, done = 0;
+    return new Promise((resolve) => {
+      let stopped = false;
+      const self = {
+        finish: () => {
+          if (stopped) return;
+          stopped = true;
+          nodes.forEach((o) => { o.n.nodeValue = o.t; });
+          if (typing === self) typing = null;
+          scrollDown(); resolve();
+        }
+      };
+      const finish = self.finish;
+      typing = self;
+      function frame() {
+        if (stopped) return;
+        let budget = perFrame;
+        while (budget > 0 && idx < nodes.length) {
+          const o = nodes[idx];
+          const take = Math.min(budget, o.t.length - done);
+          done += take; budget -= take;
+          o.n.nodeValue = o.t.slice(0, done);
+          if (done >= o.t.length) { idx++; done = 0; }
+        }
+        scrollDown();
+        if (idx >= nodes.length) finish(); else requestAnimationFrame(frame);
+      }
+      requestAnimationFrame(frame);
+    });
+  }
+  const skipTyping = () => { if (typing) typing.finish(); };
+
+  function print(html, cls = 'block') {
+    const el = document.createElement('div');
+    el.className = cls;
+    el.innerHTML = html;
+    $out.appendChild(el);
+    return el;
+  }
+  const out = (html) => typeBlock(print(html));
+
+  function echo(c) {
+    print(`<span class="ps1"><span class="u">visiteur</span><span class="s">@</span><span class="h">odilon.uncoded</span><span class="s">:~$</span></span> <span class="c">${esc(c)}</span>`, 'echo line');
+  }
+
+  // ─── Commandes ───
+  const produitIds = CV.produits.map((p) => p.id);
+  const findProduit = (q) => {
+    q = (q || '').toLowerCase().replace(/\/$/, '');
+    return CV.produits.find((p, i) => p.id === q || String(i + 1) === q || p.title.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').startsWith(q));
+  };
+
+  const COMMANDS = {
+    help: { desc: 'liste des commandes', run: () => out(
+      `<div class="acc">commandes disponibles</div><div class="grid2" style="margin-top:6px">` +
+      [
+        ['whoami', 'qui je suis, en une page'],
+        ['parcours [n]', 'expériences · détail avec parcours 1..4'],
+        ['produits', 'ce que j’ai construit'],
+        ['open &lt;produit&gt;', 'fiche détaillée · ex. open naiko'],
+        ['skills', 'compétences par domaine'],
+        ['stack', 'outils, rangés en arbre'],
+        ['approche', 'ma méthode en 4 principes'],
+        ['music', 'side project : musiques électroniques'],
+        ['contact', 'me joindre'],
+        ['cv', 'télécharger le CV en PDF'],
+        ['lecture', 'basculer en mode lecture (page classique)'],
+        ['clear', 'effacer l’écran · ctrl+L']
+      ].map(([c, d]) => `<span>${cmd(c.split(' ')[0], c.replace('&lt;', '<').replace('&gt;', '>'))}</span><span class="dim">${d}</span>`).join('') +
+      `</div><div class="faint" style="margin-top:10px">tab = autocomplétion · ↑↓ = historique · entrée = passer l’animation</div>`
+    ) },
+
+    whoami: { desc: 'profil', run: () => {
+      const el = print(
+        `<div class="whoami"><div class="portrait"><pre class="ascii" aria-hidden="true"></pre></div>` +
+        `<div class="info">` +
+        `<div class="dim">// ${esc(CV.eyebrow)}</div>` +
+        `<div class="disp">Odilon <em>Corby</em></div>` +
+        `<div class="acc">${esc(CV.role)}</div>` +
+        `<div class="quote">${esc(CV.tagline)}</div>` +
+        `<div>${esc(CV.intro)}</div>` +
+        `<div class="grid2"><span class="dim">localisation</span><span>${esc(CV.meta.location)}</span><span class="dim">expérience</span><span>${esc(CV.meta.experience)}</span><span class="dim">disponibilité</span><span>${esc(CV.meta.availability)}</span></div>` +
+        `<div class="ph"># ${esc(CV.positioning)}</div>` +
+        `<div class="dim">→ ${cmd('parcours')} · ${cmd('produits')} · ${cmd('skills')} · ${cmd('contact')}</div>` +
+        `</div></div>`);
+      const pre = el.querySelector('pre');
+      const cols = window.innerWidth < 640 ? 52 : 60;
+      UFX.asciiImage(CV.portrait, cols, { cellRatio: 0.6, invert: true, gamma: 1.6, contrast: 1.5, ramp: ' .:-=+*#%@' })
+        .then((txt) => { pre.textContent = txt; UFX.fitPre(pre, cols, 9); if (!R) revealAscii(pre); scrollDown(); })
+        .catch(() => { pre.remove(); });
+      return typeBlock(el);
+    } },
+
+    parcours: { desc: 'expériences', run: (arg) => {
+      if (arg) {
+        const i = parseInt(arg, 10) - 1;
+        const p = CV.parcours[i];
+        if (!p) return out(`<span class="err">parcours: ${esc(arg)} : entrée inconnue (1 à ${CV.parcours.length})</span>`);
+        return out(`<div class="box"><div class="acc">${esc(p.dates)} · [ ${esc(p.keyword)} ]</div><h3>${esc(p.role)}</h3><div class="dim">${esc(p.org)}</div><p style="margin-top:10px">${esc(p.desc)}</p></div>` +
+          `<div class="dim" style="margin-top:12px">${i > 0 ? '← ' + cmd('parcours ' + i) + ' · ' : ''}${cmd('parcours')}${i < CV.parcours.length - 1 ? ' · ' + cmd('parcours ' + (i + 2)) + ' →' : ''}</div>`);
+      }
+      return out(`<div class="dim" style="margin-bottom:10px">$ cat parcours.md · ${CV.parcours.length} entrées · keyword = fil narratif</div>` +
+        CV.parcours.map((p, i) =>
+          `<div class="tl-item"><div><span class="acc">${esc(p.dates)}</span>  <span class="faint">[</span> <span class="ph">${esc(p.keyword)}</span> <span class="faint">]</span></div>` +
+          `<div class="strong">${esc(p.role)}</div><div class="dim">${esc(p.org)}</div><div>${cmd('parcours ' + (i + 1), '→ détail')}</div></div>`
+        ).join('') +
+        `<div class="quote">« ${esc(CV.signature)} »</div>`);
+    } },
+
+    produits: { desc: 'produits', run: () => out(
+      `<div class="dim" style="margin-bottom:8px">total ${CV.produits.length}</div><div class="grid2">` +
+      CV.produits.map((p) => `<span><span class="faint">drwxr-xr-x</span> ${cmd('open ' + p.id, p.id + '/')}</span><span><span class="strong">${esc(p.title)}</span> <span class="dim">· ${esc(p.meta)}</span></span>`).join('') +
+      `</div><div class="faint" style="margin-top:10px">→ cliquez un dossier ou tapez open &lt;nom&gt;</div>`
+    ) },
+
+    open: { desc: 'fiche produit', run: (arg) => {
+      if (!arg) return out(`<span class="err">open: argument manquant.</span> <span class="dim">ex. ${cmd('open naiko')}</span>`);
+      const p = findProduit(arg);
+      if (!p) return out(`<span class="err">open: ${esc(arg)} : aucun produit de ce nom.</span> <span class="dim">voir ${cmd('produits')}</span>`);
+      const sec = (lbl, txt) => txt ? `<div class="lbl">${lbl}</div><p>${esc(txt)}</p>` : '';
+      const i = CV.produits.indexOf(p);
+      const next = CV.produits[(i + 1) % CV.produits.length];
+      return out(`<div class="box"><div class="acc">${esc(p.meta)}</div><h3>${esc(p.title)}</h3><p>${esc(p.teaser)}</p>` +
+        sec('contexte', p.contexte) + sec('ce que j’ai construit', p.construit) + sec('défi', p.defi) +
+        (p.stack ? `<div class="lbl">stack</div><div class="tags">${p.stack.map((s) => `<span>${esc(s)}</span>`).join('')}</div>` : '') +
+        sec('résultat', p.resultat) +
+        (p.link ? `<div style="margin-top:12px">→ ${link(p.link.href, p.link.label)}</div>` : '') +
+        `</div><div class="dim" style="margin-top:12px">${cmd('produits', '← produits')} · suivant : ${cmd('open ' + next.id, next.id)}</div>`);
+    } },
+
+    skills: { desc: 'compétences', run: () => out(
+      CV.skills.map((g) => `<div style="margin-bottom:10px"><div class="acc">▸ ${esc(g.group)}</div><div class="tags" style="padding-left:14px">${g.items.map((s) => `<span>${esc(s)}</span>`).join('')}</div></div>`).join('') +
+      `<div class="grid2" style="margin-top:6px"><span class="dim">formation</span><span>${CV.formation.map(esc).join('<br>')}</span><span class="dim">langues</span><span>${CV.langues.map(esc).join(' · ')}</span></div>`
+    ) },
+
+    stack: { desc: 'outils', run: () => {
+      const keys = Object.keys(CV.stack);
+      let s = '<span class="acc">stack/</span>\n';
+      keys.forEach((k, i) => {
+        const last = i === keys.length - 1;
+        s += `<span class="faint">${last ? '└── ' : '├── '}</span><span class="ph">${esc(k)}/</span>\n`;
+        CV.stack[k].forEach((t, j) => {
+          const lastT = j === CV.stack[k].length - 1;
+          s += `<span class="faint">${last ? '    ' : '│   '}${lastT ? '└── ' : '├── '}</span>${esc(t)}\n`;
+        });
+      });
+      const n = keys.reduce((a, k) => a + CV.stack[k].length, 0);
+      s += `\n<span class="dim">${keys.length} directories, ${n} tools</span>`;
+      return out(`<div class="line">${s}</div>`);
+    } },
+
+    approche: { desc: 'méthode', run: () => out(
+      CV.approche.map((a) => `<div style="margin-bottom:10px"><div class="acc">${esc(a.index)}</div><div class="strong">${esc(a.title)}</div><div class="dim" style="max-width:70ch">${esc(a.text)}</div></div>`).join('')
+    ) },
+
+    music: { desc: 'side project', run: () => {
+      const el = print(`<div class="acc">▸ ${esc(CV.music.title)}</div><div class="dim">${esc(CV.music.genres)}</div>` +
+        `<pre class="wave" aria-hidden="true"></pre>` +
+        `<p style="max-width:70ch;margin-top:8px">${esc(CV.music.text)}</p>` +
+        `<div class="dim" style="margin-top:6px">gear · ${esc(CV.music.gear)}</div>` +
+        `<div style="margin-top:8px">→ ${link(CV.music.link.href, CV.music.link.label)}</div>`);
+      animateWave(el.querySelector('.wave'));
+      return typeBlock(el);
+    } },
+
+    contact: { desc: 'contact', run: () => out(
+      `<div class="grid2">` + CV.contact.map((c) => `<span class="dim">${esc(c.label)}</span><span>${link(c.href, c.value)}</span>`).join('') + `</div>` +
+      `<div class="faint" style="margin-top:10px">astuce : ${cmd('sudo hire-me')}</div>`
+    ) },
+
+    cv: { desc: 'pdf', run: () => {
+      const a = document.createElement('a');
+      a.href = CV.pdf; a.download = 'cv-odilon-corby.pdf';
+      document.body.appendChild(a); a.click(); a.remove();
+      return out(`<span class="ok">✔</span> téléchargement de <span class="acc">cv-odilon-corby.pdf</span>… <span class="dim">(sinon : ${link(CV.pdf, 'lien direct')})</span>`);
+    } },
+
+    lecture: { desc: 'mode lecture', run: () => { out('<span class="dim">bascule vers le mode lecture…</span>'); setTimeout(() => { location.href = 'odilon-corby-cv.html'; }, R ? 0 : 450); glitchAll(450); } },
+
+    clear: { desc: 'effacer', run: () => { $out.innerHTML = ''; } },
+
+    ls: { desc: 'contenu', run: () => out(
+      ['parcours', 'produits', 'skills', 'stack', 'approche', 'music', 'contact'].map((c) => cmd(c, c + '/')).join('   ') + '   ' + cmd('cv', 'cv.pdf')
+    ) },
+
+    history: { desc: 'historique', run: () => out(history.map((h, i) => `<span class="faint">${String(i + 1).padStart(3)}</span>  ${esc(h)}`).join('<br>') || '<span class="dim">(vide)</span>') },
+
+    date: { desc: 'date', run: () => out(esc(new Date().toLocaleString('fr-FR', { dateStyle: 'full', timeStyle: 'short', timeZone: 'Europe/Paris' })) + ' <span class="dim">· Paris</span>') },
+
+    echo: { desc: 'echo', run: (arg) => out(esc(arg || '')) },
+
+    sudo: { desc: 'sudo', run: (arg) => {
+      if ((arg || '').trim() === 'hire-me') {
+        setTimeout(() => { location.href = 'mailto:odilon.corby@proton.me?subject=' + encodeURIComponent('Prenons contact — via odilon.uncoded'); }, R ? 0 : 900);
+        return out(`<span class="dim">[sudo] mot de passe pour visiteur :</span> ********\n<span class="ok">✔ accès accordé.</span> ouverture de votre messagerie…`.replace('\n', '<br>'));
+      }
+      glitchAll(300);
+      return out(`<span class="err">visiteur n’est pas dans le fichier sudoers. Cet incident sera signalé.</span> <span class="dim">essayez ${cmd('sudo hire-me')}</span>`);
+    } },
+
+    glitch: { desc: 'effet', run: () => { glitchAll(1400); return out('<span class="acc">▓▒░ signal perturbé ░▒▓</span>'); } }
+  };
+  const ALIASES = { exit: 'lecture', gui: 'lecture', web: 'lecture', 'ls produits': 'produits', experience: 'parcours', experiences: 'parcours', xp: 'parcours', projets: 'produits', projects: 'produits', cat: 'open', cd: null, man: 'help', '?': 'help', skill: 'skills', tools: 'stack', musique: 'music', about: 'whoami', pdf: 'cv', cls: 'clear' };
+  const PUBLIC = ['help', 'whoami', 'parcours', 'produits', 'open', 'skills', 'stack', 'approche', 'music', 'contact', 'cv', 'lecture', 'clear'];
+
+  function lev(a, b) {
+    const m = Array.from({ length: a.length + 1 }, (_, i) => [i]);
+    for (let j = 1; j <= b.length; j++) m[0][j] = j;
+    for (let i = 1; i <= a.length; i++) for (let j = 1; j <= b.length; j++)
+      m[i][j] = Math.min(m[i - 1][j] + 1, m[i][j - 1] + 1, m[i - 1][j - 1] + (a[i - 1] === b[j - 1] ? 0 : 1));
+    return m[a.length][b.length];
+  }
+
+  // ─── Exécution ───
+  const history = [];
+  let hIdx = 0;
+  let queue = Promise.resolve();
+
+  function run(raw, opts = {}) {
+    const line = raw.trim();
+    skipTyping();
+    queue = queue.then(async () => {
+      if (!opts.silent) echo(line);
+      if (!line) return;
+      if (!opts.silent) { history.push(line); hIdx = history.length; }
+      let lower = line.toLowerCase();
+      if (ALIASES[lower] !== undefined && ALIASES[lower] !== null && !COMMANDS[lower]) lower = ALIASES[lower];
+      let [name, ...rest] = lower.split(/\s+/);
+      let arg = rest.join(' ');
+      if (name === 'cd' || name === 'ls' || name === 'cat') {
+        const t = (arg || '').replace(/\/$/, '').replace(/^~\/?/, '');
+        if (t && (COMMANDS[t] || ALIASES[t])) { name = ALIASES[t] || t; arg = ''; }
+        else if (t && findProduit(t)) { name = 'open'; arg = t; }
+        else if (name === 'cd' && !t) { name = 'ls'; }
+      }
+      if (ALIASES[name]) name = ALIASES[name];
+      const c = COMMANDS[name];
+      if (!c) {
+        UFX.shake($inputLine);
+        const best = PUBLIC.map((k) => [k, lev(name, k)]).sort((a, b) => a[1] - b[1])[0];
+        return out(`<span class="err">zsh: command not found: ${esc(name)}</span>` +
+          (best && best[1] <= Math.max(1, Math.floor(name.length / 3)) ? ` <span class="dim">· vous vouliez dire ${cmd(best[0])} ?</span>` : ` <span class="dim">· tapez ${cmd('help')}</span>`));
+      }
+      if (!opts.silent && !R && name !== 'clear') UFX.glitch(document.querySelector('.titlebar .title'), 220);
+      await c.run(arg);
+    }).catch((e) => { console.error(e); });
+    return queue;
+  }
+
+  // ─── Effets ───
+  function glitchAll(ms) {
+    if (R) return;
+    $term.classList.add('glitching');
+    setTimeout(() => $term.classList.remove('glitching'), ms);
+  }
+
+  function revealAscii(pre) {
+    const final = pre.textContent;
+    const G = '░▒▓█/\\|-+*';
+    const start = performance.now(), dur = 900;
+    function f(now) {
+      const t = Math.min((now - start) / dur, 1);
+      let s = '';
+      for (let i = 0; i < final.length; i++) {
+        const ch = final[i];
+        s += (ch === '\n' || ch === ' ' || Math.random() < t) ? ch : G[(Math.random() * G.length) | 0];
+      }
+      pre.textContent = s;
+      if (t < 1) requestAnimationFrame(f); else pre.textContent = final;
+    }
+    requestAnimationFrame(f);
+  }
+
+  function animateWave(pre) {
+    const bars = '▁▂▃▄▅▆▇█';
+    const n = window.innerWidth < 640 ? 28 : 48;
+    const seed = Array.from({ length: n }, () => Math.random() * 6.28);
+    const draw = (t) => {
+      let top = '', bot = '';
+      for (let i = 0; i < n; i++) {
+        const v = (Math.sin(t / 260 + seed[i]) * 0.5 + 0.5) * (0.45 + 0.55 * Math.abs(Math.sin(i * 0.37 + t / 900)));
+        const h = Math.round(v * 15);
+        top += h > 7 ? bars[h - 8] : ' ';
+        bot += h > 7 ? '█' : bars[Math.max(0, h)];
+      }
+      pre.textContent = top + '\n' + bot;
+    };
+    if (R) { draw(1000); return; }
+    let last = 0;
+    function loop(t) {
+      if (!pre.isConnected) return;
+      if (t - last > 70) { draw(t); last = t; }
+      requestAnimationFrame(loop);
+    }
+    requestAnimationFrame(loop);
+  }
+
+  // ─── Boot ───
+  async function boot() {
+    const fast = R || new URLSearchParams(location.search).has('fast');
+    try { await document.fonts.load('700 80px "Geist Mono"'); } catch (e) {}
+    const sleep = (ms) => new Promise((r) => setTimeout(r, fast || bootSkipped ? 0 : ms));
+    const lines = [
+      ['odilon.uncoded bios v4.0 — (c) 2014–2026 Odilon Corby', 'dim'],
+      ['[ <span class="ok">OK</span> ] montage du récit ............ /dev/editorial'],
+      ['[ <span class="ok">OK</span> ] chargement des workflows ..... notion · make · brevo'],
+      ['[ <span class="ok">OK</span> ] liaison des api ............. mcp · cloudflare · github'],
+      ['[ <span class="ok">OK</span> ] calibrage du ton ............ fond · forme · ton'],
+      ['[ <span class="acc">!!</span> ] mode uncoded activé']
+    ];
+    for (const [l, cls] of lines) { print(l, 'line' + (cls ? ' ' + cls : '')); scrollDown(); await sleep(170); }
+    const bannerTxt = UFX.asciiText('odilon.uncoded', { rows: 9 });
+    const cols = bannerTxt.split('\n')[0].length;
+    const b = print(`<pre class="ascii banner" aria-label="odilon.uncoded"></pre>`, 'block');
+    const pre = b.querySelector('pre');
+    pre.textContent = bannerTxt;
+    UFX.fitPre(pre, Math.max(cols, 40), 12);
+    window.addEventListener('resize', () => UFX.fitPre(pre, Math.max(cols, 40), 12));
+    if (!fast && !bootSkipped) revealAscii(pre);
+    await sleep(900);
+    if (!R) setInterval(() => { if (pre.isConnected && Math.random() < 0.5) UFX.glitch(pre, 240); }, 3200);
+    booted = true;
+    $inputLine.hidden = false;
+    await run('whoami');
+    await out(`<span class="dim">tapez</span> ${cmd('help')} <span class="dim">ou cliquez une commande ci-dessous.</span>`);
+    if (!isTouch) $input.focus();
+  }
+  let bootSkipped = false, booted = false;
+  const skipBoot = () => { if (!booted) bootSkipped = true; };
+  window.addEventListener('keydown', skipBoot, { once: true });
+  window.addEventListener('pointerdown', skipBoot, { once: true });
+
+  // ─── Entrées ───
+  $input.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') {
+      e.preventDefault();
+      if (typing) { skipTyping(); if (!$input.value.trim()) return; }
+      const v = $input.value; $input.value = '';
+      run(v);
+    } else if (e.key === 'ArrowUp') {
+      e.preventDefault();
+      if (hIdx > 0) { hIdx--; $input.value = history[hIdx]; }
+    } else if (e.key === 'ArrowDown') {
+      e.preventDefault();
+      if (hIdx < history.length - 1) { hIdx++; $input.value = history[hIdx]; } else { hIdx = history.length; $input.value = ''; }
+    } else if (e.key === 'Tab') {
+      e.preventDefault();
+      const v = $input.value.toLowerCase();
+      const pool = v.startsWith('open ') ? produitIds.map((id) => 'open ' + id)
+        : v.startsWith('parcours ') ? CV.parcours.map((_, i) => 'parcours ' + (i + 1))
+        : PUBLIC.concat(['sudo hire-me']);
+      const m = pool.filter((c) => c.startsWith(v));
+      if (m.length === 1) $input.value = m[0] + (PUBLIC.includes(m[0]) && ['open', 'parcours'].includes(m[0]) ? ' ' : '');
+      else if (m.length > 1) print(m.map((c) => cmd(c)).join('   '), 'line dim');
+      scrollDown();
+    } else if (e.key === 'l' && e.ctrlKey) {
+      e.preventDefault(); $out.innerHTML = '';
+    }
+  });
+
+  document.addEventListener('click', (e) => {
+    const b = e.target.closest('button.cmd, .chips button');
+    if (b) {
+      e.preventDefault();
+      if (!booted) return;
+      run(b.dataset.cmd);
+      if (!isTouch) $input.focus();
+      return;
+    }
+    if (e.target.closest('a')) return;
+    if (e.target.closest('#screen') && !isTouch && !window.getSelection().toString()) $input.focus();
+  });
+
+  // Entrée hors input = passer l'animation
+  window.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter' && document.activeElement !== $input) skipTyping();
+    if (e.key.length === 1 && !e.ctrlKey && !e.metaKey && booted && document.activeElement !== $input && !isTouch) $input.focus();
+  });
+
+  // Chips
+  document.getElementById('chips').innerHTML = ['help', 'whoami', 'parcours', 'produits', 'skills', 'stack', 'approche', 'music', 'contact', 'cv', 'lecture', 'clear']
+    .map((c) => `<button type="button" data-cmd="${c}">${c}</button>`).join('');
+
+  boot();
+})();
+</script>
+</body>
+</html>
