@@ -19,7 +19,7 @@ Dernière mise à jour : 2026-09-26
 Commits : `ea25e6b` (mode lecture) · `2ae6fb3` (terminal) · `f3902a7` (boot + CLAUDE.md).
 
 ### Points ouverts sur le contenu
-- **Notion OS** et **Sites & outils no-code** : fiches courtes, faute de matière dans le PDF → à enrichir (contexte, défi, résultat, visuels).
+- **Sites & outils no-code** : fiche courte, sans source (ni PDF ni Framer) → à enrichir (contexte, défi, résultat, visuels). Notion OS a été enrichi depuis Framer.
 - `skills` en terminal : listé par groupes, sans niveaux (volontaire : pas de chiffres inventés).
 
 ## 🎯 Prochain chantier : un seul site, sortie de Framer
@@ -29,9 +29,9 @@ Commits : `ea25e6b` (mode lecture) · `2ae6fb3` (terminal) · `f3902a7` (boot + 
 **Pourquoi :** le CV contient déjà les études de cas (doublon à maintenir) ; le mode terminal n'est pas reproductible proprement dans Framer ; Framer impose un abonnement pour un domaine perso ; un site construit à la main sert de preuve du profil Product Builder.
 
 ### Étapes
-1. **Inventaire Framer** — extraire pages, projets, textes, images, liens (via le plugin Framer).
-2. **Mapping** — pour chaque contenu Framer : fusion dans une fiche produit existante / nouvelle fiche / abandon. Pas de refonte design à cette étape.
-3. **Intégration** — pages projet dédiées si nécessaire (vanilla, même système visuel), entrées correspondantes dans `cv-data.js` (commande `open`), assets optimisés dans `projet online/`.
+1. ✅ **Inventaire Framer** (2026-09-26) : une seule page. Hero, à propos, 3 projets (naïko, FMI, Notion OS), contact, image sociale. Aucune photo ni vidéo, pas de CMS.
+2. ✅ **Mapping validé** (2026-09-26) : naïko et Notion OS enrichis avec le texte Framer, FMI retouché à la marge. Métier visé « Product builder no-code & IA » et sa phrase ajoutés au hero et à `whoami`. Logotype Framer réutilisé en `og-image.png`. Abandonnés : à propos, contact, fond animé et palette Framer (déjà couverts dans le repo). Arbitrages : pour naïko, résultat et période repris de Framer (bêta-testeurs, pas encore relu par une sage-femme ; du 3e trimestre aux 3 mois du bébé). Notion OS signé « La Lune Rousse · Ground Control » ; sa brique WordPress reste dans la fiche Automations, avec un renvoi.
+3. 🔄 **Intégration** sur la branche `framer-merge`, preview Cloudflare, en attente du feu vert avant merge dans `main`.
 4. **Domaine** — achat via Cloudflare Registrar (piste : `odiloncorby.com` ou `.fr` en principal, `odilonuncoded.com` en redirection — disponibilité non vérifiée), rattachement au projet Pages `odilon-corby`.
 5. **Bascule** — redirection / dépublication du site Framer, mise à jour des liens (LinkedIn, signatures, PDF).
 

@@ -33,6 +33,11 @@
 <meta property="og:title" content="Odilon Corby — Product Builder No-Code · odilon.uncoded">
 <meta property="og:description" content="Relier le récit, la production et les outils.">
 <meta property="og:type" content="profile">
+<meta property="og:image" content="https://odilon-corby.pages.dev/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="odilon.uncoded">
+<meta name="twitter:card" content="summary_large_image">
 
 <style>
   @font-face {
@@ -712,6 +717,7 @@
     margin-bottom: 8px;
   }
 
+  .case-study-detail p + p { margin-top: 10px; }
   .case-study-detail p {
     font-family: var(--font-body);
     font-size: 15px;
@@ -1233,6 +1239,16 @@
   }
   .hero-positioning .label { color: var(--accent-primary); display: block; margin-bottom: 4px; }
   .hero-positioning .label::before { content: '# '; color: var(--text-faint); }
+  .hero-positioning p + .label { margin-top: 14px; }
+  .hero-target {
+    display: block;
+    font-weight: 500;
+    font-size: 14px;
+    letter-spacing: var(--tracking-mono-label);
+    text-transform: uppercase;
+    color: var(--text-primary);
+    margin-bottom: 4px;
+  }
 
   /* Portrait ASCII → photo */
   .hero-portrait { cursor: crosshair; }
@@ -1352,7 +1368,7 @@
     <div class="sidebar-logo">
       <span class="brand">odilon<span class="brand-dot">.</span>uncoded<span class="cursor"></span></span>
       <span class="name">Odilon Corby</span>
-      <span class="role">Product Builder No-Code</span>
+      <span class="role">Product Builder No-Code &amp; IA</span>
       <span class="signal-line"></span>
     </div>
     <nav>
@@ -1419,10 +1435,13 @@
             <span>+10 ans</span>
           </div>
         </div>
-        <p class="hero-positioning">
+        <div class="hero-positioning">
+          <span class="label">métier visé</span>
+          <strong class="hero-target">Product builder no-code &amp; IA</strong>
+          <p>Je construis des outils qui résolvent des problèmes concrets : apps, automations, interfaces. De l'idée à la mise en production.</p>
           <span class="label">positionnement</span>
-          Profil hybride : product builder no-code, workflows no-code &amp; IA, stratégie éditoriale, contenus.
-        </p>
+          <p>Profil hybride : product builder no-code, workflows no-code &amp; IA, stratégie éditoriale, contenus.</p>
+        </div>
       </div>
       <div class="hero-portrait" tabindex="0" aria-label="Portrait d'Odilon Corby (survol ou tap pour révéler la photo)">
         <div class="portrait-frame"></div>
@@ -1498,7 +1517,7 @@
             <span class="case-study-head">
               <span class="case-study-meta">01 — PWA · Accompagnement naissance</span>
               <span class="case-study-title">naïko</span>
-              <span class="case-study-teaser">Une PWA d'accompagnement pour le co-parent, de la grossesse au 4e trimestre.</span>
+              <span class="case-study-teaser">Une PWA pour la personne qui accompagne une naissance, du troisième trimestre aux trois mois du bébé.</span>
             </span>
             <span class="case-study-label">[+] détail</span>
           </button>
@@ -1506,11 +1525,14 @@
             <div class="case-study-body-inner">
               <div class="case-study-detail">
                 <div class="case-study-detail-label">Contexte</div>
-                <p>Ma femme se préparait pour un accouchement physiologique pour notre deuxième enfant. J'ai centralisé des notes sur Notion et les ai partagées à un collègue s'apprêtant à devenir papa pour la première fois. Il ne les a jamais lues car trop denses. Le problème n'était pas le manque d'information, c'était l'absence d'un outil d'accompagnement.</p>
+                <p>J'avais rassemblé dans Notion ce qu'un accompagnant doit savoir autour d'une naissance. Les notes étaient trop denses pour servir. Un collègue qui allait devenir père ne les a jamais lues. J'ai voulu en faire un outil utilisable au moment où on en a besoin.</p>
               </div>
               <div class="case-study-detail">
                 <div class="case-study-detail-label">Ce que j'ai construit</div>
-                <p>Une PWA pensée pour accompagner le co-parent en temps réel, de la grossesse au 4e trimestre : suivi, compteur de contractions pour le jour J, checklists de départ, tips à consulter et suivi post-naissance (rendez-vous médicaux, biberons, allaitement…).</p>
+                <p>naïko est une PWA mobile-first en français pour la personne qui accompagne une naissance : partenaire, co-parent ou proche. Elle couvre la période du troisième trimestre aux trois mois du bébé, en trois temps : Préparer, Jour J, Post-partum. Elle fonctionne hors ligne et sans compte.</p>
+                <p>Elle contient 43 fiches, des checklists, des cartes pour le jour J, un compteur de contractions, un suivi des biberons partagé entre deux téléphones, une fiche bébé et des rappels aux dates clés.</p>
+                <p>Côté conformité : hébergement dans l'UE, AIPD, registre des traitements, et les données les plus sensibles ne quittent pas l'appareil.</p>
+                <p>Je conçois, j'arbitre et je livre. Le code est écrit par Claude Code sous ma direction.</p>
               </div>
               <div class="case-study-detail">
                 <div class="case-study-detail-label">Défi</div>
@@ -1520,17 +1542,20 @@
                 <div class="case-study-detail-label">Stack</div>
                 <div class="skills-list">
                   <span class="skill-tag">Claude Code</span>
-                  <span class="skill-tag">React</span>
-                  <span class="skill-tag">Vite</span>
+                  <span class="skill-tag">React 18</span>
+                  <span class="skill-tag">Vite 7</span>
                   <span class="skill-tag">Tailwind CSS</span>
-                  <span class="skill-tag">Firebase</span>
                   <span class="skill-tag">PWA</span>
-                  <span class="skill-tag">Cloudflare</span>
+                  <span class="skill-tag">Firebase</span>
+                  <span class="skill-tag">Cloudflare Pages</span>
+                  <span class="skill-tag">Cloudflare Workers</span>
+                  <span class="skill-tag">Cloudflare D1</span>
+                  <span class="skill-tag">Notion</span>
                 </div>
               </div>
               <div class="case-study-detail">
                 <div class="case-study-detail-label">Résultat</div>
-                <p>Utilisée en conditions réelles pour la naissance de mon deuxième enfant. Née d'un besoin réel, aujourd'hui en phase de commercialisation auprès de sages-femmes et de professionnels de santé.</p>
+                <p>Je l'ai utilisée pour la naissance de mon deuxième enfant : le compteur de contractions pendant le travail, puis les rappels et le suivi des biberons les premières semaines. Le collègue qui n'avait pas lu mes notes s'est servi de l'app le jour J. Quelques bêta-testeurs l'utilisent aujourd'hui. Des professionnelles de santé, dont une de PMI, m'ont fait des retours qui ont donné de nouvelles fiches. Le contenu n'a pas encore été relu par une sage-femme. C'est la prochaine étape.</p>
               </div>
               <a href="https://naiko.app" target="_blank" rel="noreferrer" class="projet-link case-study-link">naiko.app</a>
             </div>
@@ -1540,7 +1565,7 @@
         <div class="case-study reveal-stagger">
           <button class="case-study-toggle" aria-expanded="false" aria-controls="case-notion">
             <span class="case-study-head">
-              <span class="case-study-meta">02 — Operating system · La Lune Rousse</span>
+              <span class="case-study-meta">02 — Operating system · La Lune Rousse · Ground Control</span>
               <span class="case-study-title">Notion OS : service communication</span>
               <span class="case-study-teaser">Un Notion OS qui organise la production des supports du service communication.</span>
             </span>
@@ -1549,17 +1574,26 @@
           <div class="case-study-body" id="case-notion">
             <div class="case-study-body-inner">
               <div class="case-study-detail">
+                <div class="case-study-detail-label">Contexte</div>
+                <p>Pour une équipe communication réduite avec turnover régulier, les informations étaient dispersées entre événements, tâches, calendrier éditorial, newsletters et mises à jour du site. La préparation manuelle d'une page événement demande environ 10 à 60 minutes selon les visuels disponibles, les formats et l'intégration d'outils de billetterie.</p>
+              </div>
+              <div class="case-study-detail">
                 <div class="case-study-detail-label">Ce que j'ai construit</div>
-                <p>Création d'un Notion OS pour l'optimisation de l'organisation et de la production des supports du service communication de La Lune Rousse. Workflows no-code automatisés pour les posts réseaux sociaux, les newsletters et le calendrier de production des formats.</p>
+                <p>J'ai conçu un système d'exploitation interne dans Notion qui relie les événements, les tâches, le calendrier de publication et les newsletters. Les automatisations exécutent les opérations répétitives, avec validation humaine avant diffusion. La brique dédiée au site (Notion → Make → WordPress) est détaillée dans la fiche Automations.</p>
               </div>
               <div class="case-study-detail">
                 <div class="case-study-detail-label">Stack</div>
                 <div class="skills-list">
-                  <span class="skill-tag">Notion workers</span>
+                  <span class="skill-tag">Notion</span>
+                  <span class="skill-tag">Notion Worker</span>
+                  <span class="skill-tag">Make</span>
                   <span class="skill-tag">Brevo</span>
                   <span class="skill-tag">Buffer</span>
-                  <span class="skill-tag">Make</span>
                 </div>
+              </div>
+              <div class="case-study-detail">
+                <div class="case-study-detail-label">Résultat</div>
+                <p>Les projets de communication ont désormais un statut d'avancement visible dans Notion. Avant, leur suivi reposait sur un fichier Excel qui n'était pas tenu à jour ; les textes éditoriaux étaient dispersés dans SharePoint. Aujourd'hui, l'équipe retrouve au même endroit l'état des projets, les tâches, les textes et le calendrier de publication. Elle peut suivre le travail de la préparation à la validation, puis à la diffusion.</p>
               </div>
             </div>
           </div>
@@ -1582,7 +1616,7 @@
               </div>
               <div class="case-study-detail">
                 <div class="case-study-detail-label">Ce que j'ai construit</div>
-                <p>Une PWA accessible sans téléchargement : onglet « en ce moment » en temps réel, programme complet, plan du site, manifeste du festival, redirections réseaux et pages dédiées food et thématique.</p>
+                <p>Une PWA accessible sans téléchargement : onglet « en ce moment » en temps réel, programme complet, plan du site, manifeste du festival, redirections réseaux et pages dédiées food et thématique de la saison de programmation.</p>
               </div>
               <div class="case-study-detail">
                 <div class="case-study-detail-label">Défi</div>

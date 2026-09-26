@@ -19,6 +19,11 @@
 <meta name="description" content="Odilon Corby — Product Builder No-Code & Communication expert. Le CV en mode terminal : tapez help.">
 <meta property="og:title" content="odilon.uncoded — terminal">
 <meta property="og:description" content="Relier le récit, la production et les outils. Tapez help.">
+<meta property="og:image" content="https://odilon-corby.pages.dev/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="odilon.uncoded">
+<meta name="twitter:card" content="summary_large_image">
 <meta name="theme-color" content="#0A0A0A">
 
 <style>
@@ -201,6 +206,7 @@
   .box .lbl { color: var(--color-signal); margin-top: 10px; }
   .box .lbl::before { content: '## '; color: var(--faint); }
   .box p { max-width: 70ch; color: color-mix(in srgb, var(--color-paper) 82%, transparent); }
+  .box p + p { margin-top: 8px; }
 
   .tags span { display: inline-block; margin: 0 10px 2px 0; }
   .tags span::before { content: '['; color: var(--faint); margin-right: 4px; }
@@ -369,6 +375,8 @@
         `<div class="quote">${esc(CV.tagline)}</div>` +
         `<div>${esc(CV.intro)}</div>` +
         `<div class="grid2"><span class="dim">localisation</span><span>${esc(CV.meta.location)}</span><span class="dim">expérience</span><span>${esc(CV.meta.experience)}</span><span class="dim">disponibilité</span><span>${esc(CV.meta.availability)}</span></div>` +
+        `<div><span class="dim"># métier visé :</span> <span class="acc">${esc(CV.target)}</span></div>` +
+        `<div>${esc(CV.pitch)}</div>` +
         `<div class="ph"># ${esc(CV.positioning)}</div>` +
         `<div class="dim">→ ${cmd('parcours')} · ${cmd('produits')} · ${cmd('skills')} · ${cmd('contact')}</div>` +
         `</div></div>`);
@@ -406,7 +414,7 @@
       if (!arg) return out(`<span class="err">open: argument manquant.</span> <span class="dim">ex. ${cmd('open naiko')}</span>`);
       const p = findProduit(arg);
       if (!p) return out(`<span class="err">open: ${esc(arg)} : aucun produit de ce nom.</span> <span class="dim">voir ${cmd('produits')}</span>`);
-      const sec = (lbl, txt) => txt ? `<div class="lbl">${lbl}</div><p>${esc(txt)}</p>` : '';
+      const sec = (lbl, txt) => txt ? `<div class="lbl">${lbl}</div>` + [].concat(txt).map((t) => `<p>${esc(t)}</p>`).join('') : '';
       const i = CV.produits.indexOf(p);
       const next = CV.produits[(i + 1) % CV.produits.length];
       return out(`<div class="box"><div class="acc">${esc(p.meta)}</div><h3>${esc(p.title)}</h3><p>${esc(p.teaser)}</p>` +
