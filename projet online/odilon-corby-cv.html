@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Odilon Corby — Direction Communication</title>
+<title>Odilon Corby — Product Builder No-Code</title>
 
 <!-- ─── SÉCURITÉ ─── -->
 <!-- Content Security Policy : fonts auto-hébergées uniquement, bloque toute origine externe -->
@@ -29,9 +29,9 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
 <!-- ─── SEO & SOCIAL ─── -->
-<meta name="description" content="Odilon Corby — Directeur de Communication. Stratégie éditoriale, storytelling, direction de projets culturels. Paris.">
-<meta property="og:title" content="Odilon Corby — Expert Communication">
-<meta property="og:description" content="Je traduis la complexité en récits cohérents pour des projets innovants.">
+<meta name="description" content="Odilon Corby — Product Builder No-Code & Communication expert. Workflows IA, automatisation, stratégie éditoriale, contenus. Paris.">
+<meta property="og:title" content="Odilon Corby — Product Builder No-Code · odilon.uncoded">
+<meta property="og:description" content="Relier le récit, la production et les outils.">
 <meta property="og:type" content="profile">
 
 <style>
@@ -1103,6 +1103,244 @@
       transform: none !important;
     }
   }
+
+  /* ═══════════════════════════════════════════════════════════
+     odilon.uncoded — couche « terminal »
+     ═══════════════════════════════════════════════════════════ */
+
+  ::selection { background: var(--accent-primary); color: var(--text-on-signal); }
+
+  /* CRT : scanlines + vignette, au-dessus de tout, sans capter les clics */
+  body::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 900;
+    background:
+      repeating-linear-gradient(0deg, rgba(0,0,0,0.18) 0 1px, transparent 1px 3px),
+      radial-gradient(ellipse at center, transparent 55%, rgba(0,0,0,0.45) 100%);
+    mix-blend-mode: multiply;
+  }
+
+  /* Curseur bloc */
+  .cursor {
+    display: inline-block;
+    width: 0.5em;
+    height: 1em;
+    margin-left: 4px;
+    vertical-align: -0.12em;
+    background: var(--accent-primary);
+    animation: blink 1.06s steps(1) infinite;
+  }
+  .cursor-lg { width: 0.42em; height: 0.8em; margin-left: 12px; vertical-align: -0.02em; }
+  @keyframes blink { 50% { opacity: 0; } }
+
+  /* Marque */
+  .brand {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: var(--tracking-mono);
+    color: var(--text-primary);
+    display: block;
+    margin-bottom: 20px;
+  }
+  .brand .brand-dot { color: var(--accent-primary); }
+  .brand .cursor { width: 7px; height: 12px; vertical-align: -1px; margin-left: 2px; }
+
+  /* Nav façon shell */
+  nav a { text-transform: lowercase; letter-spacing: var(--tracking-mono); font-size: 11px; }
+  nav a::before {
+    content: '>';
+    color: var(--text-faint);
+    margin-right: 6px;
+  }
+  nav a.active::before { content: '▌'; color: var(--accent-primary); }
+  nav a .nav-index { font-size: 9px; }
+  .mobile-nav a::before { content: none; }
+
+  .mode-switch {
+    display: inline-block;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: var(--tracking-mono);
+    color: var(--accent-primary);
+    text-decoration: none;
+    border: var(--border-accent);
+    padding: 8px 10px;
+    margin: 24px 0;
+    transition: background var(--duration-fast) var(--ease-standard), color var(--duration-fast) var(--ease-standard);
+  }
+  .mode-switch:hover, .mode-switch:focus-visible {
+    background: var(--accent-primary);
+    color: var(--text-on-signal);
+  }
+
+  /* Prompts */
+  .prompt {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    letter-spacing: var(--tracking-mono);
+    color: var(--text-faint);
+    margin-bottom: 18px;
+    display: block;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .prompt .p-path { color: var(--accent-secondary); }
+  .prompt .p-sym { color: var(--accent-primary); margin: 0 6px; }
+  .prompt .p-cmd { color: var(--text-primary); }
+
+  .section-header { flex-wrap: wrap; row-gap: 0; }
+  .section-header .prompt { flex-basis: 100%; }
+
+  /* Hero */
+  .hero-eyebrow::before { content: none; }
+  .hero-role {
+    font-family: var(--font-mono);
+    font-size: 13px;
+    letter-spacing: var(--tracking-mono-label);
+    text-transform: uppercase;
+    color: var(--accent-primary);
+    margin: -20px 0 32px;
+    opacity: 0;
+    animation: slideRight var(--duration-slow) var(--ease-standard) 0.9s forwards;
+  }
+  .hero-concept { font-style: normal; }
+  .hero-concept strong {
+    display: block;
+    font-family: var(--font-display);
+    font-style: italic;
+    font-weight: 400;
+    font-size: 1.5rem;
+    line-height: 1.3;
+    color: var(--text-primary);
+    margin-bottom: 12px;
+  }
+  .hero-positioning {
+    margin-top: 40px;
+    max-width: 520px;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    line-height: 1.7;
+    color: var(--text-secondary);
+    border: var(--border-hairline-soft);
+    padding: 14px 16px;
+    opacity: 0;
+    animation: fadeIn var(--duration-slow) var(--ease-standard) 1.4s forwards;
+  }
+  .hero-positioning .label { color: var(--accent-primary); display: block; margin-bottom: 4px; }
+  .hero-positioning .label::before { content: '# '; color: var(--text-faint); }
+
+  /* Portrait ASCII → photo */
+  .hero-portrait { cursor: crosshair; }
+  .hero-portrait img { transition: opacity var(--duration-slow) var(--ease-standard); opacity: 0; }
+  .hero-portrait.photo img, .no-ascii .hero-portrait img { opacity: 1; }
+  .portrait-ascii {
+    position: absolute;
+    inset: 0;
+    margin: 0;
+    font-family: var(--font-mono);
+    line-height: 1;
+    letter-spacing: 0;
+    color: var(--accent-primary);
+    white-space: pre;
+    overflow: hidden;
+    z-index: 1;
+    transition: opacity var(--duration-slow) var(--ease-standard);
+    text-shadow: 0 0 6px var(--color-signal-glow);
+  }
+  .hero-portrait.photo .portrait-ascii { opacity: 0; }
+  .portrait-hint {
+    position: absolute;
+    left: 0;
+    bottom: -28px;
+    font-family: var(--font-mono);
+    font-size: 10px;
+    color: var(--text-faint);
+    letter-spacing: var(--tracking-mono);
+    z-index: 3;
+  }
+
+  /* Timeline : puce carrée, keyword entre crochets */
+  .timeline-item::before { border-radius: 0; }
+  .timeline-keyword { border: none; padding: 0; font-size: 10px; }
+  .timeline-keyword::before { content: '[ '; color: var(--text-faint); }
+  .timeline-keyword::after { content: ' ]'; color: var(--text-faint); }
+
+  /* Skill tags en [ tag ] */
+  .skill-tag { border-color: transparent; padding: 4px 2px; }
+  .skill-tag::before { content: '['; color: var(--text-faint); margin-right: 6px; }
+  .skill-tag::after { content: ']'; color: var(--text-faint); margin-left: 6px; }
+  .skill-tag:hover { border-color: transparent; color: var(--accent-primary); }
+
+  /* Cadres box-drawing sur les études de cas */
+  .case-study { position: relative; background: var(--surface-raised); }
+  .case-study::before, .case-study::after {
+    position: absolute;
+    font-family: var(--font-mono);
+    font-size: 16px;
+    line-height: 1;
+    color: var(--accent-primary);
+    transition: transform var(--duration-base) var(--ease-standard);
+  }
+  .case-study::before { content: '┌'; top: -3px; left: -3px; }
+  .case-study::after { content: '┘'; bottom: -3px; right: -3px; }
+  .case-study:hover::before { transform: translate(-3px, -3px); }
+  .case-study:hover::after { transform: translate(3px, 3px); }
+  .case-study:hover { border-color: var(--border-color); }
+  .case-study-toggle:focus-visible, .mode-switch:focus-visible, nav a:focus-visible, .contact-link:focus-visible {
+    outline: 1px solid var(--accent-primary);
+    outline-offset: 4px;
+  }
+  .case-study-label { color: var(--accent-primary); text-transform: lowercase; letter-spacing: var(--tracking-mono); font-size: 11px; }
+  .case-study-link { margin-top: 16px; }
+
+  /* Side project */
+  #side { min-height: auto; }
+
+  /* Contact */
+  .contact-link-label { text-transform: lowercase; letter-spacing: var(--tracking-mono); font-size: 11px; }
+  .contact-link-label::before { content: '$ '; color: var(--text-faint); }
+  .cv-download { margin-top: 28px; }
+
+  /* Barre de statut (desktop) */
+  .statusbar {
+    position: fixed;
+    left: 220px;
+    right: 0;
+    bottom: 0;
+    height: 26px;
+    display: flex;
+    align-items: stretch;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: var(--tracking-mono);
+    color: var(--text-secondary);
+    background: var(--surface-raised);
+    border-top: var(--border-hairline);
+    z-index: 150;
+  }
+  .statusbar > span { display: flex; align-items: center; padding: 0 12px; border-right: var(--border-hairline-soft); }
+  .statusbar .sb-mode { background: var(--accent-primary); color: var(--text-on-signal); font-weight: 600; border: none; }
+  .statusbar .sb-path { color: var(--accent-secondary); }
+  .statusbar .sb-right { margin-left: auto; border-right: none; border-left: var(--border-hairline-soft); }
+  main { padding-bottom: 26px; }
+
+  @media (max-width: 1100px) {
+    .statusbar { display: none; }
+    main { padding-bottom: 0; }
+    .mobile-header-top { justify-content: space-between; }
+    .mobile-header .mode-switch { margin: 0; padding: 3px 8px; font-size: 10px; }
+    .prompt { font-size: 11px; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .cursor { animation: none !important; }
+    .hero-role, .hero-positioning { opacity: 1 !important; transform: none !important; }
+  }
 </style>
 </head>
 <body>
@@ -1112,20 +1350,23 @@
   <!-- SIDEBAR -->
   <aside class="sidebar">
     <div class="sidebar-logo">
+      <span class="brand">odilon<span class="brand-dot">.</span>uncoded<span class="cursor"></span></span>
       <span class="name">Odilon Corby</span>
-      <span class="role">Expert Communication</span>
+      <span class="role">Product Builder No-Code</span>
       <span class="signal-line"></span>
     </div>
     <nav>
-      <a href="#hero" class="active"><span class="nav-index">00.</span>Signal</a>
-      <a href="#parcours"><span class="nav-index">01.</span>Parcours</a>
-      <a href="#approche"><span class="nav-index">02.</span>Approche</a>
-      <a href="#projets"><span class="nav-index">03.</span>Projets</a>
-      <a href="#contact"><span class="nav-index">04.</span>Contact</a>
+      <a href="#hero" class="active"><span class="nav-index">00</span>signal</a>
+      <a href="#parcours"><span class="nav-index">01</span>parcours</a>
+      <a href="#produits"><span class="nav-index">02</span>produits</a>
+      <a href="#approche"><span class="nav-index">03</span>approche</a>
+      <a href="#side"><span class="nav-index">04</span>side project</a>
+      <a href="#contact"><span class="nav-index">05</span>contact</a>
     </nav>
+    <a class="mode-switch" href="terminal.html">[&gt; mode terminal]</a>
     <div class="sidebar-footer">
       <a href="mailto:odilon.corby@proton.me">odilon.corby@proton.me</a>
-      <a href="#">+33 6 50 88 16 22</a>
+      <a href="tel:+33650881622">+33 6 50 88 16 22</a>
       <br>
       Paris, 75020
     </div>
@@ -1134,14 +1375,16 @@
   <!-- MOBILE HEADER -->
   <header class="mobile-header">
     <div class="mobile-header-top">
-      <span class="mobile-logo">Odilon <em>Corby</em></span>
+      <span class="mobile-logo">odilon<em>.</em>uncoded</span>
+      <a class="mode-switch" href="terminal.html">[&gt; terminal]</a>
     </div>
     <nav class="mobile-nav">
       <a href="#hero" class="active"><span class="nav-index">00</span>Signal</a>
-      <a href="#parcours"><span class="nav-index">01.</span>Parcours</a>
-      <a href="#approche"><span class="nav-index">02.</span>Approche</a>
-      <a href="#projets"><span class="nav-index">03.</span>Projets</a>
-      <a href="#contact"><span class="nav-index">04.</span>Contact</a>
+      <a href="#parcours"><span class="nav-index">01</span>Parcours</a>
+      <a href="#produits"><span class="nav-index">02</span>Produits</a>
+      <a href="#approche"><span class="nav-index">03</span>Approche</a>
+      <a href="#side"><span class="nav-index">04</span>Side project</a>
+      <a href="#contact"><span class="nav-index">05</span>Contact</a>
     </nav>
   </header>
 
@@ -1151,13 +1394,16 @@
     <!-- HERO -->
     <section id="hero">
       <div class="hero-content">
-        <div class="hero-eyebrow">Expert communication · Récit · Paris · +10 ans</div>
+        <span class="prompt"><span class="p-path">~/odilon.uncoded</span><span class="p-sym">$</span><span class="p-cmd">whoami</span></span>
+        <div class="hero-eyebrow">// Expert communication · Product builder · Workflows IA · Contenus</div>
         <h1 class="hero-title">
           Odilon<br>
-          <em>Corby</em>
+          <em>Corby</em><span class="cursor cursor-lg" aria-hidden="true"></span>
         </h1>
+        <p class="hero-role">Product Builder No-Code &amp; Communication expert</p>
         <p class="hero-concept">
-          Je traduis la complexité en récits cohérents pour des projets innovants.
+          <strong>Relier le récit, la production et les outils.</strong>
+          J'accompagne des projets et des marques dans la structuration de leurs contenus, de leurs process et de leurs flux de diffusion. Mon terrain : faire tenir ensemble ligne éditoriale, exécution et automatisations utiles.
         </p>
         <div class="hero-meta">
           <div class="hero-meta-item">
@@ -1170,19 +1416,26 @@
           </div>
           <div class="hero-meta-item">
             Expérience
-            <span>+10 ans
+            <span>+10 ans</span>
           </div>
         </div>
+        <p class="hero-positioning">
+          <span class="label">positionnement</span>
+          Profil hybride : product builder no-code, workflows no-code &amp; IA, stratégie éditoriale, contenus.
+        </p>
       </div>
-      <div class="hero-portrait">
+      <div class="hero-portrait" tabindex="0" aria-label="Portrait d'Odilon Corby (survol ou tap pour révéler la photo)">
         <div class="portrait-frame"></div>
         <img src="portrait LLR 0251387 - Grande.jpeg" alt="Portrait Odilon Corby" onerror="this.closest('.hero-portrait').style.display='none';this.closest('#hero').style.gridTemplateColumns='1fr'">
+        <pre class="portrait-ascii" aria-hidden="true"></pre>
+        <span class="portrait-hint" aria-hidden="true">// hover = decode</span>
       </div>
     </section>
 
     <!-- PARCOURS -->
     <section id="parcours">
       <div class="section-header">
+        <span class="prompt"><span class="p-path">~/odilon.uncoded</span><span class="p-sym">$</span><span class="p-cmd">cat parcours.md</span></span>
         <span class="section-index">01</span>
         <h2 class="section-title">Parcours</h2>
         <span class="section-line"></span>
@@ -1192,10 +1445,10 @@
 
         <div class="timeline-item reveal-stagger">
           <div class="timeline-dates">2023 — En poste</div>
-          <div class="timeline-org">La Lune Rousse · Ground Control</div>
-          <div class="timeline-role">Responsable Communication</div>
+          <div class="timeline-org">La Lune Rousse · Ground Control · Paris</div>
+          <div class="timeline-role">Responsable Communication &amp; Innovation Digitale</div>
           <div class="timeline-keyword">Rayonnement</div>
-          <p class="timeline-desc">Pilotage de stratégies 360° — du stratégique à l'opérationnel. Direction éditoriale, relations presse, management d'équipe, supervision de la production de contenus (réseaux, newsletters, vidéos, podcasts). Activation d'audience et reporting de performance.</p>
+          <p class="timeline-desc">Pilotage de stratégies 360° et coordination d'une production éditoriale multi-format. Construction et utilisation de workflows et d'automatisations IA dans une équipe réduite pour optimiser les délais de livraison des contenus. Direction du récit, relations presse, management d'équipe, supervision des flux réseaux, newsletters, vidéo et podcast, avec une logique d'activation, de cadence et de performance.</p>
         </div>
 
         <div class="timeline-item reveal-stagger">
@@ -1203,15 +1456,15 @@
           <div class="timeline-org">Musée national de la Marine · Paris</div>
           <div class="timeline-role">Chargé de Communication Senior</div>
           <div class="timeline-keyword">Récit</div>
-          <p class="timeline-desc">Déploiement opérationnel d'une communication interne et externe. Stratégie éditoriale, pilotage budgétaire, production graphique (Adobe Suite), community management de comptes à +100K followers, partenariats institutionnels (Marine Nationale).</p>
+          <p class="timeline-desc">Déploiement d'une communication interne et externe dans un contexte institutionnel exigeant. Stratégie éditoriale, pilotage budgétaire, production graphique, community management de comptes à +100K abonnés et structuration de méthodes de production pour tenir la durée.</p>
         </div>
 
         <div class="timeline-item reveal-stagger">
           <div class="timeline-dates">2017 — 2018</div>
-          <div class="timeline-org">Grand Format · Paris</div>
-          <div class="timeline-role">Chargé de Communication — Pôle Ressources</div>
+          <div class="timeline-org">Grands Formats · Paris</div>
+          <div class="timeline-role">Chargé de Communication · Pôle Ressources</div>
           <div class="timeline-keyword">Valorisation</div>
-          <p class="timeline-desc">Gestion des ressources et support communication dans un environnement éditorial exigeant.</p>
+          <p class="timeline-desc">Gestion des ressources et support communication dans un environnement éditorial soutenu, avec une attention forte aux process, à la coordination et à la qualité d'exécution.</p>
         </div>
 
         <div class="timeline-item reveal-stagger">
@@ -1219,7 +1472,7 @@
           <div class="timeline-org">Carreau du Temple · Paris</div>
           <div class="timeline-role">Chargé de Communication</div>
           <div class="timeline-keyword">Amorce</div>
-          <p class="timeline-desc">Premières armes dans un lieu culturel hybride à forte identité parisienne.</p>
+          <p class="timeline-desc">Premier terrain d'apprentissage dans un lieu culturel hybride : communication, contenus, production et compréhension des publics.</p>
         </div>
 
       </div>
@@ -1227,59 +1480,14 @@
       <p class="pull-quote">
         « Faire tenir ensemble le fond, la forme et le ton. »
       </p>
-
-      <div class="parcours-skills-title">Compétences éditoriales</div>
-      <div class="skills-list">
-        <span class="skill-tag">Stratégie éditoriale</span>
-        <span class="skill-tag">Storytelling</span>
-        <span class="skill-tag">Direction communication</span>
-        <span class="skill-tag">Relations presse</span>
-        <span class="skill-tag">Social media</span>
-        <span class="skill-tag">Management</span>
-        <span class="skill-tag">Gestion de projets</span>
-        <span class="skill-tag">Email marketing</span>
-        <span class="skill-tag">Production vidéo</span>
-        <span class="skill-tag">Brevo</span>
-      </div>
     </section>
 
-    <!-- APPROCHE -->
-    <section id="approche">
+    <!-- PRODUITS -->
+    <section id="produits">
       <div class="section-header">
+        <span class="prompt"><span class="p-path">~/odilon.uncoded</span><span class="p-sym">$</span><span class="p-cmd">ls produits/</span></span>
         <span class="section-index">02</span>
-        <h2 class="section-title">Approche</h2>
-        <span class="section-line"></span>
-      </div>
-
-      <div class="approche-grid">
-        <div class="approche-cell reveal-stagger">
-          <div class="approche-cell-index">01 · Narratif</div>
-          <div class="approche-cell-title">Traduire la complexité</div>
-          <p class="approche-cell-text">Pas de communication sans récit structuré. Chaque projet commence par une question de sens — pourquoi cette marque, pourquoi maintenant, pour qui.</p>
-        </div>
-        <div class="approche-cell reveal-stagger">
-          <div class="approche-cell-index">02 · Éditorial</div>
-          <div class="approche-cell-title">La ligne, avant le canal</div>
-          <p class="approche-cell-text">La stratégie éditoriale précède la tactique social media. Le ton d'une marque est son architecture invisible.</p>
-        </div>
-        <div class="approche-cell reveal-stagger">
-          <div class="approche-cell-index">03 · Culturel</div>
-          <div class="approche-cell-title">Comprendre les imaginaires</div>
-          <p class="approche-cell-text">Dix ans dans des environnements culturels exigeants ont forgé une sensibilité aux codes, aux publics et aux territoires symboliques des marques.</p>
-        </div>
-        <div class="approche-cell reveal-stagger">
-          <div class="approche-cell-index">04 · Opérationnel</div>
-          <div class="approche-cell-title">Du concept à l'exécution</div>
-          <p class="approche-cell-text">Management d'équipe, pilotage budgétaire, coordination de prestataires. La vision stratégique n'a de valeur que livrée.</p>
-        </div>
-      </div>
-    </section>
-
-    <!-- PROJETS -->
-    <section id="projets">
-      <div class="section-header">
-        <span class="section-index">03</span>
-        <h2 class="section-title">Projets</h2>
+        <h2 class="section-title">Produits</h2>
         <span class="section-line"></span>
       </div>
 
@@ -1288,21 +1496,21 @@
         <div class="case-study reveal-stagger">
           <button class="case-study-toggle" aria-expanded="false" aria-controls="case-naiko">
             <span class="case-study-head">
-              <span class="case-study-meta">01:32 — App PWA · Co-parent &amp; naissance</span>
+              <span class="case-study-meta">01 — PWA · Accompagnement naissance</span>
               <span class="case-study-title">naïko</span>
               <span class="case-study-teaser">Une PWA d'accompagnement pour le co-parent, de la grossesse au 4e trimestre.</span>
             </span>
-            <span class="case-study-label">+ Détail</span>
+            <span class="case-study-label">[+] détail</span>
           </button>
           <div class="case-study-body" id="case-naiko">
             <div class="case-study-body-inner">
               <div class="case-study-detail">
                 <div class="case-study-detail-label">Contexte</div>
-                <p>Ma femme se préparait pour un accouchement physiologique pour notre deuxième enfant. J'ai centralisé des notes sur Notion et les ai partagées à un collègue s'apprêtant à devenir papa pour la première fois et manquant d'informations sur la préparation, l'accouchement et la suite. Il ne les a jamais lues car trop denses. Le problème n'était pas le manque d'information, c'était l'absence d'un outil d'accompagnement. De là est venue l'idée de l'app.</p>
+                <p>Ma femme se préparait pour un accouchement physiologique pour notre deuxième enfant. J'ai centralisé des notes sur Notion et les ai partagées à un collègue s'apprêtant à devenir papa pour la première fois. Il ne les a jamais lues car trop denses. Le problème n'était pas le manque d'information, c'était l'absence d'un outil d'accompagnement.</p>
               </div>
               <div class="case-study-detail">
                 <div class="case-study-detail-label">Ce que j'ai construit</div>
-                <p>Une PWA pensée pour accompagner le co-parent en temps réel, de la grossesse au 4e trimestre : infos sur la préparation à l'accouchement, un compteur de contractions pour le jour J, une liste de tips à consulter, des checks de départ et un suivi post-naissance (rendez-vous médicaux, biberons, allaitement…). Un outil synthétique, simple et pratique.</p>
+                <p>Une PWA pensée pour accompagner le co-parent en temps réel, de la grossesse au 4e trimestre : suivi, compteur de contractions pour le jour J, checklists de départ, tips à consulter et suivi post-naissance (rendez-vous médicaux, biberons, allaitement…).</p>
               </div>
               <div class="case-study-detail">
                 <div class="case-study-detail-label">Défi</div>
@@ -1311,17 +1519,47 @@
               <div class="case-study-detail">
                 <div class="case-study-detail-label">Stack</div>
                 <div class="skills-list">
-                  <span class="skill-tag">React 18</span>
-                  <span class="skill-tag">Vite 5</span>
+                  <span class="skill-tag">Claude Code</span>
+                  <span class="skill-tag">React</span>
+                  <span class="skill-tag">Vite</span>
                   <span class="skill-tag">Tailwind CSS</span>
                   <span class="skill-tag">Firebase</span>
                   <span class="skill-tag">PWA</span>
-                  <span class="skill-tag">Cloudflare Workers</span>
+                  <span class="skill-tag">Cloudflare</span>
                 </div>
               </div>
               <div class="case-study-detail">
                 <div class="case-study-detail-label">Résultat</div>
-                <p>Utilisée en conditions réelles pour la naissance de mon deuxième enfant — le compteur de contractions a permis de partir à la maternité au bon moment. Les rappels de rendez-vous médicaux, administratifs et le compteur de biberons se sont ensuite révélés très utiles. Le retour d'usage est assez solide pour que j'en lance la commercialisation, avec de premiers échanges en cours auprès de sages-femmes et professionnels de santé pour en valider le contenu et la distribuer directement aux futurs parents et accompagnants.</p>
+                <p>Utilisée en conditions réelles pour la naissance de mon deuxième enfant. Née d'un besoin réel, aujourd'hui en phase de commercialisation auprès de sages-femmes et de professionnels de santé.</p>
+              </div>
+              <a href="https://naiko.app" target="_blank" rel="noreferrer" class="projet-link case-study-link">naiko.app</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="case-study reveal-stagger">
+          <button class="case-study-toggle" aria-expanded="false" aria-controls="case-notion">
+            <span class="case-study-head">
+              <span class="case-study-meta">02 — Operating system · La Lune Rousse</span>
+              <span class="case-study-title">Notion OS : service communication</span>
+              <span class="case-study-teaser">Un Notion OS qui organise la production des supports du service communication.</span>
+            </span>
+            <span class="case-study-label">[+] détail</span>
+          </button>
+          <div class="case-study-body" id="case-notion">
+            <div class="case-study-body-inner">
+              <div class="case-study-detail">
+                <div class="case-study-detail-label">Ce que j'ai construit</div>
+                <p>Création d'un Notion OS pour l'optimisation de l'organisation et de la production des supports du service communication de La Lune Rousse. Workflows no-code automatisés pour les posts réseaux sociaux, les newsletters et le calendrier de production des formats.</p>
+              </div>
+              <div class="case-study-detail">
+                <div class="case-study-detail-label">Stack</div>
+                <div class="skills-list">
+                  <span class="skill-tag">Notion workers</span>
+                  <span class="skill-tag">Brevo</span>
+                  <span class="skill-tag">Buffer</span>
+                  <span class="skill-tag">Make</span>
+                </div>
               </div>
             </div>
           </div>
@@ -1330,11 +1568,11 @@
         <div class="case-study reveal-stagger">
           <button class="case-study-toggle" aria-expanded="false" aria-controls="case-fmi">
             <span class="case-study-head">
-              <span class="case-study-meta">02:05 — App PWA · Ground Control</span>
+              <span class="case-study-meta">03 — PWA · Ground Control</span>
               <span class="case-study-title">Festival des Médias Indépendants</span>
               <span class="case-study-teaser">Une PWA de programmation en temps réel, construite en une itération solo.</span>
             </span>
-            <span class="case-study-label">+ Détail</span>
+            <span class="case-study-label">[+] détail</span>
           </button>
           <div class="case-study-body" id="case-fmi">
             <div class="case-study-body-inner">
@@ -1348,7 +1586,7 @@
               </div>
               <div class="case-study-detail">
                 <div class="case-study-detail-label">Défi</div>
-                <p>Déployer sans budget ni campagne dédiée — uniquement via la signalétique du site, sans communication en amont.</p>
+                <p>Déployer sans budget ni campagne dédiée, uniquement via la signalétique du site.</p>
               </div>
               <div class="case-study-detail">
                 <div class="case-study-detail-label">Stack</div>
@@ -1364,9 +1602,9 @@
               </div>
               <div class="case-study-detail">
                 <div class="case-study-detail-label">Résultat</div>
-                <p>Déployée et utilisée pendant l'événement, distribuée via QR codes sur les panneaux de signalétique. Sans communication en amont — 30 visiteurs. La prochaine itération méritera une vraie campagne de déploiement.</p>
+                <p>Déployée et utilisée pendant l'événement, distribuée via QR codes sur la signalétique. Sans communication en amont : 30 visiteurs. La prochaine itération méritera une vraie campagne de déploiement.</p>
               </div>
-              <a href="https://fmiapp.pages.dev" target="_blank" rel="noreferrer" class="projet-link">fmiapp.pages.dev</a>
+              <a href="https://fmiapp.pages.dev" target="_blank" rel="noreferrer" class="projet-link case-study-link">fmiapp.pages.dev</a>
             </div>
           </div>
         </div>
@@ -1374,25 +1612,25 @@
         <div class="case-study reveal-stagger">
           <button class="case-study-toggle" aria-expanded="false" aria-controls="case-make">
             <span class="case-study-head">
-              <span class="case-study-meta">02:40 — Notion × Make × WordPress · Ground Control</span>
+              <span class="case-study-meta">04 — Notion × Make × WordPress · Ground Control</span>
               <span class="case-study-title">Automations</span>
               <span class="case-study-teaser">Un pipeline Notion → Make → WordPress qui tourne sans supervision.</span>
             </span>
-            <span class="case-study-label">+ Détail</span>
+            <span class="case-study-label">[+] détail</span>
           </button>
           <div class="case-study-body" id="case-make">
             <div class="case-study-body-inner">
               <div class="case-study-detail">
                 <div class="case-study-detail-label">Contexte</div>
-                <p>Le service com passait un temps considérable à mettre à jour le site WordPress manuellement — création de pages, mise à jour de l'agenda hebdomadaire. Un site old school, jamais repensé depuis sa création. J'ai identifié deux automatisations prioritaires.</p>
+                <p>Le service com passait un temps considérable à mettre à jour le site WordPress manuellement : création de pages, mise à jour de l'agenda hebdomadaire.</p>
               </div>
               <div class="case-study-detail">
                 <div class="case-study-detail-label">Ce que j'ai construit</div>
-                <p>Un pipeline Notion → Make → WordPress pour la création et mise en ligne des pages de programmation en batch, déclenché par un seul trigger. Et un script de génération automatique de la page Agenda, qui va chercher les infos dans les pages projets et construit les modules dynamiquement, sans intervention manuelle.</p>
+                <p>Un pipeline Notion → Make → WordPress pour la création et la mise en ligne des pages de programmation en batch, déclenché par un seul trigger. Et un script de génération automatique de la page Agenda, qui construit les modules dynamiquement à partir des pages projets.</p>
               </div>
               <div class="case-study-detail">
                 <div class="case-study-detail-label">Défi</div>
-                <p>Faire tourner l'automatisation sans supervision continue — y compris pendant une absence prolongée.</p>
+                <p>Faire tourner l'automatisation sans supervision continue, y compris pendant une absence prolongée.</p>
               </div>
               <div class="case-study-detail">
                 <div class="case-study-detail-label">Stack</div>
@@ -1406,38 +1644,89 @@
               </div>
               <div class="case-study-detail">
                 <div class="case-study-detail-label">Résultat</div>
-                <p>Le script Agenda tourne en production pendant mon congé paternité — sans supervision. Environ 1h gagnée par semaine, zéro risque d'oubli. La prochaine itération du pipeline pages intégrera une nouvelle plateforme de programmation via API — gain estimé à 5-10h par semaine.</p>
+                <p>Le script Agenda a tourné en production pendant mon congé paternité, sans supervision. Environ 1 h gagnée par semaine, zéro risque d'oubli. Prochaine itération : intégration d'une plateforme de programmation via API, gain estimé à 5–10 h par semaine.</p>
               </div>
             </div>
           </div>
         </div>
 
-        <!-- Music card - wide -->
-        <div class="projet-card wide">
-          <div class="projet-card-bg"></div>
-          <div>
-            <div class="projet-tag">Production musicale · en cours</div>
-            <h3 class="projet-title">Musiques électroniques</h3>
-            <p class="projet-desc">Production de musiques électroniques — techno, ambient, drum &amp; bass. Travail sur hardware (Roland TR-8S, TD-3-MO) et Ableton Live. Une pratique parallèle qui informe l'œil éditorial : rythme, texture, structure narrative.</p>
-            <a href="https://odilonwav.bandcamp.com/" target="_blank" class="projet-link">Écouter sur Bandcamp</a>
-          </div>
-          <div>
-            <div class="music-waveform" id="waveform"></div>
-            <div class="projet-details" style="margin-top: 24px;">
-              <div class="projet-detail"><strong>Outils ·</strong> Roland TR-8S · TD-3-MO · Ableton Live</div>
-              <div class="projet-detail"><strong>Registres ·</strong> Techno · Ambient · Drum &amp; Bass · Post-punk</div>
-              <div class="projet-detail"><strong>Format ·</strong> Production indépendante</div>
-            </div>
+        <div class="case-study reveal-stagger">
+          <div class="case-study-head">
+            <span class="case-study-meta">05 — Production digitale · Freelance</span>
+            <span class="case-study-title">Sites &amp; outils no-code</span>
+            <span class="case-study-teaser">Création de sites et d'outils métier sous statut indépendant.</span>
           </div>
         </div>
 
       </div>
     </section>
 
+    <!-- APPROCHE -->
+    <section id="approche">
+      <div class="section-header">
+        <span class="prompt"><span class="p-path">~/odilon.uncoded</span><span class="p-sym">$</span><span class="p-cmd">cat approche.md</span></span>
+        <span class="section-index">03</span>
+        <h2 class="section-title">Approche</h2>
+        <span class="section-line"></span>
+      </div>
+
+      <div class="approche-grid">
+        <div class="approche-cell reveal-stagger">
+          <div class="approche-cell-index">01 · Narratif</div>
+          <div class="approche-cell-title">Traduire la complexité</div>
+          <p class="approche-cell-text">Clarifier un projet avant de produire. Un bon outil n'a de valeur que s'il sert un cap éditorial lisible.</p>
+        </div>
+        <div class="approche-cell reveal-stagger">
+          <div class="approche-cell-index">02 · Système</div>
+          <div class="approche-cell-title">Penser en flux</div>
+          <p class="approche-cell-text">Organiser contenus, validation, diffusion et itération comme une chaîne de production, pas comme une suite d'urgences.</p>
+        </div>
+        <div class="approche-cell reveal-stagger">
+          <div class="approche-cell-index">03 · Outils</div>
+          <div class="approche-cell-title">Automatiser utile</div>
+          <p class="approche-cell-text">Le no-code et l'IA servent à gagner du temps, fiabiliser des opérations et libérer de l'attention pour l'éditorial.</p>
+        </div>
+        <div class="approche-cell reveal-stagger">
+          <div class="approche-cell-index">04 · Exécution</div>
+          <div class="approche-cell-title">Rester livrable</div>
+          <p class="approche-cell-text">Du cadrage à la mise en ligne : moins de friction, plus de cohérence, plus de rythme.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- SIDE PROJECT -->
+    <section id="side">
+      <div class="section-header">
+        <span class="prompt"><span class="p-path">~/odilon.uncoded</span><span class="p-sym">$</span><span class="p-cmd">./music --play</span></span>
+        <span class="section-index">04</span>
+        <h2 class="section-title">Side project</h2>
+        <span class="section-line"></span>
+      </div>
+
+      <div class="projet-card wide">
+        <div class="projet-card-bg"></div>
+        <div>
+          <div class="projet-tag">Production musicale</div>
+          <h3 class="projet-title">Musiques électroniques</h3>
+          <p class="projet-desc">Techno, ambient, drum &amp; bass. Une pratique personnelle qui nourrit mon sens du rythme, de la structure et de la texture, dans les projets éditoriaux comme dans les workflows. J'y trouve un lien très fort entre les outils no-code / IA et la production musicale.</p>
+          <a href="https://odilonwav.bandcamp.com/" target="_blank" rel="noreferrer" class="projet-link">odilonwav.bandcamp.com</a>
+        </div>
+        <div>
+          <div class="music-waveform" id="waveform"></div>
+          <div class="projet-details" style="margin-top: 24px;">
+            <div class="projet-detail"><strong>Outils ·</strong> Roland TR-8S · TD-3-MO · Ableton Live</div>
+            <div class="projet-detail"><strong>Registres ·</strong> Techno · Ambient · Drum &amp; Bass</div>
+            <div class="projet-detail"><strong>Format ·</strong> Production indépendante</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <!-- CONTACT -->
     <section id="contact">
       <div class="section-header">
-        <span class="section-index">04</span>
+        <span class="prompt"><span class="p-path">~/odilon.uncoded</span><span class="p-sym">$</span><span class="p-cmd">contact --all</span></span>
+        <span class="section-index">05</span>
         <h2 class="section-title">Contact</h2>
         <span class="section-line"></span>
       </div>
@@ -1447,56 +1736,77 @@
           <p class="contact-address">Un projet,<br>une direction éditoriale,<br>une conversation.</p>
           <div class="contact-links">
             <a href="mailto:odilon.corby@proton.me" class="contact-link">
-              <span class="contact-link-label">Email</span>
+              <span class="contact-link-label">email</span>
               <span class="contact-link-value">odilon.corby@proton.me</span>
             </a>
             <a href="tel:+33650881622" class="contact-link">
-              <span class="contact-link-label">Téléphone</span>
+              <span class="contact-link-label">tel</span>
               <span class="contact-link-value">+33 6 50 88 16 22</span>
             </a>
-            <a href="https://www.linkedin.com/in/odiloncorby" target="_blank" class="contact-link">
-              <span class="contact-link-label">LinkedIn</span>
+            <a href="https://www.linkedin.com/in/odiloncorby" target="_blank" rel="noreferrer" class="contact-link">
+              <span class="contact-link-label">linkedin</span>
               <span class="contact-link-value">linkedin.com/in/odiloncorby</span>
             </a>
-            <a href="https://odilonwav.bandcamp.com/" target="_blank" class="contact-link">
-              <span class="contact-link-label">Bandcamp</span>
+            <a href="https://odilonwav.bandcamp.com/" target="_blank" rel="noreferrer" class="contact-link">
+              <span class="contact-link-label">music</span>
               <span class="contact-link-value">odilonwav.bandcamp.com</span>
             </a>
           </div>
+          <a href="cv-odilon-corby.pdf" download class="projet-link cv-download">Télécharger le CV (PDF)</a>
         </div>
 
         <div class="contact-skills">
-          <div class="skills-title">Outils &amp; automatisation</div>
+          <div class="skills-title">No-code · IA · Automation</div>
           <div class="skills-list">
-            <span class="skill-tag">Adobe Suite</span>
-            <span class="skill-tag">GitHub</span>
-            <span class="skill-tag">WordPress</span>
-            <span class="skill-tag">Cloudflare</span>
-            <span class="skill-tag">Make (automatisation)</span>
+            <span class="skill-tag">Claude Code</span>
+            <span class="skill-tag">Codex</span>
             <span class="skill-tag">Notion</span>
-            <span class="skill-tag">Automatisation No-Code</span>
+            <span class="skill-tag">Airtable</span>
+            <span class="skill-tag">Make</span>
+            <span class="skill-tag">API &amp; MCP</span>
+            <span class="skill-tag">GitHub</span>
+            <span class="skill-tag">Cloudflare</span>
+            <span class="skill-tag">WordPress</span>
+            <span class="skill-tag">Structuration de workflows éditoriaux</span>
           </div>
 
-          <div class="skills-title">Intelligence artificielle</div>
+          <div class="skills-title">Stratégie éditoriale</div>
           <div class="skills-list">
-            <span class="skill-tag">ChatGPT</span>
+            <span class="skill-tag">Récit de marque</span>
+            <span class="skill-tag">Ligne éditoriale</span>
+            <span class="skill-tag">Relations presse</span>
+            <span class="skill-tag">Management d'équipe</span>
+          </div>
+
+          <div class="skills-title">Production &amp; diffusion</div>
+          <div class="skills-list">
+            <span class="skill-tag">Social media</span>
+            <span class="skill-tag">Newsletters</span>
+            <span class="skill-tag">CMS</span>
+            <span class="skill-tag">Adobe Suite</span>
+            <span class="skill-tag">Vidéo</span>
+            <span class="skill-tag">Pilotage budgétaire</span>
+            <span class="skill-tag">Reporting</span>
+          </div>
+
+          <div class="skills-title">IA générative</div>
+          <div class="skills-list">
             <span class="skill-tag">Claude</span>
-            <span class="skill-tag">Claude Code</span>
+            <span class="skill-tag">ChatGPT</span>
             <span class="skill-tag">Midjourney</span>
             <span class="skill-tag">NanoBanana</span>
-            <span class="skill-tag">VS Code</span>
           </div>
 
           <div class="skills-title">Formation</div>
           <div class="skills-list">
-            <span class="skill-tag">Masters Communication — Cesacom / Cergy · 2015</span>
-            <span class="skill-tag">BTS Communication — CFA SACEF · 2012</span>
+            <span class="skill-tag">Masters Communication · Cesacom / Cergy · 2015</span>
+            <span class="skill-tag">BTS Communication · CFA SACEF · 2012</span>
           </div>
 
           <div class="skills-title">Langues</div>
           <div class="skills-list">
-            <span class="skill-tag">Français — natif</span>
-            <span class="skill-tag">Anglais — courant</span>
+            <span class="skill-tag">Français · natif</span>
+            <span class="skill-tag">Anglais · courant</span>
           </div>
         </div>
       </div>
@@ -1505,53 +1815,63 @@
   </main>
 </div>
 
+<!-- STATUS BAR (desktop) -->
+<div class="statusbar" aria-hidden="true">
+  <span class="sb-mode">READ</span>
+  <span>odilon.uncoded</span>
+  <span class="sb-path">~/signal</span>
+  <span class="sb-right">utf-8 · paris <span class="sb-clock" style="margin-left:6px"></span></span>
+</div>
+
+<script src="uncoded-fx.js"></script>
 <script>
   const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  // ─── HERO PORTRAIT PARALLAX ───
+  // ─── HERO PORTRAIT : ASCII → photo ───
   const heroPortrait = document.querySelector('.hero-portrait');
-  if (heroPortrait && !prefersReducedMotion) {
-    let ticking = false;
-    window.addEventListener('scroll', () => {
-      if (!ticking) {
-        requestAnimationFrame(() => {
-          const offset = Math.min(window.scrollY * 0.08, 40);
-          heroPortrait.style.transform = `translateY(${offset}px)`;
-          ticking = false;
-        });
-        ticking = true;
-      }
-    }, { passive: true });
-  }
+  if (heroPortrait) {
+    const pre = heroPortrait.querySelector('.portrait-ascii');
+    const img = heroPortrait.querySelector('img');
+    const COLS = 72;
+    UFX.asciiImage(img.getAttribute('src'), COLS, { cellRatio: 0.6, invert: true, gamma: 1.6, contrast: 1.5, ramp: ' .:-=+*#%@' }).then((txt) => {
+      pre.textContent = txt;
+      UFX.fitPre(pre, COLS, 20);
+      window.addEventListener('resize', () => UFX.fitPre(pre, COLS, 20));
+    }).catch(() => document.documentElement.classList.add('no-ascii'));
+    const show = () => heroPortrait.classList.add('photo');
+    const hide = () => heroPortrait.classList.remove('photo');
+    heroPortrait.addEventListener('mouseenter', show);
+    heroPortrait.addEventListener('mouseleave', hide);
+    heroPortrait.addEventListener('focus', show);
+    heroPortrait.addEventListener('blur', hide);
+    heroPortrait.addEventListener('click', () => heroPortrait.classList.toggle('photo'));
 
-  // ─── ANIMATED COUNTERS ───
-  function animateCount(el, target, duration = 1200) {
-    if (prefersReducedMotion) { el.textContent = target; return; }
-    const start = performance.now();
-    function tick(now) {
-      const progress = Math.min((now - start) / duration, 1);
-      el.textContent = Math.round(progress * target);
-      if (progress < 1) requestAnimationFrame(tick);
+    // Parallax léger
+    if (!prefersReducedMotion) {
+      let ticking = false;
+      window.addEventListener('scroll', () => {
+        if (!ticking) {
+          requestAnimationFrame(() => {
+            const offset = Math.min(window.scrollY * 0.08, 40);
+            heroPortrait.style.transform = `translateY(${offset}px)`;
+            ticking = false;
+          });
+          ticking = true;
+        }
+      }, { passive: true });
     }
-    requestAnimationFrame(tick);
   }
-  document.querySelectorAll('[data-counter]').forEach(el => {
-    const target = parseInt(el.dataset.counter, 10);
-    const counterObs = new IntersectionObserver((entries, obs) => {
-      entries.forEach(e => {
-        if (e.isIntersecting) { animateCount(e.target, target); obs.unobserve(e.target); }
-      });
-    }, { threshold: 0.5 });
-    counterObs.observe(el);
-  });
 
-  // ─── INTERSECTION OBSERVER for section reveals ───
+  // ─── INTERSECTION OBSERVER for section reveals (+ décodage des titres) ───
   const sections = document.querySelectorAll('section');
   const staggerItems = document.querySelectorAll('.reveal-stagger');
 
   const sectionObs = new IntersectionObserver((entries) => {
     entries.forEach(e => {
-      if (e.isIntersecting) e.target.classList.add('visible');
+      if (!e.isIntersecting || e.target.classList.contains('visible')) return;
+      e.target.classList.add('visible');
+      const title = e.target.querySelector('.section-title');
+      if (title) UFX.scramble(title, { duration: 650 });
     });
   }, { threshold: 0.08 });
 
@@ -1567,12 +1887,15 @@
 
   staggerItems.forEach(item => itemObs.observe(item));
 
-  // ─── ACTIVE NAV on scroll ───
+  // ─── ACTIVE NAV + STATUS BAR on scroll ───
   const navLinks = document.querySelectorAll('nav a, .mobile-nav a');
-  const sectionIds = ['hero', 'parcours', 'approche', 'projets', 'contact'];
+  const sectionIds = ['hero', 'parcours', 'produits', 'approche', 'side', 'contact'];
+  const sectionPaths = { hero: 'signal', parcours: 'parcours', produits: 'produits', approche: 'approche', side: 'side-project', contact: 'contact' };
+  const sbPath = document.querySelector('.sb-path');
+  let lastSection = 'hero';
 
-  window.addEventListener('scroll', () => {
-    let current = '';
+  function updateActive() {
+    let current = 'hero';
     sectionIds.forEach(id => {
       const el = document.getElementById(id);
       if (el && el.getBoundingClientRect().top < window.innerHeight * 0.4) {
@@ -1582,7 +1905,21 @@
     navLinks.forEach(link => {
       link.classList.toggle('active', link.getAttribute('href') === `#${current}`);
     });
-  }, { passive: true });
+    if (current !== lastSection) {
+      lastSection = current;
+      sbPath.textContent = '~/' + sectionPaths[current];
+      UFX.glitch(sbPath, 220);
+    }
+  }
+  window.addEventListener('scroll', updateActive, { passive: true });
+
+  // ─── CLOCK ───
+  const clock = document.querySelector('.sb-clock');
+  function tickClock() {
+    clock.textContent = new Date().toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit', timeZone: 'Europe/Paris' });
+  }
+  tickClock();
+  setInterval(tickClock, 30000);
 
   // ─── CASE STUDY ACCORDIONS ───
   document.querySelectorAll('.case-study-toggle').forEach(btn => {
@@ -1591,14 +1928,16 @@
       btn.setAttribute('aria-expanded', String(!expanded));
       const body = btn.nextElementSibling;
       body.classList.toggle('open', !expanded);
-      btn.querySelector('.case-study-label').textContent = expanded ? '+ Détail' : '− Fermer';
+      const label = btn.querySelector('.case-study-label');
+      label.textContent = expanded ? '[+] détail' : '[−] fermer';
+      UFX.glitch(label, 200);
     });
   });
 
   // ─── WAVEFORM BARS ───
   const waveform = document.getElementById('waveform');
   const heights = [20, 45, 30, 65, 40, 80, 55, 35, 70, 50, 85, 45, 60, 30, 75, 50, 40, 65, 35, 55, 80, 45, 70, 30, 60, 50, 40, 75, 55, 35];
-  heights.forEach((h, i) => {
+  heights.forEach((h) => {
     const bar = document.createElement('div');
     bar.className = 'bar';
     bar.style.height = h + '%';
