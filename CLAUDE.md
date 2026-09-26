@@ -1,52 +1,47 @@
 # CV Odilon Corby — Contexte projet
 
-## Deux fichiers source
+## Marque
+
+**odilon.uncoded** (anciennement odilon.code). Positionnement : *Product Builder No-Code & Communication expert*. Source de vérité du contenu : le CV PDF `projet online/cv-odilon-corby.pdf`.
+
+## Fichiers (`projet online/`, dossier publié)
 
 | Fichier | Usage |
 |---|---|
-| `projet online/odilon-corby-cv.html` | Version web publiable — design sombre, animations, splashs interactifs |
-| `projet pdf/cv_preview.html` | Version impression A4 portrait — layout hybride dark/light, QR code |
+| `index.html` | Écran de boot ASCII : choix `[1] mode lecture` / `[2] mode terminal` (`?skip` → lecture directe) |
+| `odilon-corby-cv.html` | **Mode lecture** : page qui défile, HTML statique (sans dépendance JS pour le contenu) |
+| `terminal.html` | **Mode terminal** : CV navigable par commandes (help, whoami, parcours, produits, open, skills, stack, approche, music, contact, cv, lecture…) |
+| `cv-data.js` | Contenu structuré (`window.CV`) consommé par le terminal |
+| `uncoded-fx.js` | Effets partagés : scramble, glitch, portrait/bannière ASCII, champ de caractères (respecte `prefers-reduced-motion`) |
+| `cv-odilon-corby.pdf` | CV PDF téléchargeable |
 
-Ces deux fichiers sont **indépendants** : toute modification de contenu (expériences, compétences, liens) doit être répercutée dans les deux.
+**Règle de synchro** : le contenu existe en double (`odilon-corby-cv.html` statique + `cv-data.js`). Toute modification de contenu (expériences, produits, compétences, liens) doit être répercutée dans **les deux**.
 
 ## Stack
 
-- HTML/CSS/JS vanilla — aucun framework, aucune dépendance npm
-- Fonts : Playfair Display, IBM Plex Mono, EB Garamond (Google Fonts)
-- QR code : qrcodejs via CDN (PDF uniquement)
-- Pas de build process — ouvrir directement dans le navigateur
+- HTML/CSS/JS vanilla — aucun framework, aucune dépendance npm, pas de build
+- Fonts auto-hébergées : VG5000 (display), Geist (corps), Geist Mono (mono)
+- CSP stricte en `<meta>` : tout en `'self'`, pas de CDN
 
 ## Variables CSS clés
 
 ```css
---black: #080808
---deep: #0f0f0f        /* fond sidebar PDF */
---surface: #141414
---oxide: #c0392b       /* rouge accent */
---white: #f0ede6
---main-bg: #f8f6f2     /* fond main PDF */
---mono: 'IBM Plex Mono'
---serif: 'Playfair Display'
---body: 'EB Garamond'
+--color-ink: #0A0A0A       /* fond */
+--color-paper: #EDEAE0     /* texte */
+--color-signal: #D9A441    /* accent ambre */
+--color-phosphor: #6B9080  /* accent vert désaturé */
+--color-line: #3A3A38
+--color-muted: #8C887E
 ```
 
-## Fonctionnalités implémentées (CV online)
+## Fonctionnalités (mode lecture)
 
-- Navigation sticky avec indicateur de section active
-- Reveal des sections au scroll (IntersectionObserver)
-- Cartes projets avec overlay au hover (pointer-events: none sur .projet-card-bg — ne pas retirer)
-- **Splashs plein écran** sur les 2 cartes majeures (clic → overlay thématisé → lien externe) :
-  - Musée national de la Marine → `#splash-marine` (bleu nuit, vagues, voilier)
-  - Ground Control & La Lune Rousse → `#splash-ground` (concert, faisceaux, foule)
-- Waveform animée sur la carte Musiques électroniques
-- Section Compétences avec bloc "Intelligence artificielle"
-
-## Layout PDF — A4 Portrait
-
-- Sidebar noire `#0f0f0f` ≈30% + Main blanc `#f8f6f2` ≈70%
-- Sidebar : Portrait N&B → Identité → Compétences → Outils IA → Formation → Langues → Hook QR
-- Main : Intro · 01 Parcours · 02 Approche (grid 2×2) · 03 Projet parallèle
-- Export : Cmd+P → Enregistrer en PDF, format A4, marges 0, arrière-plan activé
+- Sidebar + nav shell (`> parcours`) avec indicateur de section active, barre de statut desktop
+- Sections : 00 Signal · 01 Parcours · 02 Produits · 03 Approche · 04 Side project · 05 Contact
+- Titres décodés au scroll (scramble), prompts `~/odilon.uncoded $ …`, scanlines CRT
+- Portrait en ASCII qui se révèle en photo au survol / tap
+- Produits en accordéon (5 études de cas), waveform animée sur la carte Musique
+- Ne jamais supprimer `pointer-events: none` sur `.projet-card-bg`
 
 ## Keywords éditoriaux du parcours
 
@@ -77,8 +72,8 @@ Démarrer le serveur CV : `python3 -m http.server 54550 --bind 127.0.0.1` depuis
 ## Git & GitHub
 
 - **Repo :** https://github.com/odiloncorby-creator/odilon.corby
-- **Live :** https://odiloncorby-creator.github.io/odilon.corby/projet%20online/odilon-corby-cv.html
-- **Enforce HTTPS :** activé sur GitHub Pages
+- **Hébergement :** Cloudflare Pages, projet `odilon-corby` — branche de prod `main`, dossier publié `projet online`, pas de build. Chaque branche a une URL de preview.
+- **Live :** https://odilon-corby.pages.dev/ (boot) · `/odilon-corby-cv` (lecture) · `/terminal`
 - Ne jamais committer : `.superpowers/`, `.DS_Store`, tokens ou credentials
 - Toujours retirer le token de la remote URL après un push
 - Rappeler à l'utilisateur de révoquer chaque token après usage
@@ -87,23 +82,22 @@ Démarrer le serveur CV : `python3 -m http.server 54550 --bind 127.0.0.1` depuis
 
 | Entité | URL |
 |---|---|
-| Musée national de la Marine | https://www.musee-marine.fr/ |
-| Ground Control | https://www.groundcontrolparis.com/ |
-| La Lune Rousse | https://lalunerousse.com/ |
+| naïko | https://naiko.app |
+| FMI app | https://fmiapp.pages.dev |
 | Bandcamp | https://odilonwav.bandcamp.com/ |
 | LinkedIn | https://www.linkedin.com/in/odiloncorby |
 
-## Compétences IA
+## Compétences (groupes du CV)
 
-ChatGPT · Claude · Claude Code · Midjourney · NanoBanana · VS Code
+- No-code · IA · Automation : Claude Code · Codex · Notion · Airtable · Make · API & MCP · GitHub · Cloudflare · WordPress
+- Stratégie éditoriale · Production & diffusion · IA générative (Claude, ChatGPT, Midjourney, NanoBanana)
 
 ## Règles importantes
 
 - Ne jamais supprimer `pointer-events: none` sur `.projet-card-bg` (bloque les clics sinon)
-- Les splashs se ferment via : bouton ✕, clic outside, touche Échap
-- Toute modification de contenu = répercuter sur les **deux** fichiers HTML
+- Toute modification de contenu = répercuter dans `odilon-corby-cv.html` **et** `cv-data.js`
 - Pas de frameworks à introduire — rester en vanilla
-- Spec de design complète : `docs/superpowers/specs/2026-03-28-cv-pdf-design.md`
+- Toute animation doit avoir son fallback `prefers-reduced-motion`
 
 ## Autonomie & outils
 

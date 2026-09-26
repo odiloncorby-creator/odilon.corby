@@ -196,10 +196,15 @@
     raf = requestAnimationFrame(loop);
   }
 
-  // Ajuste la taille de police d'un <pre> pour que `cols` caractères tiennent dans sa largeur
+  // Ajuste la taille de police d'un <pre> pour qu'il tienne dans la largeur de son parent
+  // (mesure réelle : les glyphes de bloc peuvent venir d'une police de secours plus large)
   function fitPre(pre, cols, max = 14) {
     const w = pre.parentElement.clientWidth;
-    pre.style.fontSize = Math.min(max, w / (cols * 0.6)).toFixed(2) + 'px';
+    pre.style.fontSize = '10px';
+    pre.style.width = 'max-content';
+    const natural = pre.offsetWidth || (cols * 6);
+    pre.style.width = '';
+    pre.style.fontSize = Math.min(max, (w / natural) * 10 * 0.98).toFixed(2) + 'px';
   }
 
   window.UFX = { reduced, scramble, glitch, shake, asciiImage, asciiText, field, fitPre, GLYPHS };
