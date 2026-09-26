@@ -2,7 +2,7 @@
 
 ## Statut & roadmap
 
-Voir `docs/STATUS.md` (fait, en cours, prochain chantier : fusion du portfolio Framer).
+Voir `docs/STATUS.md` (fait, en cours, prochain chantier : domaine perso via Cloudflare Registrar, puis dépublication de Framer — contenu Framer déjà fusionné).
 
 ## Marque
 
