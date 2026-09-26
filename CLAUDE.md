@@ -1,5 +1,9 @@
 # CV Odilon Corby — Contexte projet
 
+## Statut & roadmap
+
+Voir `docs/STATUS.md` (fait, en cours, prochain chantier : fusion du portfolio Framer).
+
 ## Marque
 
 **odilon.uncoded** (anciennement odilon.code). Positionnement : *Product Builder No-Code & Communication expert*. Source de vérité du contenu : le CV PDF `projet online/cv-odilon-corby.pdf`.
