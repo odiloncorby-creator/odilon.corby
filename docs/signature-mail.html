@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Signatures mail</title>
+<style>
+  /* Styles de la page d'aperçu uniquement : les signatures n'utilisent que des styles inline */
+  body { margin: 0; padding: 32px 16px; font: 14px/1.5 system-ui, sans-serif; background: #f4f2ec; color: #222; }
+  main { max-width: 720px; margin: 0 auto; }
+  h1 { font-size: 18px; margin: 0 0 4px; }
+  .help { color: #666; margin: 0 0 32px; }
+  section { margin-bottom: 40px; }
+  h2 { font-size: 13px; text-transform: uppercase; letter-spacing: .08em; color: #666; margin: 0 0 8px; }
+  .previews { display: grid; gap: 12px; }
+  .card { border: 1px solid #ddd; border-radius: 6px; padding: 20px; overflow-x: auto; }
+  .light { background: #fff; color: #1a1a1a; }
+  .dark { background: #1c1c1e; color: #e8e6df; }
+  .tag { font-size: 11px; color: #999; margin-bottom: 10px; }
+  button { font: inherit; padding: 6px 14px; border: 1px solid #222; background: #222; color: #fff; border-radius: 4px; cursor: pointer; margin-top: 10px; }
+  button.done { background: #6B9080; border-color: #6B9080; }
+</style>
+</head>
+<body>
+<main>
+  <h1>Signatures mail · odilon.uncoded</h1>
+  <p class="help">Clique sur « Copier », puis colle dans Proton : Paramètres → Identité et adresses → Nom d'affichage et signature → Mettre à jour. Aperçu en thème clair et sombre : le texte principal n'a pas de couleur fixe et suit le thème du lecteur.</p>
+
+  <!-- ===== VARIANTE 1 : complète ===== -->
+  <section>
+    <h2>1 · Complète (premier contact, candidatures)</h2>
+    <div class="previews">
+      <div class="card light"><div class="tag">thème clair</div><div data-sig="full"></div></div>
+      <div class="card dark"><div class="tag">thème sombre</div><div data-sig="full"></div></div>
+    </div>
+    <button data-copy="full">Copier la signature complète</button>
+  </section>
+
+  <!-- ===== VARIANTE 2 : courte ===== -->
+  <section>
+    <h2>2 · Courte (réponses, échanges suivis)</h2>
+    <div class="previews">
+      <div class="card light"><div class="tag">thème clair</div><div data-sig="short"></div></div>
+      <div class="card dark"><div class="tag">thème sombre</div><div data-sig="short"></div></div>
+    </div>
+    <button data-copy="short">Copier la signature courte</button>
+  </section>
+</main>
+
+<template id="sig-full">
+<table cellpadding="0" cellspacing="0" border="0" style="border-collapse:collapse;font-family:'Geist Mono',SFMono-Regular,Menlo,Consolas,'Courier New',monospace;font-size:12px;line-height:1.6;">
+  <tr><td style="padding:0 0 6px 0;color:#8C887E;">~/odilon.uncoded <span style="color:#C8902F;">$</span> whoami</td></tr>
+  <tr><td style="padding:0;font-size:15px;font-weight:bold;letter-spacing:0.02em;">Odilon Corby<span style="color:#C8902F;">&#9612;</span></td></tr>
+  <tr><td style="padding:0;text-transform:uppercase;letter-spacing:0.06em;font-size:11px;">Product Builder No-Code, IA &amp; Communication expert</td></tr>
+  <tr><td style="padding:6px 0 0 0;border-left:2px solid #C8902F;padding-left:8px;font-style:italic;color:#8C887E;">Construire l'outil, structurer le contenu, porter le message.</td></tr>
+  <tr><td style="padding:8px 0 0 0;">
+    <span style="color:#6B9080;">&rarr;</span>
+    <a href="https://odiloncorby.com" style="color:#C8902F;text-decoration:none;font-weight:bold;">odiloncorby.com</a>
+    <span style="color:#8C887E;">&nbsp;&middot;&nbsp;</span>
+    <a href="https://odiloncorby.com/terminal" style="color:#C8902F;text-decoration:none;">./terminal</a>
+    <span style="color:#8C887E;">&nbsp;&middot;&nbsp;</span>
+    <a href="https://www.linkedin.com/in/odiloncorby" style="color:#C8902F;text-decoration:none;">linkedin</a>
+  </td></tr>
+</table>
+</template>
+
+<template id="sig-short">
+<table cellpadding="0" cellspacing="0" border="0" style="border-collapse:collapse;font-family:'Geist Mono',SFMono-Regular,Menlo,Consolas,'Courier New',monospace;font-size:12px;line-height:1.6;">
+  <tr><td style="padding:0;"><span style="font-weight:bold;">Odilon Corby</span><span style="color:#C8902F;">&#9612;</span> <span style="color:#8C887E;">&middot; Product Builder No-Code, IA &amp; Communication expert</span></td></tr>
+  <tr><td style="padding:0;"><span style="color:#6B9080;">&rarr;</span> <a href="https://odiloncorby.com" style="color:#C8902F;text-decoration:none;">odiloncorby.com</a></td></tr>
+</table>
+</template>
+
+<script>
+  document.querySelectorAll('[data-sig]').forEach((el) => {
+    el.innerHTML = document.getElementById('sig-' + el.dataset.sig).innerHTML;
+  });
+  document.querySelectorAll('[data-copy]').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      // Copie du HTML exact du template (sans les couleurs calculées de l'aperçu,
+      // pour que le texte principal suive le thème du lecteur)
+      const tpl = document.getElementById('sig-' + btn.dataset.copy);
+      const html = tpl.innerHTML.trim();
+      const text = tpl.content.textContent.replace(/\s+\n/g, '\n').replace(/[ \t]+/g, ' ').trim();
+      const onCopy = (e) => {
+        e.clipboardData.setData('text/html', html);
+        e.clipboardData.setData('text/plain', text);
+        e.preventDefault();
+      };
+      document.addEventListener('copy', onCopy);
+      document.execCommand('copy');
+      document.removeEventListener('copy', onCopy);
+      const label = btn.textContent;
+      btn.textContent = 'Copié ✓';
+      btn.classList.add('done');
+      setTimeout(() => { btn.textContent = label; btn.classList.remove('done'); }, 1600);
+    });
+  });
+</script>
+</body>
+</html>
