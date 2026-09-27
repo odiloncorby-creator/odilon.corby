@@ -25,7 +25,8 @@ Voir `docs/STATUS.md` (fait, en cours, prochain chantier : dépublication de Fra
 
 - HTML/CSS/JS vanilla — aucun framework, aucune dépendance npm, pas de build
 - Fonts auto-hébergées : VG5000 (display), Geist (corps), Geist Mono (mono)
-- CSP stricte en `<meta>` : tout en `'self'`, pas de CDN
+- CSP stricte en `<meta>` : tout en `'self'`, pas de CDN. Seule exception : Cloudflare Web Analytics (`static.cloudflareinsights.com` en script-src, `cloudflareinsights.com` en connect-src)
+- **Stats** : Cloudflare Web Analytics, sans cookie, snippet manuel dans les 3 pages (site RUM `ac423…`, hôtes pages.dev + odiloncorby.com + www). L'injection auto du site RUM de la zone (`3e8bd…`) est coupée pour éviter le double comptage. Ne pas cocher l'option « exclure les visiteurs UE ». Suivi candidatures : liens `?ref=entreprise`
 
 ## Variables CSS clés
 
