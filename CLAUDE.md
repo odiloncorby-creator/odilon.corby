@@ -2,7 +2,7 @@
 
 ## Statut & roadmap
 
-Voir `docs/STATUS.md` (fait, en cours, prochain chantier : domaine perso via Cloudflare Registrar, puis dépublication de Framer — contenu Framer déjà fusionné).
+Voir `docs/STATUS.md` (fait, en cours, prochain chantier : dépublication de Framer et mise à jour des liens — contenu Framer déjà fusionné).
 
 ## Marque
 
@@ -79,13 +79,15 @@ Démarrer le serveur CV : `python3 -m http.server 54550 --bind 127.0.0.1` depuis
 - **Champs `cv-data.js`** : `contexte`/`construit`/`defi`/`resultat` acceptent une chaîne **ou un tableau** (un paragraphe par entrée).
 - **Grep** : l'alias shell `grep` passe par `rg` et gère mal l'alternation BRE (`\|`). Utiliser `/usr/bin/grep -E`.
 - **Branches** : travailler sur une branche, preview Cloudflare sur `https://<branche>.odilon-corby.pages.dev` (build ≈1 min après le push).
-- **Image OG** : `projet online/og-image.png` (1200×630). L'URL absolue est codée en dur en `odilon-corby.pages.dev` dans les 3 pages : la changer au passage au domaine perso.
+- **Image OG** : `projet online/og-image.png` (1200×630). URL absolue codée en dur (`https://odiloncorby.com/og-image.png`) dans les 3 pages.
 
 ## Git & GitHub
 
 - **Repo :** https://github.com/odiloncorby-creator/odilon.corby
 - **Hébergement :** Cloudflare Pages, projet `odilon-corby` — branche de prod `main`, dossier publié `projet online`, pas de build. Chaque branche a une URL de preview.
-- **Live :** https://odilon-corby.pages.dev/ (boot) · `/odilon-corby-cv` (lecture) · `/terminal`
+- **Domaine :** `odiloncorby.com` (acheté sept. 2026, Cloudflare Registrar, zone sur le même compte). Apex + `www` rattachés au projet Pages ; `www` redirige vers l'apex (Redirect Rule). `odilon-corby.pages.dev` reste accessible
+- **Live :** https://odiloncorby.com/ (boot) · `/odilon-corby-cv` (lecture) · `/terminal`
+- **Sous-domaines** : gratuits et illimités en pratique ; chacun peut viser un autre projet Pages/Worker ou un service externe (CNAME)
 - Ne jamais committer : `.superpowers/`, `.DS_Store`, tokens ou credentials
 - Toujours retirer le token de la remote URL après un push
 - Rappeler à l'utilisateur de révoquer chaque token après usage

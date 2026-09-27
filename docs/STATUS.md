@@ -4,7 +4,7 @@ Dernière mise à jour : 2026-09-26
 
 ## ✅ Fait (en production)
 
-**Prod :** https://odilon-corby.pages.dev/ — Cloudflare Pages, projet `odilon-corby`, branche `main`, dossier publié `projet online/`, pas de build.
+**Prod :** https://odiloncorby.com/ (aussi https://odilon-corby.pages.dev/) — Cloudflare Pages, projet `odilon-corby`, branche `main`, dossier publié `projet online/`, pas de build.
 
 | Livrable | Détail |
 |---|---|
@@ -23,7 +23,7 @@ Commits : `ea25e6b` (mode lecture) · `2ae6fb3` (terminal) · `f3902a7` (boot + 
 - **Sites & outils no-code** : fiche courte, sans source (ni PDF ni Framer) → à enrichir (contexte, défi, résultat, visuels). Notion OS a été enrichi depuis Framer.
 - `skills` en terminal : listé par groupes, sans niveaux (volontaire : pas de chiffres inventés).
 
-## 🎯 Chantier en cours : un seul site, sortie de Framer (étapes 1–3 faites, reste 4–5)
+## 🎯 Chantier en cours : un seul site, sortie de Framer (étapes 1–4 faites, reste 5)
 
 **Décision :** fusionner le portfolio Framer (https://odilon-uncoded.framer.website/) dans ce repo et abandonner Framer. Un seul support, une seule marque, hébergé sur Cloudflare avec un domaine personnalisé.
 
@@ -33,8 +33,8 @@ Commits : `ea25e6b` (mode lecture) · `2ae6fb3` (terminal) · `f3902a7` (boot + 
 1. ✅ **Inventaire Framer** (2026-09-26) : une seule page. Hero, à propos, 3 projets (naïko, FMI, Notion OS), contact, image sociale. Aucune photo ni vidéo, pas de CMS.
 2. ✅ **Mapping validé** (2026-09-26) : naïko et Notion OS enrichis avec le texte Framer, FMI retouché à la marge. Métier visé « Product builder no-code & IA » et sa phrase ajoutés au hero et à `whoami`. Logotype Framer réutilisé en `og-image.png`. Abandonnés : à propos, contact, fond animé et palette Framer (déjà couverts dans le repo). Arbitrages : pour naïko, résultat et période repris de Framer (bêta-testeurs, pas encore relu par une sage-femme ; du 3e trimestre aux 3 mois du bébé). Notion OS signé « La Lune Rousse · Ground Control » ; sa brique WordPress reste dans la fiche Automations, avec un renvoi.
 3. ✅ **Intégration** (2026-09-26) : branche `framer-merge` mergée dans `main` et en prod.
-4. **Domaine** — achat via Cloudflare Registrar (piste : `odiloncorby.com` ou `.fr` en principal, `odilonuncoded.com` en redirection — disponibilité non vérifiée), rattachement au projet Pages `odilon-corby`.
-5. **Bascule** — redirection / dépublication du site Framer, mise à jour des liens (LinkedIn, signatures, PDF), et remplacement de `odilon-corby.pages.dev` dans les balises `og:image` des 3 pages.
+4. ✅ **Domaine** (2026-09-27) : `odiloncorby.com` acheté via Cloudflare Registrar, apex + `www` rattachés au projet Pages `odilon-corby`, `www` redirigé vers l'apex, `og:image` des 3 pages passée sur le domaine.
+5. **Bascule** — redirection / dépublication du site Framer, mise à jour des liens (LinkedIn, signatures, PDF).
 
 ### Garde-fous
 - Déplacer le contenu d'abord ; les améliorations visuelles viennent après.
