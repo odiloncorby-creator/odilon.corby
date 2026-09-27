@@ -1,7 +1,0 @@
-[build]
-  publish = "projet online"
-
-[[redirects]]
-  from = "/"
-  to = "/odilon-corby-cv.html"
-  status = 301
