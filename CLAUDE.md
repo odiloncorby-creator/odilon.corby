@@ -6,7 +6,7 @@ Voir `docs/STATUS.md` (fait, en cours, prochain chantier : domaine perso via Clo
 
 ## Marque
 
-**odilon.uncoded** (anciennement odilon.code). Positionnement : *Product Builder No-Code & Communication expert*. Source de vérité du contenu : le CV PDF `projet online/cv-odilon-corby.pdf`.
+**odilon.uncoded** (anciennement odilon.code). Positionnement : *Product Builder No-Code, IA & Communication expert* (le PDF dit encore « No-Code & Communication expert »). Source de vérité du contenu : le CV PDF `projet online/cv-odilon-corby.pdf`.
 
 ## Fichiers (`projet online/`, dossier publié)
 
@@ -44,7 +44,7 @@ Voir `docs/STATUS.md` (fait, en cours, prochain chantier : domaine perso via Clo
 - Sections : 00 Signal · 01 Parcours · 02 Produits · 03 Approche · 04 Side project · 05 Contact
 - Titres décodés au scroll (scramble), prompts `~/odilon.uncoded $ …`, scanlines CRT
 - Portrait en ASCII qui se révèle en photo au survol / tap
-- Hero : rôle officiel « Product Builder No-Code & Communication expert » (PDF) + un seul bloc d'accroche (`tagline` + `intro`), orienté product sans lâcher l'éditorial. L'ancien encadré métier visé/positionnement a été fusionné dedans (sept. 2026)
+- Hero : rôle « Product Builder No-Code, IA & Communication expert » + un seul bloc d'accroche (`tagline` + `intro`), orienté product sans lâcher l'éditorial. L'ancien encadré métier visé/positionnement a été fusionné dedans (sept. 2026)
 - Produits en accordéon (5 études de cas), waveform animée sur la carte Musique
 - Ne jamais supprimer `pointer-events: none` sur `.projet-card-bg`
 

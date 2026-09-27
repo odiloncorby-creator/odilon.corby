@@ -7,9 +7,9 @@
 window.CV = {
   brand: 'odilon.uncoded',
   name: 'Odilon Corby',
-  role: 'Product Builder No-Code & Communication expert',
+  role: 'Product Builder No-Code, IA & Communication expert',
   eyebrow: 'Product builder · Workflows IA · Stratégie éditoriale · Communication',
-  tagline: 'Construire des produits utiles, et savoir les raconter.',
+  tagline: "Construire l'outil, structurer le contenu, porter le message.",
   intro: "Je conçois des outils no-code & IA qui résolvent des problèmes concrets : apps, automations, interfaces, de l'idée à la mise en production. Mon atout : plus de dix ans de stratégie éditoriale et de communication, pour des produits qui tiennent aussi par leurs contenus, leurs process et leur diffusion.",
   meta: { location: 'Paris, FR', availability: 'Sur demande', experience: '+10 ans' },
   portrait: 'portrait LLR 0251387 - Grande.jpeg',
