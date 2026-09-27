@@ -44,7 +44,7 @@ Voir `docs/STATUS.md` (fait, en cours, prochain chantier : domaine perso via Clo
 - Sections : 00 Signal · 01 Parcours · 02 Produits · 03 Approche · 04 Side project · 05 Contact
 - Titres décodés au scroll (scramble), prompts `~/odilon.uncoded $ …`, scanlines CRT
 - Portrait en ASCII qui se révèle en photo au survol / tap
-- Encadré hero : `# métier visé` (Product builder no-code & IA, le métier ciblé) + `# positionnement`. Le rôle officiel reste « Product Builder No-Code & Communication expert » (PDF)
+- Hero : rôle officiel « Product Builder No-Code & Communication expert » (PDF) + un seul bloc d'accroche (`tagline` + `intro`), orienté product sans lâcher l'éditorial. L'ancien encadré métier visé/positionnement a été fusionné dedans (sept. 2026)
 - Produits en accordéon (5 études de cas), waveform animée sur la carte Musique
 - Ne jamais supprimer `pointer-events: none` sur `.projet-card-bg`
 
@@ -58,10 +58,6 @@ Progression narrative — ne pas modifier sans validation :
 | Grand Format (2017–2018) | **Valorisation** |
 | Musée national de la Marine (2018–2023) | **Récit** |
 | La Lune Rousse / Ground Control (2023–présent) | **Rayonnement** |
-
-## Phrase signature (ne pas modifier)
-
-> "Faire tenir ensemble le fond, la forme et le ton."
 
 ## Serveurs locaux
 
@@ -80,7 +76,7 @@ Démarrer le serveur CV : `python3 -m http.server 54550 --bind 127.0.0.1` depuis
 - **Framer CLI** (`@framer/agent`) : il faut le réseau, donc lancer hors sandbox. Dans `exec`, `fs` n'écrit que dans `os.tmpdir()` (pas dans le scratchpad) : écrire là puis `cp`. Projet Framer : `odilon.uncoded-portfolio` (id `6S9lWlSITjA2PcqV1C8G`), une seule page, contenu entièrement fusionné dans ce repo en sept. 2026.
 - **Captures d'écran** : pixelbrowse n'a pas de Chrome fonctionnel ici (Darwin arm64) et rend mal les éléments `position: fixed`. Méthode fiable : Chrome headless piloté en CDP (`python3` + `websockets` déjà installé, `/Applications/Google Chrome.app`), avec `prefers-reduced-motion: reduce` émulé (sinon le hero reste à opacité 0 pendant ses animations). Viewports : 1440×900 desktop, 390×844 @2x mobile. Terminal : remplir `#cmd` puis envoyer un `keydown` Enter.
 - **Reset CSS** `* { margin: 0 }` : plusieurs `<p>` à la suite se collent. Des règles `p + p` existent déjà dans `.case-study-detail` (lecture) et `.box` (terminal).
-- **Champs `cv-data.js`** : `contexte`/`construit`/`defi`/`resultat` acceptent une chaîne **ou un tableau** (un paragraphe par entrée). `target` + `pitch` = métier visé, affichés dans `whoami` et dans l'encadré du hero.
+- **Champs `cv-data.js`** : `contexte`/`construit`/`defi`/`resultat` acceptent une chaîne **ou un tableau** (un paragraphe par entrée).
 - **Grep** : l'alias shell `grep` passe par `rg` et gère mal l'alternation BRE (`\|`). Utiliser `/usr/bin/grep -E`.
 - **Branches** : travailler sur une branche, preview Cloudflare sur `https://<branche>.odilon-corby.pages.dev` (build ≈1 min après le push).
 - **Image OG** : `projet online/og-image.png` (1200×630). L'URL absolue est codée en dur en `odilon-corby.pages.dev` dans les 3 pages : la changer au passage au domaine perso.

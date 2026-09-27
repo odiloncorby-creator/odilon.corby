@@ -18,7 +18,7 @@
 <meta name="referrer" content="strict-origin-when-cross-origin">
 <meta name="description" content="Odilon Corby — Product Builder No-Code & Communication expert. Le CV en mode terminal : tapez help.">
 <meta property="og:title" content="odilon.uncoded — terminal">
-<meta property="og:description" content="Relier le récit, la production et les outils. Tapez help.">
+<meta property="og:description" content="Construire des produits utiles, et savoir les raconter. Tapez help.">
 <meta property="og:image" content="https://odilon-corby.pages.dev/og-image.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
@@ -375,9 +375,6 @@
         `<div class="quote">${esc(CV.tagline)}</div>` +
         `<div>${esc(CV.intro)}</div>` +
         `<div class="grid2"><span class="dim">localisation</span><span>${esc(CV.meta.location)}</span><span class="dim">expérience</span><span>${esc(CV.meta.experience)}</span><span class="dim">disponibilité</span><span>${esc(CV.meta.availability)}</span></div>` +
-        `<div><span class="dim"># métier visé :</span> <span class="acc">${esc(CV.target)}</span></div>` +
-        `<div>${esc(CV.pitch)}</div>` +
-        `<div class="ph"># ${esc(CV.positioning)}</div>` +
         `<div class="dim">→ ${cmd('parcours')} · ${cmd('produits')} · ${cmd('skills')} · ${cmd('contact')}</div>` +
         `</div></div>`);
       const pre = el.querySelector('pre');
@@ -400,8 +397,7 @@
         CV.parcours.map((p, i) =>
           `<div class="tl-item"><div><span class="acc">${esc(p.dates)}</span>  <span class="faint">[</span> <span class="ph">${esc(p.keyword)}</span> <span class="faint">]</span></div>` +
           `<div class="strong">${esc(p.role)}</div><div class="dim">${esc(p.org)}</div><div>${cmd('parcours ' + (i + 1), '→ détail')}</div></div>`
-        ).join('') +
-        `<div class="quote">« ${esc(CV.signature)} »</div>`);
+        ).join(''));
     } },
 
     produits: { desc: 'produits', run: () => out(

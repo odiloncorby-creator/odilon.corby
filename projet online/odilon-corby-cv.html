@@ -31,7 +31,7 @@
 <!-- ─── SEO & SOCIAL ─── -->
 <meta name="description" content="Odilon Corby — Product Builder No-Code & Communication expert. Workflows IA, automatisation, stratégie éditoriale, contenus. Paris.">
 <meta property="og:title" content="Odilon Corby — Product Builder No-Code · odilon.uncoded">
-<meta property="og:description" content="Relier le récit, la production et les outils.">
+<meta property="og:description" content="Construire des produits utiles, et savoir les raconter.">
 <meta property="og:type" content="profile">
 <meta property="og:image" content="https://odilon-corby.pages.dev/og-image.png">
 <meta property="og:image:width" content="1200">
@@ -534,19 +534,6 @@
     line-height: var(--leading-body);
     color: var(--text-secondary);
     max-width: 600px;
-  }
-
-  .pull-quote {
-    font-family: var(--font-display);
-    font-style: italic;
-    font-weight: 400;
-    font-size: 22px;
-    line-height: 1.4;
-    color: var(--text-primary);
-    max-width: 560px;
-    border-left: var(--border-accent);
-    padding-left: 24px;
-    margin: 48px 0 40px;
   }
 
   .parcours-skills-title {
@@ -1094,7 +1081,6 @@
     .approche-cell { padding: 20px 16px; }
     .contact-address { font-size: 22px; }
     .timeline-role { font-size: 20px; }
-    .pull-quote { font-size: 18px; padding-left: 16px; }
   }
 
   @media (prefers-reduced-motion: reduce) {
@@ -1225,30 +1211,6 @@
     color: var(--text-primary);
     margin-bottom: 12px;
   }
-  .hero-positioning {
-    margin-top: 40px;
-    max-width: 520px;
-    font-family: var(--font-mono);
-    font-size: 12px;
-    line-height: 1.7;
-    color: var(--text-secondary);
-    border: var(--border-hairline-soft);
-    padding: 14px 16px;
-    opacity: 0;
-    animation: fadeIn var(--duration-slow) var(--ease-standard) 1.4s forwards;
-  }
-  .hero-positioning .label { color: var(--accent-primary); display: block; margin-bottom: 4px; }
-  .hero-positioning .label::before { content: '# '; color: var(--text-faint); }
-  .hero-positioning p + .label { margin-top: 14px; }
-  .hero-target {
-    display: block;
-    font-weight: 500;
-    font-size: 14px;
-    letter-spacing: var(--tracking-mono-label);
-    text-transform: uppercase;
-    color: var(--text-primary);
-    margin-bottom: 4px;
-  }
 
   /* Portrait ASCII → photo */
   .hero-portrait { cursor: crosshair; }
@@ -1355,7 +1317,7 @@
 
   @media (prefers-reduced-motion: reduce) {
     .cursor { animation: none !important; }
-    .hero-role, .hero-positioning { opacity: 1 !important; transform: none !important; }
+    .hero-role { opacity: 1 !important; transform: none !important; }
   }
 </style>
 </head>
@@ -1411,15 +1373,15 @@
     <section id="hero">
       <div class="hero-content">
         <span class="prompt"><span class="p-path">~/odilon.uncoded</span><span class="p-sym">$</span><span class="p-cmd">whoami</span></span>
-        <div class="hero-eyebrow">// Expert communication · Product builder · Workflows IA · Contenus</div>
+        <div class="hero-eyebrow">// Product builder · Workflows IA · Stratégie éditoriale · Communication</div>
         <h1 class="hero-title">
           Odilon<br>
           <em>Corby</em><span class="cursor cursor-lg" aria-hidden="true"></span>
         </h1>
         <p class="hero-role">Product Builder No-Code &amp; Communication expert</p>
         <p class="hero-concept">
-          <strong>Relier le récit, la production et les outils.</strong>
-          J'accompagne des projets et des marques dans la structuration de leurs contenus, de leurs process et de leurs flux de diffusion. Mon terrain : faire tenir ensemble ligne éditoriale, exécution et automatisations utiles.
+          <strong>Construire des produits utiles, et savoir les raconter.</strong>
+          Je conçois des outils no-code &amp; IA qui résolvent des problèmes concrets : apps, automations, interfaces, de l'idée à la mise en production. Mon atout : plus de dix ans de stratégie éditoriale et de communication, pour des produits qui tiennent aussi par leurs contenus, leurs process et leur diffusion.
         </p>
         <div class="hero-meta">
           <div class="hero-meta-item">
@@ -1434,13 +1396,6 @@
             Expérience
             <span>+10 ans</span>
           </div>
-        </div>
-        <div class="hero-positioning">
-          <span class="label">métier visé</span>
-          <strong class="hero-target">Product builder no-code &amp; IA</strong>
-          <p>Je construis des outils qui résolvent des problèmes concrets : apps, automations, interfaces. De l'idée à la mise en production.</p>
-          <span class="label">positionnement</span>
-          <p>Profil hybride : product builder no-code, workflows no-code &amp; IA, stratégie éditoriale, contenus.</p>
         </div>
       </div>
       <div class="hero-portrait" tabindex="0" aria-label="Portrait d'Odilon Corby (survol ou tap pour révéler la photo)">
@@ -1496,9 +1451,6 @@
 
       </div>
 
-      <p class="pull-quote">
-        « Faire tenir ensemble le fond, la forme et le ton. »
-      </p>
     </section>
 
     <!-- PRODUITS -->
