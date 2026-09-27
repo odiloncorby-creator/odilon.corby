@@ -85,7 +85,7 @@ Démarrer le serveur CV : `python3 -m http.server 54550 --bind 127.0.0.1` depuis
 
 - **Repo :** https://github.com/odiloncorby-creator/odilon.corby
 - **Hébergement :** Cloudflare Pages, projet `odilon-corby` — branche de prod `main`, dossier publié `projet online`, pas de build. Chaque branche a une URL de preview.
-- **Domaine :** `odiloncorby.com` (acheté sept. 2026, Cloudflare Registrar, zone sur le même compte). Apex + `www` rattachés au projet Pages ; `www` redirige vers l'apex (Redirect Rule). `odilon-corby.pages.dev` reste accessible
+- **Domaine :** `odiloncorby.com` (acheté sept. 2026, Cloudflare Registrar, zone sur le même compte). Apex + `www` rattachés au projet Pages ; `www` redirige vers l'apex (Redirect Rule). `odilon-corby.pages.dev` redirige en 301 vers `odiloncorby.com` via `functions/_middleware.js` (hôte exact : les previews de branche restent accessibles)
 - **Live :** https://odiloncorby.com/ (boot) · `/odilon-corby-cv` (lecture) · `/terminal`
 - **Sous-domaines** : gratuits et illimités en pratique ; chacun peut viser un autre projet Pages/Worker ou un service externe (CNAME)
 - Ne jamais committer : `.superpowers/`, `.DS_Store`, tokens ou credentials

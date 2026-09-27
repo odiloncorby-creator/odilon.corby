@@ -4,7 +4,7 @@ Dernière mise à jour : 2026-09-26
 
 ## ✅ Fait (en production)
 
-**Prod :** https://odiloncorby.com/ (aussi https://odilon-corby.pages.dev/) — Cloudflare Pages, projet `odilon-corby`, branche `main`, dossier publié `projet online/`, pas de build.
+**Prod :** https://odiloncorby.com/ (`odilon-corby.pages.dev` y redirige) — Cloudflare Pages, projet `odilon-corby`, branche `main`, dossier publié `projet online/`, pas de build.
 
 | Livrable | Détail |
 |---|---|
