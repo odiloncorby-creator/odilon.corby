@@ -96,6 +96,8 @@ window.CV = {
       teaser: "Un programme qui bouge jusqu'à la dernière minute, des visiteurs qui doivent savoir ce qui se passe maintenant : une PWA en ligne 2 h après le premier commit.",
       impact: ['En prod 2 h après le premier commit', 'Livrée en 7 jours, seul, sans budget'],
       shots: [
+        { src: 'img/fmi-01-en-ce-moment.webp', alt: "Écran Maintenant de l'app FMI, samedi 15:20 : rendez-vous en cours avec horaires, lieu, médias et intervenant·es", caption: "Maintenant : ce qui se passe, en direct" },
+        { src: 'img/fmi-02-programme.webp', alt: "Écran Programme de l'app FMI : rendez-vous à heure fixe avec médias, horaire, lieu et intervenant·es", caption: "Programme : alimenté par Notion" },
         { src: 'img/fmi-03-plan.webp', alt: "Écran Plan de l'app FMI : plan simplifié du festival, 8 espaces numérotés", caption: "Plan : 8 espaces, chacun relié à sa page" },
         { src: 'img/fmi-04-cathedrale-exposition.webp', alt: "Écran de l'espace Cathédrale : présentation de l'exposition (in)dépendances, boutons vers le plan, la programmation et l'expo", caption: "Page espace : l'exposition de l'édition" },
         { src: 'img/fmi-05-manifeste.webp', alt: "Écran Manifeste de l'app FMI : le texte éditorial du festival", caption: "Manifeste : le ton éditorial dans l'app" }
