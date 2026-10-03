@@ -211,6 +211,7 @@
   .shots { display: flex; gap: 10px; margin-top: 10px; overflow-x: auto; }
   .shots a { flex: 0 0 auto; border: 1px solid var(--color-line); line-height: 0; }
   .shots a:hover { border-color: var(--color-signal); }
+  .flow { white-space: pre; margin: 10px 0 0; padding: 10px 12px; border: 1px solid var(--color-line); color: var(--color-phosphor); overflow-x: auto; width: fit-content; max-width: 100%; }
   .shots img { width: 120px; height: auto; display: block; }
 
   .tags span { display: inline-block; margin: 0 10px 2px 0; }
@@ -421,6 +422,7 @@
       return out(`<div class="box"><div class="acc">${esc(p.meta)}</div><h3>${esc(p.title)}</h3><p>${esc(p.teaser)}</p>` +
         (p.impact ? `<div class="ok" style="margin-top:6px">${p.impact.map((s) => '▸ ' + esc(s)).join('<br>')}</div>` : '') +
         (p.shots ? `<div class="shots">${p.shots.map((s) => `<a href="${esc(s.src)}" target="_blank" rel="noreferrer"><img src="${esc(s.src)}" alt="${esc(s.alt)}" loading="lazy"></a>`).join('')}</div>` : '') +
+        (p.flow ? `<pre class="flow" role="img" aria-label="${esc(p.flow.alt)}">${esc(p.flow.lines.join('\n'))}</pre>` : '') +
         sec('problème', p.probleme) + sec('ce que j’ai construit', p.construit) + sec('impact', p.resultat) +
         (p.stack ? `<div class="faint" style="margin-top:12px">stack · ${p.stack.map(esc).join(' · ')}</div>` : '') +
         (p.link ? `<div style="margin-top:12px">→ ${link(p.link.href, p.link.label)}</div>` : '') +

@@ -81,6 +81,19 @@ window.CV = {
       meta: 'Operating system · La Lune Rousse · Ground Control',
       teaser: 'Une équipe com réduite qui suivait ses projets dans un Excel jamais à jour : un seul espace de pilotage, de la préparation à la diffusion.',
       impact: ['Excel + SharePoint → un seul espace de travail', "Statut d'avancement visible pour chaque projet"],
+      flow: {
+        alt: 'Schéma du Notion OS : événements reliés aux tâches, textes et calendrier de publication, validation humaine, puis diffusion newsletter, réseaux et site',
+        lines: [
+          'événements ──┬── tâches',
+          '             ├── textes',
+          '             └── calendrier',
+          '                   │',
+          '                   │ validation humaine',
+          '                   ▼',
+          '  newsletter · réseaux · site',
+          '    brevo      buffer   wordpress'
+        ]
+      },
       probleme: [
         "Une équipe communication réduite, avec un turnover régulier. L'information était dispersée entre événements, tâches, calendrier éditorial, newsletters et mises à jour du site. Le suivi des projets reposait sur un fichier Excel qui n'était pas tenu à jour ; les textes éditoriaux étaient éparpillés dans SharePoint.",
         "Préparer une page événement à la main demandait 10 à 60 minutes selon les visuels disponibles, les formats et l'intégration d'outils de billetterie."
@@ -121,8 +134,27 @@ window.CV = {
       meta: 'Notion × Make × WordPress · Ground Control',
       teaser: 'Les mises à jour manuelles du site WordPress prenaient du temps chaque semaine : un pipeline qui publie en batch et tourne sans supervision.',
       impact: ['≈ 1 h gagnée par semaine', 'En production sans supervision pendant un congé paternité'],
+      flow: {
+        alt: 'Schéma du pipeline : base Notion des projets, Make crée les pages en batch, WordPress affiche la page Programmation triée et sans événements passés',
+        lines: [
+          'notion · base projets',
+          '   │ 1 trigger',
+          '   ▼',
+          'make · création en batch',
+          '   │ champs ACF',
+          '   ▼',
+          'wordpress · pages projet',
+          '   │ [gc_agenda]',
+          '   ▼',
+          'page programmation',
+          '   tri par date · passés masqués'
+        ]
+      },
       probleme: "Le service com passait un temps considérable à mettre à jour le site WordPress à la main : création des pages de programmation, mise à jour de l'agenda hebdomadaire. L'automatisation devait aussi tenir sans supervision continue, y compris pendant une absence prolongée.",
-      construit: 'Un pipeline Notion → Make → WordPress pour la création et la mise en ligne des pages de programmation en batch, déclenché par un seul trigger. Et un script de génération automatique de la page Agenda, qui construit les modules dynamiquement à partir des pages projets.',
+      construit: [
+        'Un pipeline Notion → Make → WordPress pour la création et la mise en ligne des pages de programmation en batch, déclenché par un seul trigger.',
+        "La page Programmation se construit seule à partir des pages projet : un shortcode trie les événements par date, place les événements récurrents à leur prochaine occurrence, n'affiche que les 45 jours à venir et retire les événements passés. L'équipe remplit une fiche, le site fait le reste."
+      ],
       resultat: "Le script Agenda a tourné en production pendant mon congé paternité, sans supervision. Environ 1 h gagnée par semaine, zéro risque d'oubli. Prochaine itération : intégration d'une plateforme de programmation via API, gain estimé à 5–10 h par semaine.",
       stack: ['Notion', 'Make', 'WordPress', 'ACF', 'Script IA']
     },
