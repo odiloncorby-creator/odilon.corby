@@ -51,15 +51,23 @@ window.CV = {
       id: 'naiko',
       title: 'naïko',
       meta: 'PWA · Accompagnement naissance',
-      teaser: "Un savoir de naissance trop dense pour être lu, devenu une app qu'on ouvre au moment où on en a besoin.",
-      impact: ['2 naissances accompagnées en conditions réelles', '43 fiches · hors ligne · sans compte'],
+      teaser: "Les cours et les livres s'adressent à la personne qui accouche. naïko donne à celle qui l'accompagne des repères utilisables dans l'instant.",
+      impact: ['MVP en prod 7 h après le premier commit', '43 fiches · 17 cartes jour J · hors ligne', 'Testée en conditions réelles : 2 naissances'],
+      shots: [
+        { src: 'img/naiko-01-accueil.webp', alt: "Accueil de naïko en préparation : compte à rebours J-28, bascule préparation / post-partum, progression des sections", caption: "Accueil préparation : J-28, progression" },
+        { src: 'img/naiko-01-accueil-postpartum.webp', alt: "Accueil de naïko en post-partum : bébé de 4 jours, dernier repas, repères du moment", caption: "Post-partum : l'accueil suit l'âge du bébé" },
+        { src: 'img/naiko-03-contractions.webp', alt: "Compteur de contractions en cours sur fond nuit : durée, dernière contraction, moyenne et intervalle", caption: "Jour J : compteur de contractions" },
+        { src: 'img/naiko-04-biberons.webp', alt: "Suivi des repas : nombre et volume du jour, dernier biberon, historique corrigeable", caption: "Suivi des repas, partageable à deux" },
+        { src: 'img/naiko-05-carte-jour-j.webp', alt: "Carte réflexe du jour J « Massage sacrum », avec son illustration au trait", caption: "Carte réflexe du jour J, illustrée" }
+      ],
       probleme: [
-        "Ce qu'un accompagnant doit savoir autour d'une naissance existe, mais pas sous une forme utilisable au bon moment : pendant le travail, la nuit, les premières semaines.",
+        "L'accompagnant (co-parent, partenaire, proche) arrive à l'accouchement et au post-partum avec peu de repères pensés pour lui : les cours, les sages-femmes et les livres s'adressent d'abord à la personne qui accouche. Après la naissance, rien n'organise les démarches, les rendez-vous ni les repas à compter.",
         "J'avais rassemblé ce savoir dans Notion. Les notes étaient trop denses pour servir : un collègue qui allait devenir père ne les a jamais lues."
       ],
       construit: [
-        "naïko est une PWA mobile-first en français pour la personne qui accompagne une naissance : partenaire, co-parent ou proche. Elle couvre la période du troisième trimestre aux trois mois du bébé, en trois temps : Préparer, Jour J, Post-partum. Elle fonctionne hors ligne et sans compte.",
-        "Elle contient 43 fiches, des checklists, des cartes pour le jour J, un compteur de contractions, un suivi des biberons partagé entre deux téléphones, une fiche bébé et des rappels aux dates clés.",
+        'naïko est une PWA mobile-first en français pour la personne qui accompagne une naissance : partenaire, co-parent ou proche. Elle couvre la période du troisième trimestre aux trois mois du bébé, en trois temps : Préparer, Jour J, Post-partum. Elle fonctionne hors ligne et sans compte.',
+        'Elle contient 43 fiches (37 à lire, 6 outils), 17 cartes pour le jour J, des checklists, un compteur de contractions, un suivi des biberons partagé entre deux téléphones, une fiche bébé et des rappels aux dates clés.',
+        'Premier commit le 12 avril, MVP en production le jour même, 6 h 43 plus tard : 4 onglets, 7 fiches, 3 checklists, 5 cartes du jour J, installable et hors ligne. Depuis, 145 déploiements en production et une refonte complète, en ligne depuis septembre 2026.',
         "Côté conformité : hébergement dans l'UE, AIPD, registre des traitements, et les données les plus sensibles ne quittent pas l'appareil.",
         "Je conçois, j'arbitre et je livre. Le code est écrit par Claude Code sous ma direction."
       ],
