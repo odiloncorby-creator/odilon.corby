@@ -207,5 +207,73 @@
     pre.style.fontSize = Math.min(max, (w / natural) * 10 * 0.98).toFixed(2) + 'px';
   }
 
-  window.UFX = { reduced, scramble, glitch, shake, asciiImage, asciiText, field, fitPre, GLYPHS };
+  // Visionneuse d'images dans la page (<dialog> en top layer, au-dessus des scanlines).
+  // Délégation : marche aussi pour les liens injectés après coup (terminal).
+  function lightbox(selector) {
+    const css = document.createElement('style');
+    css.textContent = `
+      .ufx-lightbox { margin: auto; border: 0; padding: 0; background: transparent; max-width: 100vw; max-height: 100vh; overflow: visible; }
+      .ufx-lightbox::backdrop { background: rgba(10,10,10,0.88); }
+      .ufx-lightbox[open] { animation: ufx-lb-in 220ms ease-out; }
+      @keyframes ufx-lb-in { from { opacity: 0; transform: scale(0.97); } to { opacity: 1; transform: none; } }
+      .ufx-lightbox figure { margin: 0; display: flex; flex-direction: column; align-items: center; gap: 10px; }
+      .ufx-lightbox img { display: block; max-width: min(92vw, 520px); max-height: 82vh; width: auto; height: auto; border: 1px solid #3A3A38; cursor: zoom-out; }
+      .ufx-lightbox figcaption { font: 11px/1.5 "Geist Mono", ui-monospace, monospace; color: #EDEAE0; text-align: center; max-width: 92vw; }
+      .ufx-lightbox figcaption span { color: #8C887E; margin-left: 10px; }
+      .ufx-lightbox button { all: unset; cursor: pointer; font: 11px "Geist Mono", ui-monospace, monospace; color: #D9A441; padding: 6px 10px; }
+      .ufx-lightbox button:focus-visible { outline: 1px solid #D9A441; }
+      .ufx-lightbox .ufx-lb-nav { display: flex; gap: 8px; align-items: center; }
+      @media (prefers-reduced-motion: reduce) { .ufx-lightbox[open] { animation: none; } }`;
+    document.head.appendChild(css);
+
+    const dlg = document.createElement('dialog');
+    dlg.className = 'ufx-lightbox';
+    dlg.setAttribute('aria-label', 'Capture d’écran agrandie');
+    dlg.innerHTML = '<figure><img alt=""><figcaption></figcaption><div class="ufx-lb-nav">' +
+      '<button type="button" data-lb="prev" aria-label="Image précédente">‹ préc.</button>' +
+      '<button type="button" data-lb="close">[esc] fermer</button>' +
+      '<button type="button" data-lb="next" aria-label="Image suivante">suiv. ›</button></div></figure>';
+    document.body.appendChild(dlg);
+    const img = dlg.querySelector('img');
+    const cap = dlg.querySelector('figcaption');
+    let group = [], idx = 0;
+
+    function show(i) {
+      idx = (i + group.length) % group.length;
+      const a = group[idx];
+      const thumb = a.querySelector('img');
+      img.src = a.getAttribute('href');
+      img.alt = thumb ? thumb.alt : '';
+      const fc = a.closest('figure') && a.closest('figure').querySelector('figcaption');
+      cap.textContent = fc ? fc.textContent : img.alt;
+      if (group.length > 1) {
+        const n = document.createElement('span');
+        n.textContent = (idx + 1) + '/' + group.length;
+        cap.appendChild(n);
+      }
+      dlg.querySelectorAll('[data-lb="prev"],[data-lb="next"]').forEach((b) => { b.hidden = group.length < 2; });
+    }
+
+    document.addEventListener('click', (ev) => {
+      const a = ev.target.closest(selector);
+      if (!a || ev.metaKey || ev.ctrlKey || ev.shiftKey) return;
+      ev.preventDefault();
+      const box = a.parentElement.closest('.case-study-shots, .shots') || a.parentElement;
+      group = Array.from(box.querySelectorAll(selector));
+      show(group.indexOf(a));
+      dlg.showModal();
+    });
+    dlg.addEventListener('click', (ev) => {
+      const b = ev.target.closest('[data-lb]');
+      if (b && b.dataset.lb === 'prev') return show(idx - 1);
+      if (b && b.dataset.lb === 'next') return show(idx + 1);
+      dlg.close();
+    });
+    dlg.addEventListener('keydown', (ev) => {
+      if (ev.key === 'ArrowLeft') show(idx - 1);
+      if (ev.key === 'ArrowRight') show(idx + 1);
+    });
+  }
+
+  window.UFX = { reduced, scramble, glitch, shake, asciiImage, asciiText, field, fitPre, lightbox, GLYPHS };
 })();

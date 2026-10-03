@@ -1188,6 +1188,11 @@
     mix-blend-mode: multiply;
   }
 
+  body::after { transition: opacity var(--duration-base, 200ms) var(--ease-standard, ease); }
+  body:has(.case-study-shot a:hover)::after,
+  body:has(.case-study-shot a:focus-visible)::after { opacity: 0; }
+  .case-study-shot a { cursor: zoom-in; }
+
   /* Curseur bloc */
   .cursor {
     display: inline-block;
@@ -2009,13 +2014,16 @@ page programmation
     btn.addEventListener('click', () => {
       const expanded = btn.getAttribute('aria-expanded') === 'true';
       btn.setAttribute('aria-expanded', String(!expanded));
-      const body = btn.nextElementSibling;
+      const body = document.getElementById(btn.getAttribute('aria-controls'));
       body.classList.toggle('open', !expanded);
       const label = btn.querySelector('.case-study-label');
       label.textContent = expanded ? '[+] détail' : '[−] fermer';
       UFX.glitch(label, 200);
     });
   });
+
+  // ─── CAPTURES : visionneuse dans la page ───
+  UFX.lightbox('.case-study-shot a');
 
   // ─── WAVEFORM BARS ───
   const waveform = document.getElementById('waveform');
