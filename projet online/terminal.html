@@ -464,7 +464,8 @@
         `<pre class="wave" aria-hidden="true"></pre>` +
         `<p style="max-width:70ch;margin-top:8px">${esc(CV.music.text)}</p>` +
         `<div class="dim" style="margin-top:6px">gear · ${esc(CV.music.gear)}</div>` +
-        `<div style="margin-top:8px">→ ${link(CV.music.link.href, CV.music.link.label)}</div>`);
+        `<div style="margin-top:8px">▶ écouter : ${link(CV.music.release.href, CV.music.release.title)}</div>` +
+        `<div style="margin-top:4px">→ ${link(CV.music.link.href, CV.music.link.label)}</div>`);
       animateWave(el.querySelector('.wave'));
       return typeBlock(el);
     } },

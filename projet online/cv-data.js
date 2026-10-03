@@ -193,9 +193,10 @@ window.CV = {
   music: {
     title: 'Musiques électroniques',
     genres: 'Techno · Ambient · Drum & Bass',
-    text: "Une pratique personnelle qui nourrit mon sens du rythme, de la structure et de la texture, dans les projets éditoriaux comme dans les workflows. J'y trouve un lien très fort entre les outils no-code / IA et la production musicale.",
+    text: 'Une pratique personnelle qui nourrit mon sens du rythme et de la structure, dans les projets comme dans les workflows.',
     gear: 'Roland TR-8S · TD-3-MO · Ableton Live',
-    link: { href: 'https://odilonwav.bandcamp.com/', label: 'odilonwav.bandcamp.com' }
+    link: { href: 'https://odilonwav.bandcamp.com/', label: 'odilonwav.bandcamp.com' },
+    release: { title: 'La Longue Marche', href: 'https://odilonwav.bandcamp.com/album/la-longue-marche' }
   },
 
   formation: ['Masters Communication · Cesacom / Cergy · 2015', 'BTS Communication · CFA SACEF · 2012'],

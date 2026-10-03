@@ -14,6 +14,7 @@
   img-src 'self' data:;
   script-src 'self' 'unsafe-inline' https://static.cloudflareinsights.com;
   connect-src 'self' https://cloudflareinsights.com;
+  frame-src https://bandcamp.com;
   object-src 'none';
   base-uri 'self';
   form-action 'none';
@@ -1198,6 +1199,24 @@
   body:has(.case-study-shot a:focus-visible)::after { opacity: 0; }
   .case-study-shot a { cursor: zoom-in; }
 
+  /* Player Bandcamp chargé au clic (aucune requête tierce avant) */
+  .music-player { align-self: center; position: relative; z-index: 1; }
+  .music-play {
+    all: unset; box-sizing: border-box; width: 100%; min-height: 120px;
+    display: flex; align-items: center; gap: 18px; padding: 18px 20px;
+    border: var(--border-hairline-soft); cursor: pointer;
+    transition: border-color var(--duration-base) var(--ease-standard);
+  }
+  .music-play:hover, .music-play:focus-visible { border-color: var(--accent-primary); }
+  .music-play-icon {
+    flex: 0 0 auto; width: 52px; height: 52px; display: grid; place-items: center;
+    border: 1px solid var(--accent-primary); color: var(--accent-primary); font-size: 18px;
+  }
+  .music-play-text { display: flex; flex-direction: column; gap: 6px; }
+  .music-play-title { font-family: var(--font-display); font-size: 20px; color: var(--text-primary); }
+  .music-play-meta { font-family: var(--font-mono); font-size: 11px; color: var(--text-secondary); letter-spacing: var(--tracking-mono); }
+  .music-player iframe { border: 0; width: 100%; height: 120px; display: block; }
+
   /* Curseur bloc */
   .cursor {
     display: inline-block;
@@ -1420,7 +1439,8 @@
       <a href="#hero" class="active"><span class="nav-index">00</span>signal</a>
       <a href="#produits"><span class="nav-index">01</span>produits</a>
       <a href="#parcours"><span class="nav-index">02</span>parcours</a>
-      <a href="#contact"><span class="nav-index">03</span>contact</a>
+      <a href="#musique"><span class="nav-index">03</span>musique</a>
+      <a href="#contact"><span class="nav-index">04</span>contact</a>
     </nav>
     <a class="mode-switch" href="terminal.html">[&gt; mode terminal]</a>
     <div class="sidebar-footer">
@@ -1438,7 +1458,8 @@
       <a href="#hero" class="active"><span class="nav-index">00</span>Signal</a>
       <a href="#produits"><span class="nav-index">01</span>Produits</a>
       <a href="#parcours"><span class="nav-index">02</span>Parcours</a>
-      <a href="#contact"><span class="nav-index">03</span>Contact</a>
+      <a href="#musique"><span class="nav-index">03</span>Musique</a>
+      <a href="#contact"><span class="nav-index">04</span>Contact</a>
     </nav>
   </header>
 
@@ -1718,11 +1739,40 @@ page programmation
 
     </section>
 
+    <!-- MUSIQUE -->
+    <section id="musique">
+      <div class="section-header">
+        <span class="prompt"><span class="p-path">~/odilon.uncoded</span><span class="p-sym">$</span><span class="p-cmd">./music --play</span></span>
+        <span class="section-index">03</span>
+        <h2 class="section-title">Musique</h2>
+        <span class="section-line"></span>
+      </div>
+
+      <div class="projet-card wide">
+        <div class="projet-card-bg"></div>
+        <div>
+          <div class="projet-tag">Side project · odilon.wav</div>
+          <h3 class="projet-title">Musiques électroniques</h3>
+          <p class="projet-desc">Techno, ambient, drum &amp; bass. Une pratique personnelle qui nourrit mon sens du rythme et de la structure, dans les projets comme dans les workflows.</p>
+          <div class="projet-details">
+            <div class="projet-detail"><strong>Outils ·</strong> Roland TR-8S · TD-3-MO · Ableton Live</div>
+          </div>
+          <a href="https://odilonwav.bandcamp.com/" target="_blank" rel="noreferrer" class="projet-link">odilonwav.bandcamp.com</a>
+        </div>
+        <div class="music-player" data-src="https://bandcamp.com/EmbeddedPlayer/album=2152146235/size=large/bgcol=0a0a0a/linkcol=d9a441/tracklist=false/artwork=small/transparent=true/">
+          <button type="button" class="music-play" aria-label="Écouter La Longue Marche sur Bandcamp">
+            <span class="music-play-icon" aria-hidden="true">▶</span>
+            <span class="music-play-text"><span class="music-play-title">La Longue Marche</span><span class="music-play-meta">odilon.wav · écouter (lecteur Bandcamp)</span></span>
+          </button>
+        </div>
+      </div>
+    </section>
+
     <!-- CONTACT -->
     <section id="contact">
       <div class="section-header">
         <span class="prompt"><span class="p-path">~/odilon.uncoded</span><span class="p-sym">$</span><span class="p-cmd">contact --all</span></span>
-        <span class="section-index">03</span>
+        <span class="section-index">04</span>
         <h2 class="section-title">Contact</h2>
         <span class="section-line"></span>
       </div>
@@ -1877,8 +1927,8 @@ page programmation
 
   // ─── ACTIVE NAV + STATUS BAR on scroll ───
   const navLinks = document.querySelectorAll('nav a, .mobile-nav a');
-  const sectionIds = ['hero', 'produits', 'parcours', 'contact'];
-  const sectionPaths = { hero: 'signal', produits: 'produits', parcours: 'parcours', contact: 'contact' };
+  const sectionIds = ['hero', 'produits', 'parcours', 'musique', 'contact'];
+  const sectionPaths = { hero: 'signal', produits: 'produits', parcours: 'parcours', musique: 'musique', contact: 'contact' };
   const sbPath = document.querySelector('.sb-path');
   let lastSection = 'hero';
 
@@ -1919,6 +1969,18 @@ page programmation
       const label = btn.querySelector('.case-study-label');
       label.textContent = expanded ? '[+] lire l\'étude de cas' : '[−] refermer';
       UFX.glitch(label, 200);
+    });
+  });
+
+  // ─── MUSIQUE : player Bandcamp chargé au clic ───
+  document.querySelectorAll('.music-player').forEach((box) => {
+    box.querySelector('.music-play').addEventListener('click', () => {
+      const f = document.createElement('iframe');
+      f.src = box.dataset.src;
+      f.title = 'La Longue Marche par odilon.wav (lecteur Bandcamp)';
+      f.loading = 'lazy';
+      f.allow = 'autoplay';
+      box.replaceChildren(f);
     });
   });
 

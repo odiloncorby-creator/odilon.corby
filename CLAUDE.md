@@ -25,7 +25,7 @@ Voir `docs/STATUS.md` (fait, en cours, prochain chantier : dépublication de Fra
 
 - HTML/CSS/JS vanilla — aucun framework, aucune dépendance npm, pas de build
 - Fonts auto-hébergées : VG5000 (display), Geist (corps), Geist Mono (mono)
-- CSP stricte en `<meta>` : tout en `'self'`, pas de CDN. Seule exception : Cloudflare Web Analytics (`static.cloudflareinsights.com` en script-src, `cloudflareinsights.com` en connect-src)
+- CSP stricte en `<meta>` : tout en `'self'`, pas de CDN. Exceptions : le player Bandcamp (`frame-src`, mode lecture) et Cloudflare Web Analytics (`static.cloudflareinsights.com` en script-src, `cloudflareinsights.com` en connect-src)
 - **Stats** : Cloudflare Web Analytics, sans cookie, snippet manuel dans les 3 pages (site RUM `ac423…`, hôtes pages.dev + odiloncorby.com + www). L'injection auto du site RUM de la zone (`3e8bd…`) est coupée pour éviter le double comptage. Ne pas cocher l'option « exclure les visiteurs UE ». Suivi candidatures : liens `?ref=entreprise`
 
 ## Variables CSS clés
@@ -42,7 +42,9 @@ Voir `docs/STATUS.md` (fait, en cours, prochain chantier : dépublication de Fra
 ## Fonctionnalités (mode lecture)
 
 - Sidebar + nav shell (`> parcours`) avec indicateur de section active, barre de statut desktop
-- Sections : 00 Signal · 01 Produits · 02 Parcours · 03 Contact (version épurée, oct. 2026 : Approche retirée, side project réduit à un lien « music » dans Contact ; le terminal garde `approche` et `music`)
+- Sections : 00 Signal · 01 Produits · 02 Parcours · 03 Musique · 04 Contact (version épurée, oct. 2026 : Approche retirée ; le terminal garde `approche`)
+- Musique : player Bandcamp de « La Longue Marche » chargé **au clic seulement** (aucune requête tierce avant, cohérent avec le « sans cookie »). CSP : `frame-src https://bandcamp.com`
+- Ne jamais supprimer `pointer-events: none` sur `.projet-card-bg`
 - Titres décodés au scroll (scramble), prompts `~/odilon.uncoded $ …`, scanlines CRT
 - Portrait en ASCII qui se révèle en photo au survol / tap
 - Hero : rôle « Product Builder No-Code, IA & Communication expert » + un seul bloc d'accroche (`tagline` + `intro`), orienté product sans lâcher l'éditorial. L'ancien encadré métier visé/positionnement a été fusionné dedans (sept. 2026)
