@@ -102,11 +102,11 @@ window.CV = {
       construit: [
         "Une architecture relationnelle dans Notion, conçue en avril 2026 pour une équipe de six personnes : événements, publications, plans de com, projets et tâches. SharePoint reste l'espace de stockage, les outils de diffusion restent en place.",
         "Chaque événement suit six statuts : info brute reçue, en traitement éditorial, validé com, en production, publié, archive. Règle métier : la production ne démarre qu'une fois l'information validée par la communication.",
-        'Autour de ce noyau : un calendrier de publication, un dashboard des événements Ground Control, et la création automatique des pages du site, détaillée dans la fiche Automations.'
+        'Autour de ce noyau : un calendrier de publication, un dashboard des événements Ground Control, et un premier pipeline vers le site, détaillé dans la fiche Automations.'
       ],
       resultat: [
         "Le calendrier de publication et le dashboard des événements sont utilisés par l'équipe et consultés par la direction. Chaque projet a désormais un statut visible, là où l'Excel n'était jamais à jour. En septembre 2026, l'intégration d'une deuxième structure du groupe, Communale, est demandée.",
-        "Prochaine étape : brancher la barrière « validé com » sur l'automatisation du site, qui crée aujourd'hui la page dès la création de la fiche."
+        "Prochaine étape : étendre aux événements courants l'automatisation du site testée sur le festival, en la déclenchant au statut « validé com »."
       ],
       stack: ['Notion', 'Make', 'SharePoint']
     },
@@ -140,19 +140,19 @@ window.CV = {
       id: 'automations',
       title: 'Automations',
       meta: 'Notion × Make × WordPress · Ground Control',
-      teaser: "Les mises à jour manuelles du site WordPress prenaient du temps chaque semaine : les pages du site se créent depuis Notion et l'agenda tourne sans supervision.",
-      impact: ['≈ 1 h gagnée par semaine', 'En production sans supervision pendant un congé paternité'],
+      teaser: "Les mises à jour manuelles du site WordPress prenaient du temps chaque semaine : la page Programmation se construit seule, et toute la programmation d'un festival a été publiée d'un coup depuis Notion.",
+      impact: ['≈ 1 h gagnée par semaine', 'Agenda en production, sans supervision', 'Toute la prog du FMI publiée en un batch'],
       flow: {
-        alt: 'Schéma du pipeline : une nouvelle fiche dans la base Événements crée via Make la page projet WordPress avec ses champs et son image ; la page Programmation se construit seule',
+        alt: 'Schéma : en MVP, Make crée en batch les pages projet WordPress depuis la base Notion ; en production, la page Programmation se construit seule à partir des pages projet',
         lines: [
           'notion · base événements',
-          '   │ nouvelle fiche',
+          '   │ batch (mvp, festival)',
           '   ▼',
-          'make · page projet créée',
+          'make · pages projet créées',
           '   │ 9 champs ACF + image à la une',
           '   ▼',
           'wordpress · pages projet',
-          '   │ [gc_agenda]',
+          '   │ [gc_agenda] (en production)',
           '   ▼',
           'page programmation',
           '   tri par date · passés masqués'
@@ -160,10 +160,13 @@ window.CV = {
       },
       probleme: "Le service com passait un temps considérable à mettre à jour le site WordPress à la main : création des pages de programmation, mise à jour de l'agenda hebdomadaire. L'automatisation devait aussi tenir sans supervision continue, y compris pendant une absence prolongée.",
       construit: [
-        "Un scénario Make, en place depuis mars 2026 : chaque nouvelle fiche de la base Événements crée la page projet WordPress, y reporte neuf champs (dates, horaires, lieu, billetterie, description, typologie, programmation…) et télécharge l'image principale comme image à la une.",
-        "La page Programmation se construit seule à partir des pages projet : un shortcode trie les événements par date, place les événements récurrents à leur prochaine occurrence, n'affiche que les 45 jours à venir et retire les événements passés. L'équipe remplit une fiche, le site fait le reste."
+        "En production : la page Programmation se construit seule à partir des pages projet. Un script injecté dans le site trie les événements par date, place les événements récurrents à leur prochaine occurrence, n'affiche que les 45 jours à venir et retire les événements passés. L'équipe remplit une fiche, le site fait le reste.",
+        "En MVP : un scénario Make Notion → WordPress. Chaque fiche de la base Événements crée la page projet, y reporte neuf champs (dates, horaires, lieu, billetterie, description, typologie, programmation…) et télécharge l'image principale comme image à la une. Testé en conditions réelles sur le Festival des Médias Indépendants : une vingtaine d'événements, toute la programmation, publiés d'un coup. Les pages des événements courants sont encore créées à la main."
       ],
-      resultat: "Le script Agenda a tourné en production pendant mon congé paternité, sans supervision. Environ 1 h gagnée par semaine, zéro risque d'oubli. Prochaine itération : intégration d'une plateforme de programmation via API, gain estimé à 5–10 h par semaine.",
+      resultat: [
+        "Le script Agenda a tourné en production pendant mon congé paternité, sans supervision. Environ 1 h gagnée par semaine, zéro risque d'oubli. Le pipeline Make a fait ses preuves sur le festival.",
+        'Prochaine itération : étendre le pipeline aux événements courants, déclenché au statut « validé com », puis brancher une plateforme de programmation via API. Gain estimé à 5–10 h par semaine.'
+      ],
       stack: ['Notion', 'Make', 'WordPress', 'ACF', 'Script IA']
     },
     {
