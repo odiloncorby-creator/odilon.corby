@@ -51,51 +51,61 @@ window.CV = {
       id: 'naiko',
       title: 'naïko',
       meta: 'PWA · Accompagnement naissance',
-      teaser: "Une PWA pour la personne qui accompagne une naissance, du troisième trimestre aux trois mois du bébé.",
-      contexte: "J'avais rassemblé dans Notion ce qu'un accompagnant doit savoir autour d'une naissance. Les notes étaient trop denses pour servir. Un collègue qui allait devenir père ne les a jamais lues. J'ai voulu en faire un outil utilisable au moment où on en a besoin.",
+      teaser: "Un savoir de naissance trop dense pour être lu, devenu une app qu'on ouvre au moment où on en a besoin.",
+      impact: ['2 naissances accompagnées en conditions réelles', '43 fiches · hors ligne · sans compte'],
+      probleme: [
+        "Ce qu'un accompagnant doit savoir autour d'une naissance existe, mais pas sous une forme utilisable au bon moment : pendant le travail, la nuit, les premières semaines.",
+        "J'avais rassemblé ce savoir dans Notion. Les notes étaient trop denses pour servir : un collègue qui allait devenir père ne les a jamais lues."
+      ],
       construit: [
         "naïko est une PWA mobile-first en français pour la personne qui accompagne une naissance : partenaire, co-parent ou proche. Elle couvre la période du troisième trimestre aux trois mois du bébé, en trois temps : Préparer, Jour J, Post-partum. Elle fonctionne hors ligne et sans compte.",
         "Elle contient 43 fiches, des checklists, des cartes pour le jour J, un compteur de contractions, un suivi des biberons partagé entre deux téléphones, une fiche bébé et des rappels aux dates clés.",
         "Côté conformité : hébergement dans l'UE, AIPD, registre des traitements, et les données les plus sensibles ne quittent pas l'appareil.",
         "Je conçois, j'arbitre et je livre. Le code est écrit par Claude Code sous ma direction."
       ],
-      defi: "Remplacer un document dense que personne ne lit par un outil qu'on utilise vraiment, au bon moment.",
-      stack: ['Claude Code', 'React 18', 'Vite 7', 'Tailwind CSS', 'PWA', 'Firebase', 'Cloudflare Pages', 'Cloudflare Workers', 'Cloudflare D1', 'Notion'],
       resultat: "Je l'ai utilisée pour la naissance de mon deuxième enfant : le compteur de contractions pendant le travail, puis les rappels et le suivi des biberons les premières semaines. Le collègue qui n'avait pas lu mes notes s'est servi de l'app le jour J. Quelques bêta-testeurs l'utilisent aujourd'hui. Des professionnelles de santé, dont une de PMI, m'ont fait des retours qui ont donné de nouvelles fiches. Le contenu n'a pas encore été relu par une sage-femme. C'est la prochaine étape.",
+      stack: ['Claude Code', 'React 18', 'Vite 7', 'Tailwind CSS', 'PWA', 'Firebase', 'Cloudflare Pages', 'Cloudflare Workers', 'Cloudflare D1', 'Notion'],
       link: { href: 'https://naiko.app', label: 'naiko.app' }
     },
     {
       id: 'notion-os',
       title: 'Notion OS : service communication',
       meta: 'Operating system · La Lune Rousse · Ground Control',
-      teaser: "Un Notion OS qui organise la production des supports du service communication.",
-      contexte: "Pour une équipe communication réduite avec turnover régulier, les informations étaient dispersées entre événements, tâches, calendrier éditorial, newsletters et mises à jour du site. La préparation manuelle d'une page événement demande environ 10 à 60 minutes selon les visuels disponibles, les formats et l'intégration d'outils de billetterie.",
+      teaser: 'Une équipe com réduite qui suivait ses projets dans un Excel jamais à jour : un seul espace de pilotage, de la préparation à la diffusion.',
+      impact: ['Excel + SharePoint → un seul espace de travail', "Statut d'avancement visible pour chaque projet"],
+      probleme: [
+        "Une équipe communication réduite, avec un turnover régulier. L'information était dispersée entre événements, tâches, calendrier éditorial, newsletters et mises à jour du site. Le suivi des projets reposait sur un fichier Excel qui n'était pas tenu à jour ; les textes éditoriaux étaient éparpillés dans SharePoint.",
+        "Préparer une page événement à la main demandait 10 à 60 minutes selon les visuels disponibles, les formats et l'intégration d'outils de billetterie."
+      ],
       construit: "J'ai conçu un système d'exploitation interne dans Notion qui relie les événements, les tâches, le calendrier de publication et les newsletters. Les automatisations exécutent les opérations répétitives, avec validation humaine avant diffusion. La brique dédiée au site (Notion → Make → WordPress) est détaillée dans la fiche Automations.",
-      stack: ['Notion', 'Notion Worker', 'Make', 'Brevo', 'Buffer'],
-      resultat: "Les projets de communication ont désormais un statut d'avancement visible dans Notion. Avant, leur suivi reposait sur un fichier Excel qui n'était pas tenu à jour ; les textes éditoriaux étaient dispersés dans SharePoint. Aujourd'hui, l'équipe retrouve au même endroit l'état des projets, les tâches, les textes et le calendrier de publication. Elle peut suivre le travail de la préparation à la validation, puis à la diffusion."
+      resultat: "Chaque projet de communication a désormais un statut d'avancement visible. L'équipe retrouve au même endroit l'état des projets, les tâches, les textes et le calendrier de publication. Elle peut suivre le travail de la préparation à la validation, puis à la diffusion.",
+      stack: ['Notion', 'Notion Worker', 'Make', 'Brevo', 'Buffer']
     },
     {
       id: 'fmi',
       title: 'Festival des Médias Indépendants',
       meta: 'PWA · Ground Control',
-      teaser: 'Une PWA de programmation en temps réel, construite en une itération solo.',
-      contexte: "En préparant la communication du festival, j'avais centralisé toute la programmation dans une base de données. En voyant la structure, j'ai réalisé que j'avais tout ce qu'il fallait pour construire une app. Je l'ai fait de ma propre initiative.",
-      construit: "Une PWA accessible sans téléchargement : onglet « en ce moment » en temps réel, programme complet, plan du site, manifeste du festival, redirections réseaux et pages dédiées food et thématique de la saison de programmation.",
-      defi: "Déployer sans budget ni campagne dédiée, uniquement via la signalétique du site.",
+      teaser: 'Donner au public la programmation en temps réel, sans app à télécharger ni budget : une PWA construite seul, en une itération.',
+      impact: ['Construite seul, sans budget', "Utilisée pendant l'événement, via QR codes"],
+      probleme: [
+        "Donner au public du festival la programmation en temps réel, sans app à télécharger, sans budget ni campagne dédiée : la seule diffusion possible passait par la signalétique du site.",
+        "En préparant la communication, j'avais centralisé toute la programmation dans une base de données. En voyant la structure, j'ai compris que j'avais tout ce qu'il fallait pour construire une app. Je l'ai fait de ma propre initiative."
+      ],
+      construit: 'Une PWA accessible sans téléchargement : onglet « en ce moment » en temps réel, programme complet, plan du site, manifeste du festival, redirections réseaux et pages dédiées food et thématique de la saison de programmation.',
+      resultat: "Déployée et utilisée pendant l'événement, distribuée uniquement via des QR codes sur la signalétique. Sans communication en amont : 30 visiteurs. Le produit a tenu, c'est la distribution qui a manqué : la prochaine itération aura une vraie campagne de déploiement.",
       stack: ['React', 'TypeScript', 'Vite', 'Tailwind CSS', 'React Router', 'Cloudflare Pages', 'Notion API'],
-      resultat: "Déployée et utilisée pendant l'événement, distribuée via QR codes sur la signalétique. Sans communication en amont : 30 visiteurs. La prochaine itération méritera une vraie campagne de déploiement.",
       link: { href: 'https://fmiapp.pages.dev', label: 'fmiapp.pages.dev' }
     },
     {
       id: 'automations',
       title: 'Automations',
       meta: 'Notion × Make × WordPress · Ground Control',
-      teaser: 'Un pipeline Notion → Make → WordPress qui tourne sans supervision.',
-      contexte: "Le service com passait un temps considérable à mettre à jour le site WordPress manuellement : création de pages, mise à jour de l'agenda hebdomadaire.",
-      construit: "Un pipeline Notion → Make → WordPress pour la création et la mise en ligne des pages de programmation en batch, déclenché par un seul trigger. Et un script de génération automatique de la page Agenda, qui construit les modules dynamiquement à partir des pages projets.",
-      defi: "Faire tourner l'automatisation sans supervision continue, y compris pendant une absence prolongée.",
-      stack: ['Notion', 'Make', 'WordPress', 'ACF', 'Script IA'],
-      resultat: "Le script Agenda a tourné en production pendant mon congé paternité, sans supervision. Environ 1 h gagnée par semaine, zéro risque d'oubli. Prochaine itération : intégration d'une plateforme de programmation via API, gain estimé à 5–10 h par semaine."
+      teaser: 'Les mises à jour manuelles du site WordPress prenaient du temps chaque semaine : un pipeline qui publie en batch et tourne sans supervision.',
+      impact: ['≈ 1 h gagnée par semaine', 'En production sans supervision pendant un congé paternité'],
+      probleme: "Le service com passait un temps considérable à mettre à jour le site WordPress à la main : création des pages de programmation, mise à jour de l'agenda hebdomadaire. L'automatisation devait aussi tenir sans supervision continue, y compris pendant une absence prolongée.",
+      construit: 'Un pipeline Notion → Make → WordPress pour la création et la mise en ligne des pages de programmation en batch, déclenché par un seul trigger. Et un script de génération automatique de la page Agenda, qui construit les modules dynamiquement à partir des pages projets.',
+      resultat: "Le script Agenda a tourné en production pendant mon congé paternité, sans supervision. Environ 1 h gagnée par semaine, zéro risque d'oubli. Prochaine itération : intégration d'une plateforme de programmation via API, gain estimé à 5–10 h par semaine.",
+      stack: ['Notion', 'Make', 'WordPress', 'ACF', 'Script IA']
     },
     {
       id: 'sites',
