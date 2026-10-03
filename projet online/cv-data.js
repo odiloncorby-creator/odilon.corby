@@ -52,7 +52,7 @@ window.CV = {
       title: 'naïko',
       meta: 'PWA · Accompagnement naissance',
       teaser: "Les cours et les livres s'adressent à la personne qui accouche. naïko donne à celle qui l'accompagne des repères utilisables dans l'instant.",
-      impact: ['MVP en prod 7 h après le premier commit', '1 700 visites depuis avril · 87 % sur mobile'],
+      impact: ['Testée sur 2 naissances réelles', '1 700 visites · 33 configurations terminées'],
       shots: [
         { src: 'img/naiko-01-accueil.webp', alt: "Accueil de naïko en préparation : compte à rebours J-28, bascule préparation / post-partum, progression des sections", caption: "Accueil préparation : J-28, progression" },
         { src: 'img/naiko-01-accueil-postpartum.webp', alt: "Accueil de naïko en post-partum : bébé de 4 jours, dernier repas, repères du moment", caption: "Post-partum : l'accueil suit l'âge du bébé" },
@@ -65,7 +65,7 @@ window.CV = {
       ],
       construit: [
         "Une PWA mobile, hors ligne et sans compte, en trois temps : Préparer, Jour J, Post-partum. 43 fiches, 17 cartes pour le jour J, compteur de contractions, suivi des biberons partagé à deux, rappels aux dates clés. Hébergement UE, AIPD, données sensibles gardées sur l'appareil.",
-        "MVP en production le jour du premier commit, refonte complète en septembre 2026. Je conçois et j'arbitre, le code est écrit par Claude Code sous ma direction."
+        "Une refonte complète est en ligne depuis septembre 2026. Je conçois et j'arbitre, le code est écrit par Claude Code sous ma direction."
       ],
       resultat: [
         "Utilisée pour la naissance de mon deuxième enfant, et par le collègue qui n'avait pas lu mes notes. Depuis fin avril : environ 1 700 visites, 87 % sur mobile, 33 parcours d'accueil terminés (Umami). Prochaine étape : la relecture par une sage-femme."
@@ -112,8 +112,8 @@ window.CV = {
       id: 'fmi',
       title: 'Festival des Médias Indépendants',
       meta: 'PWA · Ground Control',
-      teaser: "Un programme qui bouge jusqu'à la dernière minute : une PWA temps réel, en ligne 2 h après le premier commit.",
-      impact: ['En prod 2 h après le premier commit', 'Livrée en 7 jours, seul, sans budget'],
+      teaser: "Un programme qui bouge jusqu'à la dernière minute : une PWA temps réel, que l'équipe met à jour depuis Notion sans redéployer.",
+      impact: ['Programme corrigé en direct depuis Notion', 'Livrée en 7 jours, seul, sans budget'],
       shots: [
         { src: 'img/fmi-01-en-ce-moment.webp', alt: "Écran Maintenant de l'app FMI, samedi 15:20 : rendez-vous en cours avec horaires, lieu, médias et intervenant·es", caption: "Maintenant : ce qui se passe, en direct" },
         { src: 'img/fmi-02-programme.webp', alt: "Écran Programme de l'app FMI : rendez-vous à heure fixe avec médias, horaire, lieu et intervenant·es", caption: "Programme : alimenté par Notion" },
@@ -125,7 +125,7 @@ window.CV = {
         "Pendant deux jours, le public doit savoir ce qui se passe maintenant et où. Le programme bouge jusqu'à la dernière minute, sans budget ni campagne dédiée."
       ],
       construit: [
-        "Une PWA sans téléchargement : « en ce moment » en temps réel, programme, plan, pages espaces. Le programme est lu en direct dans Notion : l'équipe le corrige sans toucher au code. En ligne 2 h 14 après le premier commit, prête pour l'ouverture une semaine plus tard."
+        "Une PWA sans téléchargement : « en ce moment » en temps réel, programme, plan, pages espaces. Le programme est lu en direct dans Notion : l'équipe le corrige sans toucher au code. Conçue et livrée en une semaine, pour l'ouverture du festival."
       ],
       resultat: [
         'Utilisée pendant le festival, diffusée uniquement par QR codes : 30 visiteurs. Le produit a tenu, la distribution a manqué ; la prochaine édition aura une vraie campagne.'
