@@ -633,15 +633,16 @@
 
   .case-study-toggle {
     all: unset;
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: space-between;
-    gap: 16px;
+    display: block;
     width: 100%;
     box-sizing: border-box;
+    margin-top: 22px;
+    padding-top: 14px;
+    border-top: var(--border-hairline-soft);
     cursor: pointer;
   }
+
+  .case-study-toggle:hover .case-study-label { color: var(--accent-primary); }
 
   .case-study-head {
     display: flex;
@@ -1543,15 +1544,12 @@
       <div class="projets-stack">
 
         <div class="case-study reveal-stagger">
-          <button class="case-study-toggle" aria-expanded="false" aria-controls="case-naiko">
-            <span class="case-study-head">
+          <div class="case-study-head">
               <span class="case-study-meta">01 — PWA · Accompagnement naissance</span>
               <span class="case-study-title">naïko</span>
               <span class="case-study-teaser">Les cours et les livres s'adressent à la personne qui accouche. naïko donne à celle qui l'accompagne des repères utilisables dans l'instant.</span>
               <span class="case-study-impact"><span>MVP en prod 7 h après le premier commit</span><span>1 700 visites depuis avril · 87 % sur mobile</span><span>Testée en conditions réelles : 2 naissances</span></span>
-            </span>
-            <span class="case-study-label">[+] détail</span>
-          </button>
+          </div>
           <div class="case-study-shots">
             <figure class="case-study-shot">
               <a href="img/naiko-01-accueil.webp" target="_blank" rel="noreferrer"><img src="img/naiko-01-accueil.webp" alt="Accueil de naïko en préparation : compte à rebours J-28, bascule préparation / post-partum, progression des sections" width="480" height="1039" loading="lazy" decoding="async"></a>
@@ -1574,6 +1572,7 @@
               <figcaption>Carte réflexe du jour J, illustrée</figcaption>
             </figure>
           </div>
+          <button class="case-study-toggle" aria-expanded="false" aria-controls="case-naiko"><span class="case-study-label">[+] lire l'étude de cas</span></button>
           <div class="case-study-body" id="case-naiko">
             <div class="case-study-body-inner">
               <div class="case-study-detail">
@@ -1600,15 +1599,12 @@
         </div>
 
         <div class="case-study reveal-stagger">
-          <button class="case-study-toggle" aria-expanded="false" aria-controls="case-notion">
-            <span class="case-study-head">
+          <div class="case-study-head">
               <span class="case-study-meta">02 — Operating system · La Lune Rousse · Ground Control</span>
               <span class="case-study-title">Notion OS : service communication</span>
               <span class="case-study-teaser">Des infos d'événements éparpillées entre mails, pièces jointes et SharePoint : une source de vérité commune, de l'info brute à la publication.</span>
               <span class="case-study-impact"><span>6 statuts, de l'info brute à la publication</span><span>Calendrier éditorial et dashboard en usage</span></span>
-            </span>
-            <span class="case-study-label">[+] détail</span>
-          </button>
+          </div>
           <pre class="case-study-flow" role="img" aria-label="Workflow d'un événement dans le Notion OS : info brute reçue, traitement éditorial, validé com, production, publié, archive">info brute reçue
    ▼
 traitement éditorial
@@ -1618,6 +1614,7 @@ validé com ── barrière avant production
 production · site, réseaux, newsletter
    ▼
 publié → archive</pre>
+          <button class="case-study-toggle" aria-expanded="false" aria-controls="case-notion"><span class="case-study-label">[+] lire l'étude de cas</span></button>
           <div class="case-study-body" id="case-notion">
             <div class="case-study-body-inner">
               <div class="case-study-detail">
@@ -1642,15 +1639,12 @@ publié → archive</pre>
         </div>
 
         <div class="case-study reveal-stagger">
-          <button class="case-study-toggle" aria-expanded="false" aria-controls="case-fmi">
-            <span class="case-study-head">
+          <div class="case-study-head">
               <span class="case-study-meta">03 — PWA · Ground Control</span>
               <span class="case-study-title">Festival des Médias Indépendants</span>
               <span class="case-study-teaser">Un programme qui bouge jusqu'à la dernière minute, des visiteurs qui doivent savoir ce qui se passe maintenant : une PWA en ligne 2 h après le premier commit.</span>
               <span class="case-study-impact"><span>En prod 2 h après le premier commit</span><span>Livrée en 7 jours, seul, sans budget</span></span>
-            </span>
-            <span class="case-study-label">[+] détail</span>
-          </button>
+          </div>
           <div class="case-study-shots">
             <figure class="case-study-shot">
               <a href="img/fmi-01-en-ce-moment.webp" target="_blank" rel="noreferrer"><img src="img/fmi-01-en-ce-moment.webp" alt="Écran Maintenant de l'app FMI, samedi 15:20 : rendez-vous en cours avec horaires, lieu, médias et intervenant·es" width="480" height="1039" loading="lazy" decoding="async"></a>
@@ -1673,6 +1667,7 @@ publié → archive</pre>
               <figcaption>Manifeste : le ton éditorial dans l'app</figcaption>
             </figure>
           </div>
+          <button class="case-study-toggle" aria-expanded="false" aria-controls="case-fmi"><span class="case-study-label">[+] lire l'étude de cas</span></button>
           <div class="case-study-body" id="case-fmi">
             <div class="case-study-body-inner">
               <div class="case-study-detail">
@@ -1697,15 +1692,12 @@ publié → archive</pre>
         </div>
 
         <div class="case-study reveal-stagger">
-          <button class="case-study-toggle" aria-expanded="false" aria-controls="case-make">
-            <span class="case-study-head">
+          <div class="case-study-head">
               <span class="case-study-meta">04 — Notion × Make × WordPress · Ground Control</span>
               <span class="case-study-title">Automations</span>
               <span class="case-study-teaser">Les mises à jour manuelles du site WordPress prenaient du temps chaque semaine : la page Programmation se construit seule, et toute la programmation d'un festival a été publiée d'un coup depuis Notion.</span>
               <span class="case-study-impact"><span>≈ 1 h gagnée par semaine</span><span>Agenda en production, sans supervision</span><span>Toute la prog du FMI publiée en un batch</span></span>
-            </span>
-            <span class="case-study-label">[+] détail</span>
-          </button>
+          </div>
           <pre class="case-study-flow" role="img" aria-label="Schéma : en MVP, Make crée en batch les pages projet WordPress depuis la base Notion ; en production, la page Programmation se construit seule à partir des pages projet">notion · base événements
    │ batch (mvp, festival)
    ▼
@@ -1717,6 +1709,7 @@ wordpress · pages projet
    ▼
 page programmation
    tri par date · passés masqués</pre>
+          <button class="case-study-toggle" aria-expanded="false" aria-controls="case-make"><span class="case-study-label">[+] lire l'étude de cas</span></button>
           <div class="case-study-body" id="case-make">
             <div class="case-study-body-inner">
               <div class="case-study-detail">
@@ -2017,7 +2010,7 @@ page programmation
       const body = document.getElementById(btn.getAttribute('aria-controls'));
       body.classList.toggle('open', !expanded);
       const label = btn.querySelector('.case-study-label');
-      label.textContent = expanded ? '[+] détail' : '[−] fermer';
+      label.textContent = expanded ? '[+] lire l\'étude de cas' : '[−] refermer';
       UFX.glitch(label, 200);
     });
   });
