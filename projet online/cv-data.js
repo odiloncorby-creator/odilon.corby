@@ -52,7 +52,7 @@ window.CV = {
       title: 'naïko',
       meta: 'PWA · Accompagnement naissance',
       teaser: "Les cours et les livres s'adressent à la personne qui accouche. naïko donne à celle qui l'accompagne des repères utilisables dans l'instant.",
-      impact: ['MVP en prod 7 h après le premier commit', '1 030 visiteurs depuis avril · 3 min 16 par visite', 'Testée en conditions réelles : 2 naissances'],
+      impact: ['MVP en prod 7 h après le premier commit', '1 700 visites depuis avril · 87 % sur mobile', 'Testée en conditions réelles : 2 naissances'],
       shots: [
         { src: 'img/naiko-01-accueil.webp', alt: "Accueil de naïko en préparation : compte à rebours J-28, bascule préparation / post-partum, progression des sections", caption: "Accueil préparation : J-28, progression" },
         { src: 'img/naiko-01-accueil-postpartum.webp', alt: "Accueil de naïko en post-partum : bébé de 4 jours, dernier repas, repères du moment", caption: "Post-partum : l'accueil suit l'âge du bébé" },
@@ -71,7 +71,7 @@ window.CV = {
         "Côté conformité : hébergement dans l'UE, AIPD, registre des traitements, et les données les plus sensibles ne quittent pas l'appareil.",
         "Je conçois, j'arbitre et je livre. Le code est écrit par Claude Code sous ma direction."
       ],
-      resultat: "Je l'ai utilisée pour la naissance de mon deuxième enfant : le compteur de contractions pendant le travail, puis les rappels et le suivi des biberons les premières semaines. Le collègue qui n'avait pas lu mes notes s'est servi de l'app le jour J. Depuis la mise en place de la mesure d'audience fin avril : 1 030 visiteurs, 1 780 visites et 4 240 pages vues, avec 3 min 16 en moyenne par visite (Umami, sans cookie). Quelques bêta-testeurs l'utilisent aujourd'hui. Des professionnelles de santé, dont une de PMI, m'ont fait des retours qui ont donné de nouvelles fiches. Le contenu n'a pas encore été relu par une sage-femme. C'est la prochaine étape.",
+      resultat: "Je l'ai utilisée pour la naissance de mon deuxième enfant : le compteur de contractions pendant le travail, puis les rappels et le suivi des biberons les premières semaines. Le collègue qui n'avait pas lu mes notes s'est servi de l'app le jour J. Depuis la mise en place de la mesure d'audience fin avril (Umami, sans cookie, tests exclus) : environ 1 700 visites et 4 000 pages vues, dont 87 % sur mobile, et 33 parcours d'accueil menés jusqu'au bout. Quelques bêta-testeurs l'utilisent aujourd'hui. Des professionnelles de santé, dont une de PMI, m'ont fait des retours qui ont donné de nouvelles fiches. Le contenu n'a pas encore été relu par une sage-femme. C'est la prochaine étape.",
       stack: ['Claude Code', 'React 18', 'Vite 7', 'Tailwind CSS', 'PWA', 'Firebase', 'Cloudflare Pages', 'Cloudflare Workers', 'Cloudflare D1', 'Notion'],
       link: { href: 'https://naiko.app', label: 'naiko.app' }
     },
