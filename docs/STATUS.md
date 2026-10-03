@@ -8,7 +8,7 @@ Dernière mise à jour : 2026-10-03
 
 | Livrable | Détail |
 |---|---|
-| Repositionnement | Contenu aligné sur le CV PDF « Product Builder No-Code & Communication expert » (`projet online/cv-odilon-corby.pdf`) |
+| Repositionnement | « Product Builder No-Code, IA & Communication expert » sur le site et le CV PDF |
 | Écran de démarrage | `index.html` — boot ASCII, choix `[1] mode lecture` / `[2] mode terminal`, `?skip` → lecture |
 | Mode lecture | `odilon-corby-cv.html` — page qui défile, couche terminal (prompts, scramble, portrait ASCII, scanlines, barre de statut) |
 | Mode terminal | `terminal.html` — CV par commandes : help, whoami, parcours [n], produits, open <produit>, skills, stack, approche, music, contact, cv, lecture, clear (+ `sudo hire-me`, `glitch`) |
@@ -18,6 +18,8 @@ Dernière mise à jour : 2026-10-03
 | Fusion Framer | Contenu du portfolio Framer intégré (naïko, Notion OS, FMI), métier visé « Product builder no-code & IA » (hero, sidebar, `whoami`), `og-image.png` sur les 3 pages |
 | Domaine | `odiloncorby.com` (apex + `www` → apex), `odilon-corby.pages.dev` redirigé en 301 via `functions/_middleware.js` |
 | Stats | Cloudflare Web Analytics sans cookie sur les 3 pages (exception CSP dédiée) |
+| Version épurée (oct. 2026) | 4 sections (signal · produits · parcours · contact), textes resserrés, métriques d'usage plutôt que de vitesse de mise en ligne |
+| CV PDF 2026 | `docs/cv/cv-2026.html` → PDF publié + SVG Figma (`docs/cv/html-to-svg.mjs`), mêmes chiffres que le site |
 | Signature mail | `docs/signature-mail.html`, style terminal (Proton) |
 | Études de cas (oct. 2026) | Fiches Produits recentrées sur le problème métier : structure Problème → Ce que j'ai construit → Impact, stack réduite à une ligne, accroche problème → résultat et ligne d'impact visibles accordéon fermé. Captures réelles (naïko, FMI) et schémas de flux ASCII (Notion OS, Automations) au-dessus du bouton « lire l'étude de cas ». Visionneuse d'images dans la page (`UFX.lightbox`, lecture + terminal), scanlines effacées au survol d'une capture |
 
@@ -29,7 +31,6 @@ Commits : `ea25e6b` (mode lecture) · `2ae6fb3` (terminal) · `f3902a7` (boot + 
 - **naïko** : nombre de bêta-testeurs inconnu (compteur `/api/beta-register`). Audience publiée = export Umami nettoyé (≈ 1 700 visites, ≈ 4 000 pages vues, 87 % mobile, 33 onboardings).
 - **Notion OS** : aucune métrique comptée (workspace La Lune Rousse non interrogeable) ; aucun visuel (captures du dashboard, du calendrier, d'une fiche événement ou de l'édition newsletter WEEK 35 à faire, anonymisées). Pipeline newsletter Notion → JSON → Brevo = POC validé sur une édition, Worker non déployé.
 - **Automations** : « ≈ 1 h / semaine » et « congé paternité sans supervision » reposent sur le témoignage d'Odilon. Pipeline Make = MVP (batch de la programmation FMI) ; les événements courants sont encore saisis à la main.
-- **CV PDF** : pas encore aligné sur les nouvelles fiches.
 - **Sites & outils no-code** : fiche courte, sans source (ni PDF ni Framer) → à enrichir (contexte, défi, résultat, visuels). Notion OS a été enrichi depuis Framer.
 - `skills` en terminal : listé par groupes, sans niveaux (volontaire : pas de chiffres inventés).
 

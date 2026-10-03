@@ -6,7 +6,7 @@ Voir `docs/STATUS.md` (fait, en cours, prochain chantier : dépublication de Fra
 
 ## Marque
 
-**odilon.uncoded** (anciennement odilon.code). Positionnement : *Product Builder No-Code, IA & Communication expert* (le PDF dit encore « No-Code & Communication expert »). Source de vérité du contenu : le CV PDF `projet online/cv-odilon-corby.pdf`.
+**odilon.uncoded** (anciennement odilon.code). Positionnement : *Product Builder No-Code, IA & Communication expert*. Source du CV PDF : `docs/cv/cv-2026.html` (A4), rendu en `docs/cv/cv-2026.pdf` puis copié en `projet online/cv-odilon-corby.pdf` ; version Figma (SVG à texte éditable) via `node docs/cv/html-to-svg.mjs`. Les chiffres du CV suivent ceux des études de cas du site.
 
 ## Fichiers (`projet online/`, dossier publié)
 
@@ -42,12 +42,11 @@ Voir `docs/STATUS.md` (fait, en cours, prochain chantier : dépublication de Fra
 ## Fonctionnalités (mode lecture)
 
 - Sidebar + nav shell (`> parcours`) avec indicateur de section active, barre de statut desktop
-- Sections : 00 Signal · 01 Parcours · 02 Produits · 03 Approche · 04 Side project · 05 Contact
+- Sections : 00 Signal · 01 Produits · 02 Parcours · 03 Contact (version épurée, oct. 2026 : Approche retirée, side project réduit à un lien « music » dans Contact ; le terminal garde `approche` et `music`)
 - Titres décodés au scroll (scramble), prompts `~/odilon.uncoded $ …`, scanlines CRT
 - Portrait en ASCII qui se révèle en photo au survol / tap
 - Hero : rôle « Product Builder No-Code, IA & Communication expert » + un seul bloc d'accroche (`tagline` + `intro`), orienté product sans lâcher l'éditorial. L'ancien encadré métier visé/positionnement a été fusionné dedans (sept. 2026)
-- Produits en accordéon (5 études de cas), waveform animée sur la carte Musique
-- Ne jamais supprimer `pointer-events: none` sur `.projet-card-bg`
+- Produits : 4 études de cas (naïko, Notion OS, FMI, Automations). En-tête visible (accroche problème → résultat, 2 faits d'impact sourcés), puis captures ou schéma ASCII, puis bouton « [+] lire l'étude de cas » qui déplie Problème / Ce que j'ai construit / Impact / stack. Clic sur une capture = visionneuse `UFX.lightbox`
 
 ## Keywords éditoriaux du parcours
 
