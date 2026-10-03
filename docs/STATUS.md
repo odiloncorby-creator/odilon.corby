@@ -18,20 +18,21 @@ Dernière mise à jour : 2026-10-03
 | Fusion Framer | Contenu du portfolio Framer intégré (naïko, Notion OS, FMI), métier visé « Product builder no-code & IA » (hero, sidebar, `whoami`), `og-image.png` sur les 3 pages |
 | Domaine | `odiloncorby.com` (apex + `www` → apex), `odilon-corby.pages.dev` redirigé en 301 via `functions/_middleware.js` |
 | Stats | Cloudflare Web Analytics sans cookie sur les 3 pages (exception CSP dédiée) |
-| Version épurée (oct. 2026) | 4 sections (signal · produits · parcours · contact), textes resserrés, métriques d'usage plutôt que de vitesse de mise en ligne |
+| Version épurée (oct. 2026) | 5 sections (signal · produits · parcours · musique · contact), Produits avant Parcours. Approche et fiche « Sites & outils no-code » retirées du mode lecture (le terminal garde `approche`). Textes resserrés, deux faits d'impact par étude de cas, métriques d'usage plutôt que de vitesse de mise en ligne |
+| Musique | Section avec le player Bandcamp de « La Longue Marche », chargé au clic seulement (aucune requête tierce avant), couleurs du site ; CSP `frame-src https://bandcamp.com`. Terminal : lien d'écoute dans `music` |
 | CV PDF 2026 | `docs/cv/cv-2026.html` → PDF publié + SVG Figma (`docs/cv/html-to-svg.mjs`), mêmes chiffres que le site |
 | Signature mail | `docs/signature-mail.html`, style terminal (Proton) |
 | Études de cas (oct. 2026) | Fiches Produits recentrées sur le problème métier : structure Problème → Ce que j'ai construit → Impact, stack réduite à une ligne, accroche problème → résultat et ligne d'impact visibles accordéon fermé. Captures réelles (naïko, FMI) et schémas de flux ASCII (Notion OS, Automations) au-dessus du bouton « lire l'étude de cas ». Visionneuse d'images dans la page (`UFX.lightbox`, lecture + terminal), scanlines effacées au survol d'une capture |
 
-Commits : `ea25e6b` (mode lecture) · `2ae6fb3` (terminal) · `f3902a7` (boot + CLAUDE.md) · `c2ababf` + `73c4cc6` (fusion Framer) · `f4f9805` → `e5d53d8` (études de cas, branche `claude/sweet-lovelace-14cnnz`).
+Commits : `ea25e6b` (mode lecture) · `2ae6fb3` (terminal) · `f3902a7` (boot + CLAUDE.md) · `c2ababf` + `73c4cc6` (fusion Framer) · `f4f9805` → `e5d53d8` (études de cas, branche `claude/sweet-lovelace-14cnnz`) · `6bf4b9b` → `549bc2a` (CV 2026 + SVG Figma) · `82c9377` → `1955d1a` (version épurée, CV publié, musique, branche `claude/site-epure`).
 
 ### Points ouverts sur le contenu
 - **Règle des chiffres** : chaque chiffre publié a une source (git, API Cloudflare Pages, export Umami nettoyé, brief Notion OS). Les briefs sourcés sont dans les repos des apps : `Partner-Birth` et `AppFMI`, branche `portfolio-captures`, dossier `docs/portfolio/` (captures, briefs, scripts de capture). Pas de chiffre approximatif ou non vérifiable.
 - **FMI** : « 30 visiteurs » non vérifié (à relever dans Umami, 25–26 avril). « 24 rendez-vous / 49 médias » non publiés tant que l'historique Notion ne confirme pas l'état du week-end. App : libellé « MAINTENANT » coupé dans la barre de nav, « Trois jours » au lieu de deux.
-- **naïko** : nombre de bêta-testeurs inconnu (compteur `/api/beta-register`). Audience publiée = export Umami nettoyé (≈ 1 700 visites, ≈ 4 000 pages vues, 87 % mobile, 33 onboardings).
+- **naïko** : nombre de bêta-testeurs inconnu (compteur `/api/beta-register`). Publié : « Testée sur 2 naissances réelles », « 1 700 visites · 33 configurations terminées » (export Umami nettoyé ; aussi ≈ 4 000 pages vues, 87 % mobile).
 - **Notion OS** : aucune métrique comptée (workspace La Lune Rousse non interrogeable) ; aucun visuel (captures du dashboard, du calendrier, d'une fiche événement ou de l'édition newsletter WEEK 35 à faire, anonymisées). Pipeline newsletter Notion → JSON → Brevo = POC validé sur une édition, Worker non déployé.
 - **Automations** : « ≈ 1 h / semaine » et « congé paternité sans supervision » reposent sur le témoignage d'Odilon. Pipeline Make = MVP (batch de la programmation FMI) ; les événements courants sont encore saisis à la main.
-- **Sites & outils no-code** : fiche courte, sans source (ni PDF ni Framer) → à enrichir (contexte, défi, résultat, visuels). Notion OS a été enrichi depuis Framer.
+- **Sites & outils no-code** : retirée du site et du CV faute de source ; à réintroduire seulement avec un cas documenté.
 - `skills` en terminal : listé par groupes, sans niveaux (volontaire : pas de chiffres inventés).
 
 ## 🎯 Chantier en cours : un seul site, sortie de Framer (étapes 1–4 faites, reste 5)
@@ -45,7 +46,7 @@ Commits : `ea25e6b` (mode lecture) · `2ae6fb3` (terminal) · `f3902a7` (boot + 
 2. ✅ **Mapping validé** (2026-09-26) : naïko et Notion OS enrichis avec le texte Framer, FMI retouché à la marge. Métier visé « Product builder no-code & IA » et sa phrase ajoutés au hero et à `whoami`. Logotype Framer réutilisé en `og-image.png`. Abandonnés : à propos, contact, fond animé et palette Framer (déjà couverts dans le repo). Arbitrages : pour naïko, résultat et période repris de Framer (bêta-testeurs, pas encore relu par une sage-femme ; du 3e trimestre aux 3 mois du bébé). Notion OS signé « La Lune Rousse · Ground Control » ; sa brique WordPress reste dans la fiche Automations, avec un renvoi.
 3. ✅ **Intégration** (2026-09-26) : branche `framer-merge` mergée dans `main` et en prod.
 4. ✅ **Domaine** (2026-09-27) : `odiloncorby.com` acheté via Cloudflare Registrar, apex + `www` rattachés au projet Pages `odilon-corby`, `www` redirigé vers l'apex, `og:image` des 3 pages passée sur le domaine.
-5. **Bascule** — redirection / dépublication du site Framer, mise à jour des liens (LinkedIn, PDF). Signature mail prête (`docs/signature-mail.html`).
+5. **Bascule** — reste : redirection / dépublication du site Framer, mise à jour du lien LinkedIn. Fait : CV PDF 2026 publié avec odiloncorby.com et QR, signature mail prête (`docs/signature-mail.html`).
 
 ### Garde-fous
 - Déplacer le contenu d'abord ; les améliorations visuelles viennent après.
