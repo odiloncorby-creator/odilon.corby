@@ -1,0 +1,195 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>CV Odilon Corby · Product Builder No-Code, IA & Communication expert</title>
+<style>
+@font-face { font-family: "VG5000"; src: url("../../projet online/VG5000-Regular_web.woff2") format("woff2"); }
+@font-face { font-family: "Geist"; src: url("../../projet online/Geist-Variable.woff2") format("woff2"); font-weight: 100 900; }
+@font-face { font-family: "Geist Mono"; src: url("../../projet online/GeistMono-Variable.woff2") format("woff2"); font-weight: 100 900; }
+@page { size: A4; margin: 0; }
+:root {
+  --ink: #0A0A0A; --paper: #EDEAE0; --page: #F6F4EE;
+  --signal: #D9A441; --signal-ink: #9A6F1F; --phosphor: #6B9080;
+  --line: #D8D4C8; --muted: #6F6B62; --muted-dark: #8C887E;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html, body { background: #ccc; }
+body { font-family: "Geist", system-ui, sans-serif; color: var(--ink); -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+.sheet { width: 210mm; height: 297mm; margin: 0 auto; background: var(--page); display: grid; grid-template-columns: 62mm 1fr; overflow: hidden; }
+@media screen { .sheet { margin: 24px auto; box-shadow: 0 4px 30px rgba(0,0,0,.25); } }
+.mono { font-family: "Geist Mono", ui-monospace, monospace; }
+
+/* ── colonne gauche ── */
+aside { background: var(--ink); color: var(--paper); padding: 10mm 7mm 8mm; display: flex; flex-direction: column; gap: 4.6mm; }
+.photo { width: 100%; aspect-ratio: 1 / 0.86; object-fit: cover; object-position: 50% 22%; filter: grayscale(1) contrast(1.05); display: block; }
+.id .brand { font: 8pt "Geist Mono", monospace; color: var(--signal); letter-spacing: .04em; }
+.id .brand::after { content: "_"; animation: none; }
+.id h1 { font: 24pt/0.95 "VG5000", serif; font-weight: 400; margin: 2.2mm 0 2mm; letter-spacing: -.01em; }
+.id .role { font: 8.2pt/1.35 "Geist Mono", monospace; color: var(--paper); opacity: .9; }
+.blk h2 { font: 7pt "Geist Mono", monospace; text-transform: uppercase; letter-spacing: .12em; color: var(--signal); margin-bottom: 2mm; font-weight: 500; }
+.blk p, .blk li { font: 7.6pt/1.5 "Geist Mono", monospace; color: var(--paper); list-style: none; }
+.blk .dim { color: var(--muted-dark); }
+.blk a { color: var(--paper); text-decoration: none; }
+.tags { display: flex; flex-wrap: wrap; gap: .6mm 2.4mm; }
+.tags span { font: 7.4pt/1.5 "Geist Mono", monospace; color: var(--paper); }
+.tags span::before { content: "["; color: var(--muted-dark); margin-right: .8mm; }
+.tags span::after { content: "]"; color: var(--muted-dark); margin-left: .8mm; }
+.qrbox { margin-top: auto; display: flex; align-items: flex-end; gap: 3mm; }
+.qrbox .qrwrap { background: var(--paper); padding: 1.6mm; line-height: 0; }
+.qr { width: 17mm; height: 17mm; display: block; }
+.qrbox p { font: 7pt/1.45 "Geist Mono", monospace; color: var(--muted-dark); }
+.qrbox p b { color: var(--signal); font-weight: 500; }
+
+/* ── colonne principale ── */
+main { padding: 10mm 11mm 8mm 10mm; display: flex; flex-direction: column; }
+.prompt { font: 7.6pt "Geist Mono", monospace; color: var(--muted); }
+.prompt .p { color: var(--phosphor); } .prompt .s { color: var(--signal-ink); margin: 0 1.2mm; }
+.tagline { font: 19pt/1.08 "VG5000", serif; margin: 3mm 0 3mm; letter-spacing: -.005em; }
+.intro { font-size: 8.6pt; line-height: 1.5; color: #2a2926; padding-left: 3.2mm; border-left: 2px solid var(--signal); }
+section { margin-top: 5mm; }
+.sh { display: flex; align-items: baseline; gap: 2.4mm; margin-bottom: 3mm; }
+.sh .idx { font: 7pt "Geist Mono", monospace; color: var(--signal-ink); }
+.sh h2 { font: 13pt "VG5000", serif; font-weight: 400; }
+.sh .rule { flex: 1; height: 1px; background: var(--line); transform: translateY(-1mm); }
+
+.job { display: grid; grid-template-columns: 1fr auto; column-gap: 4mm; padding: 2mm 0; border-top: 1px solid var(--line); }
+.job:first-of-type { border-top: 0; padding-top: 0; }
+.job h3 { font-size: 9.2pt; font-weight: 600; }
+.job .org { font: 7pt "Geist Mono", monospace; color: var(--muted); text-transform: uppercase; letter-spacing: .06em; margin-top: .6mm; }
+.job .org .kw { color: var(--signal-ink); margin-left: 1.6mm; }
+.job .dates { font: 7.4pt "Geist Mono", monospace; color: var(--signal-ink); white-space: nowrap; }
+.job p { grid-column: 1 / -1; font-size: 8pt; line-height: 1.45; color: #2a2926; margin-top: 1.2mm; }
+
+.cases { display: grid; grid-template-columns: 1fr 1fr; gap: 3mm 5mm; }
+.case { border-top: 1px solid var(--ink); padding-top: 2mm; }
+.case .meta { font: 6.6pt "Geist Mono", monospace; color: var(--signal-ink); text-transform: uppercase; letter-spacing: .06em; }
+.case h3 { font-size: 9.4pt; font-weight: 600; margin: .8mm 0 1mm; }
+.case p { font-size: 7.8pt; line-height: 1.42; color: #2a2926; }
+.case .impact { font: 7pt/1.5 "Geist Mono", monospace; color: #3E6656; margin-top: 1.2mm; }
+.case .impact span { display: block; }
+.case .impact span::before { content: "▸ "; color: var(--muted-dark); }
+.case .link { font: 7pt "Geist Mono", monospace; color: var(--muted); margin-top: 1mm; }
+.foot { margin-top: auto; padding-top: 3mm; font: 6.8pt "Geist Mono", monospace; color: var(--muted); display: flex; justify-content: space-between; border-top: 1px solid var(--line); }
+.foot b { color: var(--ink); font-weight: 500; }
+</style>
+</head>
+<body>
+<div class="sheet">
+  <aside>
+    <img class="photo" src="../../projet online/portrait LLR 0251387 - Grande.jpeg" alt="Portrait d'Odilon Corby">
+    <div class="id">
+      <div class="brand">odilon.uncoded</div>
+      <h1>Odilon<br>Corby</h1>
+      <div class="role">Product Builder No-Code, IA<br>&amp; Communication expert</div>
+    </div>
+    <div class="blk">
+      <h2>Contact</h2>
+      <ul>
+        <li>Paris, FR · +10 ans</li>
+        <li><a href="tel:+33650881622">+33 6 50 88 16 22</a></li>
+        <li><a href="mailto:odilon.corby@proton.me">odilon.corby@proton.me</a></li>
+        <li><a href="https://www.linkedin.com/in/odiloncorby">linkedin.com/in/odiloncorby</a></li>
+        <li><a href="https://odiloncorby.com/?ref=cv">odiloncorby.com</a></li>
+      </ul>
+    </div>
+    <div class="blk">
+      <h2>No-code · IA · Automation</h2>
+      <div class="tags"><span>Claude Code</span><span>Codex</span><span>Notion</span><span>Airtable</span><span>Make</span><span>API &amp; MCP</span><span>GitHub</span><span>Cloudflare</span><span>WordPress</span></div>
+    </div>
+    <div class="blk">
+      <h2>Stratégie éditoriale</h2>
+      <div class="tags"><span>Récit de marque</span><span>Ligne éditoriale</span><span>Relations presse</span><span>Management</span></div>
+    </div>
+    <div class="blk">
+      <h2>Production &amp; diffusion</h2>
+      <div class="tags"><span>Social media</span><span>Newsletters</span><span>CMS</span><span>Adobe Suite</span><span>Vidéo</span><span>Budget</span><span>Reporting</span></div>
+    </div>
+    <div class="blk">
+      <h2>Formation · Langues</h2>
+      <ul>
+        <li>Master Communication · 2015</li>
+        <li class="dim">Cesacom / Cergy</li>
+        <li>BTS Communication · 2012</li>
+        <li class="dim">CFA SACEF</li>
+        <li style="margin-top:1.4mm">Français natif · Anglais courant</li>
+      </ul>
+    </div>
+    <div class="blk">
+      <h2>Side project</h2>
+      <p>Production musicale · techno, ambient, drum &amp; bass</p>
+      <p class="dim">odilonwav.bandcamp.com</p>
+    </div>
+    <div class="qrbox">
+      <div class="qrwrap">
+<svg class="qr" aria-hidden="true" version="1.1" viewBox="0 0 29 29" xmlns="http://www.w3.org/2000/svg"><path fill="#0A0A0A" d="M0,0H1V1H0zM1,0H2V1H1zM2,0H3V1H2zM3,0H4V1H3zM4,0H5V1H4zM5,0H6V1H5zM6,0H7V1H6zM8,0H9V1H8zM9,0H10V1H9zM11,0H12V1H11zM13,0H14V1H13zM14,0H15V1H14zM15,0H16V1H15zM18,0H19V1H18zM22,0H23V1H22zM23,0H24V1H23zM24,0H25V1H24zM25,0H26V1H25zM26,0H27V1H26zM27,0H28V1H27zM28,0H29V1H28zM0,1H1V2H0zM6,1H7V2H6zM9,1H10V2H9zM10,1H11V2H10zM11,1H12V2H11zM12,1H13V2H12zM15,1H16V2H15zM18,1H19V2H18zM20,1H21V2H20zM22,1H23V2H22zM28,1H29V2H28zM0,2H1V3H0zM2,2H3V3H2zM3,2H4V3H3zM4,2H5V3H4zM6,2H7V3H6zM8,2H9V3H8zM9,2H10V3H9zM10,2H11V3H10zM13,2H14V3H13zM17,2H18V3H17zM22,2H23V3H22zM24,2H25V3H24zM25,2H26V3H25zM26,2H27V3H26zM28,2H29V3H28zM0,3H1V4H0zM2,3H3V4H2zM3,3H4V4H3zM4,3H5V4H4zM6,3H7V4H6zM9,3H10V4H9zM10,3H11V4H10zM12,3H13V4H12zM15,3H16V4H15zM16,3H17V4H16zM17,3H18V4H17zM19,3H20V4H19zM22,3H23V4H22zM24,3H25V4H24zM25,3H26V4H25zM26,3H27V4H26zM28,3H29V4H28zM0,4H1V5H0zM2,4H3V5H2zM3,4H4V5H3zM4,4H5V5H4zM6,4H7V5H6zM9,4H10V5H9zM10,4H11V5H10zM12,4H13V5H12zM15,4H16V5H15zM16,4H17V5H16zM18,4H19V5H18zM22,4H23V5H22zM24,4H25V5H24zM25,4H26V5H25zM26,4H27V5H26zM28,4H29V5H28zM0,5H1V6H0zM6,5H7V6H6zM8,5H9V6H8zM9,5H10V6H9zM11,5H12V6H11zM12,5H13V6H12zM13,5H14V6H13zM14,5H15V6H14zM16,5H17V6H16zM17,5H18V6H17zM18,5H19V6H18zM20,5H21V6H20zM22,5H23V6H22zM28,5H29V6H28zM0,6H1V7H0zM1,6H2V7H1zM2,6H3V7H2zM3,6H4V7H3zM4,6H5V7H4zM5,6H6V7H5zM6,6H7V7H6zM8,6H9V7H8zM10,6H11V7H10zM12,6H13V7H12zM14,6H15V7H14zM16,6H17V7H16zM18,6H19V7H18zM20,6H21V7H20zM22,6H23V7H22zM23,6H24V7H23zM24,6H25V7H24zM25,6H26V7H25zM26,6H27V7H26zM27,6H28V7H27zM28,6H29V7H28zM9,7H10V8H9zM12,7H13V8H12zM13,7H14V8H13zM18,7H19V8H18zM19,7H20V8H19zM0,8H1V9H0zM2,8H3V9H2zM6,8H7V9H6zM7,8H8V9H7zM9,8H10V9H9zM12,8H13V9H12zM13,8H14V9H13zM15,8H16V9H15zM16,8H17V9H16zM18,8H19V9H18zM19,8H20V9H19zM20,8H21V9H20zM23,8H24V9H23zM26,8H27V9H26zM28,8H29V9H28zM3,9H4V10H3zM4,9H5V10H4zM7,9H8V10H7zM12,9H13V10H12zM16,9H17V10H16zM17,9H18V10H17zM18,9H19V10H18zM19,9H20V10H19zM20,9H21V10H20zM22,9H23V10H22zM23,9H24V10H23zM27,9H28V10H27zM28,9H29V10H28zM0,10H1V11H0zM1,10H2V11H1zM2,10H3V11H2zM4,10H5V11H4zM5,10H6V11H5zM6,10H7V11H6zM8,10H9V11H8zM9,10H10V11H9zM10,10H11V11H10zM12,10H13V11H12zM13,10H14V11H13zM14,10H15V11H14zM16,10H17V11H16zM19,10H20V11H19zM20,10H21V11H20zM23,10H24V11H23zM24,10H25V11H24zM25,10H26V11H25zM26,10H27V11H26zM28,10H29V11H28zM2,11H3V12H2zM7,11H8V12H7zM8,11H9V12H8zM9,11H10V12H9zM12,11H13V12H12zM14,11H15V12H14zM15,11H16V12H15zM16,11H17V12H16zM18,11H19V12H18zM19,11H20V12H19zM20,11H21V12H20zM21,11H22V12H21zM22,11H23V12H22zM23,11H24V12H23zM24,11H25V12H24zM25,11H26V12H25zM0,12H1V13H0zM1,12H2V13H1zM2,12H3V13H2zM3,12H4V13H3zM4,12H5V13H4zM6,12H7V13H6zM9,12H10V13H9zM10,12H11V13H10zM11,12H12V13H11zM13,12H14V13H13zM14,12H15V13H14zM20,12H21V13H20zM22,12H23V13H22zM23,12H24V13H23zM28,12H29V13H28zM0,13H1V14H0zM3,13H4V14H3zM5,13H6V14H5zM7,13H8V14H7zM8,13H9V14H8zM9,13H10V14H9zM10,13H11V14H10zM13,13H14V14H13zM14,13H15V14H14zM18,13H19V14H18zM19,13H20V14H19zM22,13H23V14H22zM23,13H24V14H23zM27,13H28V14H27zM28,13H29V14H28zM0,14H1V15H0zM1,14H2V15H1zM3,14H4V15H3zM4,14H5V15H4zM6,14H7V15H6zM8,14H9V15H8zM11,14H12V15H11zM15,14H16V15H15zM18,14H19V15H18zM19,14H20V15H19zM24,14H25V15H24zM28,14H29V15H28zM0,15H1V16H0zM1,15H2V16H1zM5,15H6V16H5zM7,15H8V16H7zM8,15H9V16H8zM9,15H10V16H9zM10,15H11V16H10zM11,15H12V16H11zM12,15H13V16H12zM13,15H14V16H13zM22,15H23V16H22zM24,15H25V16H24zM0,16H1V17H0zM2,16H3V17H2zM3,16H4V17H3zM5,16H6V17H5zM6,16H7V17H6zM9,16H10V17H9zM11,16H12V17H11zM12,16H13V17H12zM13,16H14V17H13zM15,16H16V17H15zM16,16H17V17H16zM22,16H23V17H22zM23,16H24V17H23zM28,16H29V17H28zM8,17H9V18H8zM9,17H10V18H9zM10,17H11V18H10zM12,17H13V18H12zM16,17H17V18H16zM19,17H20V18H19zM20,17H21V18H20zM22,17H23V18H22zM23,17H24V18H23zM26,17H27V18H26zM27,17H28V18H27zM28,17H29V18H28zM0,18H1V19H0zM1,18H2V19H1zM4,18H5V19H4zM6,18H7V19H6zM7,18H8V19H7zM8,18H9V19H8zM12,18H13V19H12zM13,18H14V19H13zM14,18H15V19H14zM16,18H17V19H16zM17,18H18V19H17zM19,18H20V19H19zM20,18H21V19H20zM21,18H22V19H21zM22,18H23V19H22zM23,18H24V19H23zM24,18H25V19H24zM25,18H26V19H25zM28,18H29V19H28zM2,19H3V20H2zM5,19H6V20H5zM7,19H8V20H7zM9,19H10V20H9zM11,19H12V20H11zM14,19H15V20H14zM15,19H16V20H15zM16,19H17V20H16zM18,19H19V20H18zM19,19H20V20H19zM21,19H22V20H21zM22,19H23V20H22zM23,19H24V20H23zM0,20H1V21H0zM1,20H2V21H1zM3,20H4V21H3zM4,20H5V21H4zM5,20H6V21H5zM6,20H7V21H6zM8,20H9V21H8zM13,20H14V21H13zM14,20H15V21H14zM16,20H17V21H16zM19,20H20V21H19zM20,20H21V21H20zM21,20H22V21H21zM22,20H23V21H22zM23,20H24V21H23zM24,20H25V21H24zM25,20H26V21H25zM27,20H28V21H27zM8,21H9V22H8zM9,21H10V22H9zM11,21H12V22H11zM12,21H13V22H12zM13,21H14V22H13zM14,21H15V22H14zM20,21H21V22H20zM24,21H25V22H24zM25,21H26V22H25zM26,21H27V22H26zM28,21H29V22H28zM0,22H1V23H0zM1,22H2V23H1zM2,22H3V23H2zM3,22H4V23H3zM4,22H5V23H4zM5,22H6V23H5zM6,22H7V23H6zM8,22H9V23H8zM9,22H10V23H9zM10,22H11V23H10zM15,22H16V23H15zM16,22H17V23H16zM20,22H21V23H20zM22,22H23V23H22zM24,22H25V23H24zM28,22H29V23H28zM0,23H1V24H0zM6,23H7V24H6zM10,23H11V24H10zM12,23H13V24H12zM13,23H14V24H13zM15,23H16V24H15zM16,23H17V24H16zM19,23H20V24H19zM20,23H21V24H20zM24,23H25V24H24zM27,23H28V24H27zM28,23H29V24H28zM0,24H1V25H0zM2,24H3V25H2zM3,24H4V25H3zM4,24H5V25H4zM6,24H7V25H6zM9,24H10V25H9zM10,24H11V25H10zM13,24H14V25H13zM15,24H16V25H15zM18,24H19V25H18zM19,24H20V25H19zM20,24H21V25H20zM21,24H22V25H21zM22,24H23V25H22zM23,24H24V25H23zM24,24H25V25H24zM25,24H26V25H25zM0,25H1V26H0zM2,25H3V26H2zM3,25H4V26H3zM4,25H5V26H4zM6,25H7V26H6zM9,25H10V26H9zM10,25H11V26H10zM11,25H12V26H11zM15,25H16V26H15zM16,25H17V26H16zM17,25H18V26H17zM18,25H19V26H18zM20,25H21V26H20zM21,25H22V26H21zM24,25H25V26H24zM25,25H26V26H25zM26,25H27V26H26zM27,25H28V26H27zM0,26H1V27H0zM2,26H3V27H2zM3,26H4V27H3zM4,26H5V27H4zM6,26H7V27H6zM8,26H9V27H8zM9,26H10V27H9zM11,26H12V27H11zM12,26H13V27H12zM13,26H14V27H13zM14,26H15V27H14zM15,26H16V27H15zM17,26H18V27H17zM19,26H20V27H19zM20,26H21V27H20zM21,26H22V27H21zM24,26H25V27H24zM27,26H28V27H27zM28,26H29V27H28zM0,27H1V28H0zM6,27H7V28H6zM9,27H10V28H9zM11,27H12V28H11zM13,27H14V28H13zM15,27H16V28H15zM18,27H19V28H18zM19,27H20V28H19zM20,27H21V28H20zM21,27H22V28H21zM22,27H23V28H22zM23,27H24V28H23zM24,27H25V28H24zM25,27H26V28H25zM0,28H1V29H0zM1,28H2V29H1zM2,28H3V29H2zM3,28H4V29H3zM4,28H5V29H4zM5,28H6V29H5zM6,28H7V29H6zM8,28H9V29H8zM12,28H13V29H12zM13,28H14V29H13zM15,28H16V29H15zM16,28H17V29H16zM20,28H21V29H20zM25,28H26V29H25zM28,28H29V29H28z" id="qr-path" fill="#000000" fill-opacity="1" fill-rule="nonzero" stroke="none" /></svg></div>
+      <p><b>// portfolio</b><br>études de cas,<br>captures, mode<br>terminal</p>
+    </div>
+  </aside>
+
+  <main>
+    <div class="prompt"><span class="p">~/odilon.uncoded</span><span class="s">$</span>cat cv.md</div>
+    <p class="tagline">Construire l'outil, structurer le contenu, porter le message.</p>
+    <p class="intro">Je conçois des outils no-code &amp; IA qui résolvent des problèmes concrets : apps, automations, interfaces, de l'idée à la mise en production. Mon atout : plus de dix ans de stratégie éditoriale et de communication, pour des produits qui tiennent aussi par leurs contenus, leurs process et leur diffusion.</p>
+
+    <section>
+      <div class="sh"><span class="idx">01</span><h2>Parcours</h2><span class="rule"></span></div>
+      <div class="job">
+        <div><h3>Responsable Communication &amp; Innovation Digitale</h3><div class="org">La Lune Rousse · Ground Control · Paris<span class="kw">// rayonnement</span></div></div>
+        <div class="dates">2023 — en poste</div>
+        <p>Stratégie 360° et production éditoriale multi-format. Conception des outils internes du service : un Notion OS (événements, publications, validation), des pipelines vers le site et la newsletter, un agenda web qui se met à jour seul. Direction du récit, relations presse, management d'équipe, réseaux, newsletters, vidéo et podcast.</p>
+      </div>
+      <div class="job">
+        <div><h3>Chargé de Communication Senior</h3><div class="org">Musée national de la Marine · Paris<span class="kw">// récit</span></div></div>
+        <div class="dates">2018 — 2023</div>
+        <p>Communication interne et externe en contexte institutionnel. Stratégie éditoriale, pilotage budgétaire, production graphique, community management de comptes à +100K abonnés, méthodes de production pensées pour durer.</p>
+      </div>
+      <div class="job">
+        <div><h3>Chargé de Communication · Pôle Ressources</h3><div class="org">Grands Formats · Paris<span class="kw">// valorisation</span></div></div>
+        <div class="dates">2017 — 2018</div>
+        <p>Ressources et support communication dans un environnement éditorial soutenu : process, coordination, qualité d'exécution.</p>
+      </div>
+      <div class="job">
+        <div><h3>Chargé de Communication</h3><div class="org">Carreau du Temple · Paris<span class="kw">// amorce</span></div></div>
+        <div class="dates">2014 — 2016</div>
+        <p>Premier terrain dans un lieu culturel hybride : communication, contenus, production, compréhension des publics.</p>
+      </div>
+    </section>
+
+    <section>
+      <div class="sh"><span class="idx">02</span><h2>Produits</h2><span class="rule"></span></div>
+      <div class="cases">
+        <div class="case">
+          <div class="meta">PWA · accompagnement naissance</div>
+          <h3>naïko</h3>
+          <p>Les cours et les livres s'adressent à la personne qui accouche. naïko donne à celle qui l'accompagne des repères utilisables dans l'instant, hors ligne et sans compte.</p>
+          <div class="impact"><span>MVP en prod 7 h après le 1er commit</span><span>1 700 visites depuis avril · 87 % mobile</span></div>
+          <div class="link">→ naiko.app</div>
+        </div>
+        <div class="case">
+          <div class="meta">PWA · Ground Control</div>
+          <h3>Festival des Médias Indépendants</h3>
+          <p>Un programme qui bouge jusqu'à la dernière minute : une PWA temps réel alimentée par Notion, que l'équipe met à jour sans redéployer.</p>
+          <div class="impact"><span>En prod 2 h après le 1er commit</span><span>Livrée en 7 jours, seul, sans budget</span></div>
+          <div class="link">→ fmiapp.pages.dev</div>
+        </div>
+        <div class="case">
+          <div class="meta">Operating system · La Lune Rousse</div>
+          <h3>Notion OS : service communication</h3>
+          <p>Des infos d'événements éparpillées entre mails et SharePoint : une source de vérité commune, de l'info brute à la publication, avec une étape de validation.</p>
+          <div class="impact"><span>6 statuts, de l'info brute à la publication</span><span>Newsletter générée depuis Notion jusqu'au BAT</span></div>
+        </div>
+        <div class="case">
+          <div class="meta">Notion × Make × WordPress</div>
+          <h3>Automations</h3>
+          <p>La page Programmation du site se construit seule à partir des fiches événement ; la programmation complète d'un festival publiée d'un coup depuis Notion.</p>
+          <div class="impact"><span>≈ 1 h gagnée par semaine</span><span>Agenda en production, sans supervision</span></div>
+        </div>
+      </div>
+    </section>
+
+    <div class="foot"><span>Études de cas détaillées, captures et mode terminal : <b>odiloncorby.com</b></span><span>2026</span></div>
+  </main>
+</div>
+</body>
+</html>
