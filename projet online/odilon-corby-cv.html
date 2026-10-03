@@ -727,6 +727,10 @@
     width: fit-content;
   }
 
+  @media (max-width: 480px) {
+    .case-study-flow { font-size: 10px; padding: 12px 12px; }
+  }
+
   .case-study-stack {
     font-family: var(--font-mono);
     font-size: 11px;
@@ -1603,15 +1607,18 @@
               <span class="case-study-meta">02 — Operating system · La Lune Rousse · Ground Control</span>
               <span class="case-study-title">Notion OS : service communication</span>
               <span class="case-study-teaser">Des infos d'événements éparpillées entre mails, pièces jointes et SharePoint : une source de vérité commune, de l'info brute à la publication.</span>
-              <span class="case-study-impact"><span>6 statuts, de l'info brute à la publication</span><span>Calendrier éditorial et dashboard en usage</span></span>
+              <span class="case-study-impact"><span>6 statuts, de l'info brute à la publication</span><span>Newsletter générée depuis Notion jusqu'au BAT</span><span>Calendrier éditorial et dashboard en usage</span></span>
           </div>
-          <pre class="case-study-flow" role="img" aria-label="Workflow d'un événement dans le Notion OS : info brute reçue, traitement éditorial, validé com, production, publié, archive">info brute reçue
+          <pre class="case-study-flow" role="img" aria-label="Workflow d'un événement dans le Notion OS : info brute reçue, traitement éditorial, validé com, puis production vers le site (Notion, Make, WordPress), la newsletter (Notion, JSON, Brevo) et les réseaux (calendrier éditorial), puis publié et archive">info brute reçue
    ▼
 traitement éditorial
    ▼
 validé com ── barrière avant production
    ▼
-production · site, réseaux, newsletter
+production
+   ├─ site        notion → make → wordpress
+   ├─ newsletter  notion → json → brevo
+   └─ réseaux     calendrier éditorial
    ▼
 publié → archive</pre>
           <button class="case-study-toggle" aria-expanded="false" aria-controls="case-notion"><span class="case-study-label">[+] lire l'étude de cas</span></button>
@@ -1626,14 +1633,16 @@ publié → archive</pre>
                 <div class="case-study-detail-label">Ce que j'ai construit</div>
                 <p>Une architecture relationnelle dans Notion, conçue en avril 2026 pour une équipe de six personnes : événements, publications, plans de com, projets et tâches. SharePoint reste l'espace de stockage, les outils de diffusion restent en place.</p>
                 <p>Chaque événement suit six statuts : info brute reçue, en traitement éditorial, validé com, en production, publié, archive. Règle métier : la production ne démarre qu'une fois l'information validée par la communication.</p>
-                <p>Autour de ce noyau : un calendrier de publication, un dashboard des événements Ground Control, et un premier pipeline vers le site, détaillé dans la fiche Automations.</p>
+                <p>Autour de ce noyau : un calendrier de publication, un dashboard des événements Ground Control, et deux pipelines de sortie. Vers le site, détaillé dans la fiche Automations. Vers la newsletter, ci-dessous.</p>
+                <p>Newsletter : chaque événement porte son texte, son visuel et sa présence dans la newsletter ; une base d'éditions (objet, préheader, état) les regroupe. Les données sont normalisées en JSON (vedette, semaine, à venir) et injectées dans le template Brevo existant, jusqu'au brouillon de campagne et au BAT. Le template reste modifiable dans Brevo, la validation et la programmation restent humaines.</p>
               </div>
               <div class="case-study-detail">
                 <div class="case-study-detail-label">Impact</div>
                 <p>Le calendrier de publication et le dashboard des événements sont utilisés par l'équipe et consultés par la direction. Chaque projet a désormais un statut visible, là où l'Excel n'était jamais à jour. En septembre 2026, l'intégration d'une deuxième structure du groupe, Communale, est demandée.</p>
-                <p>Prochaine étape : étendre aux événements courants l'automatisation du site testée sur le festival, en la déclenchant au statut « validé com ».</p>
+                <p>Le pipeline newsletter a été testé en août 2026 sur une édition réelle : dix événements (une vedette, trois de la semaine, six à venir), jusqu'au brouillon de campagne et au BAT.</p>
+                <p>Prochaines étapes : remplacer la couche de test du pipeline newsletter par un Worker Notion et héberger les images de façon pérenne ; étendre aux événements courants l'automatisation du site testée sur le festival, déclenchée au statut « validé com ».</p>
               </div>
-              <p class="case-study-stack"><span>stack</span> Notion · Make · SharePoint</p>
+              <p class="case-study-stack"><span>stack</span> Notion · Make · Brevo · SharePoint</p>
             </div>
           </div>
         </div>

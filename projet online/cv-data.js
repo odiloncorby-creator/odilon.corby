@@ -80,9 +80,9 @@ window.CV = {
       title: 'Notion OS : service communication',
       meta: 'Operating system · La Lune Rousse · Ground Control',
       teaser: "Des infos d'événements éparpillées entre mails, pièces jointes et SharePoint : une source de vérité commune, de l'info brute à la publication.",
-      impact: ["6 statuts, de l'info brute à la publication", 'Calendrier éditorial et dashboard en usage'],
+      impact: ["6 statuts, de l'info brute à la publication", "Newsletter générée depuis Notion jusqu'au BAT", 'Calendrier éditorial et dashboard en usage'],
       flow: {
-        alt: "Workflow d'un événement dans le Notion OS : info brute reçue, traitement éditorial, validé com, production, publié, archive",
+        alt: "Workflow d'un événement dans le Notion OS : info brute reçue, traitement éditorial, validé com, puis production vers le site (Notion, Make, WordPress), la newsletter (Notion, JSON, Brevo) et les réseaux (calendrier éditorial), puis publié et archive",
         lines: [
           'info brute reçue',
           '   ▼',
@@ -90,7 +90,10 @@ window.CV = {
           '   ▼',
           'validé com ── barrière avant production',
           '   ▼',
-          'production · site, réseaux, newsletter',
+          'production',
+          '   ├─ site        notion → make → wordpress',
+          '   ├─ newsletter  notion → json → brevo',
+          '   └─ réseaux     calendrier éditorial',
           '   ▼',
           'publié → archive'
         ]
@@ -102,13 +105,15 @@ window.CV = {
       construit: [
         "Une architecture relationnelle dans Notion, conçue en avril 2026 pour une équipe de six personnes : événements, publications, plans de com, projets et tâches. SharePoint reste l'espace de stockage, les outils de diffusion restent en place.",
         "Chaque événement suit six statuts : info brute reçue, en traitement éditorial, validé com, en production, publié, archive. Règle métier : la production ne démarre qu'une fois l'information validée par la communication.",
-        'Autour de ce noyau : un calendrier de publication, un dashboard des événements Ground Control, et un premier pipeline vers le site, détaillé dans la fiche Automations.'
+        'Autour de ce noyau : un calendrier de publication, un dashboard des événements Ground Control, et deux pipelines de sortie. Vers le site, détaillé dans la fiche Automations. Vers la newsletter, ci-dessous.',
+        "Newsletter : chaque événement porte son texte, son visuel et sa présence dans la newsletter ; une base d'éditions (objet, préheader, état) les regroupe. Les données sont normalisées en JSON (vedette, semaine, à venir) et injectées dans le template Brevo existant, jusqu'au brouillon de campagne et au BAT. Le template reste modifiable dans Brevo, la validation et la programmation restent humaines."
       ],
       resultat: [
         "Le calendrier de publication et le dashboard des événements sont utilisés par l'équipe et consultés par la direction. Chaque projet a désormais un statut visible, là où l'Excel n'était jamais à jour. En septembre 2026, l'intégration d'une deuxième structure du groupe, Communale, est demandée.",
-        "Prochaine étape : étendre aux événements courants l'automatisation du site testée sur le festival, en la déclenchant au statut « validé com »."
+        "Le pipeline newsletter a été testé en août 2026 sur une édition réelle : dix événements (une vedette, trois de la semaine, six à venir), jusqu'au brouillon de campagne et au BAT.",
+        "Prochaines étapes : remplacer la couche de test du pipeline newsletter par un Worker Notion et héberger les images de façon pérenne ; étendre aux événements courants l'automatisation du site testée sur le festival, déclenchée au statut « validé com »."
       ],
-      stack: ['Notion', 'Make', 'SharePoint']
+      stack: ['Notion', 'Make', 'Brevo', 'SharePoint']
     },
     {
       id: 'fmi',
