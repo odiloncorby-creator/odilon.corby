@@ -78,10 +78,10 @@
     <text x="272.11" y="754.95" font-family="Geist" font-size="10.4" font-weight="400" fill="#2A2926" xml:space="preserve">l'accompagne des repères utilisables dans</text>
     <text x="272.11" y="769.72" font-family="Geist" font-size="10.4" font-weight="400" fill="#2A2926" xml:space="preserve">l'instant, hors ligne et sans compte.</text>
     <text x="272.11" y="788.02" font-family="Geist Mono" font-size="9.33333" font-weight="400" fill="#8C887E" xml:space="preserve">▸</text>
-    <text x="283.33" y="788.02" font-family="Geist Mono" font-size="9.33333" font-weight="400" fill="#3E6656" xml:space="preserve">MVP en prod 7 h après le 1er commit</text>
+    <text x="283.33" y="788.02" font-family="Geist Mono" font-size="9.33333" font-weight="400" fill="#3E6656" xml:space="preserve">Testée sur 2 naissances réelles</text>
     <text x="272.11" y="802" font-family="Geist Mono" font-size="9.33333" font-weight="400" fill="#8C887E" xml:space="preserve">▸</text>
-    <text x="283.33" y="802" font-family="Geist Mono" font-size="9.33333" font-weight="400" fill="#3E6656" xml:space="preserve">1 700 visites depuis avril · 87 %</text>
-    <text x="272.11" y="815.98" font-family="Geist Mono" font-size="9.33333" font-weight="400" fill="#3E6656" xml:space="preserve">mobile</text>
+    <text x="283.33" y="802" font-family="Geist Mono" font-size="9.33333" font-weight="400" fill="#3E6656" xml:space="preserve">1 700 visites · 33 configurations</text>
+    <text x="272.11" y="815.98" font-family="Geist Mono" font-size="9.33333" font-weight="400" fill="#3E6656" xml:space="preserve">terminées</text>
     <text x="272.11" y="833.73" font-family="Geist Mono" font-size="9.33333" font-weight="400" fill="#6F6B62" xml:space="preserve">→ naiko.app</text>
   </g>
   <g id="produit-festival-des-medias-independants">
@@ -92,10 +92,11 @@
     <text x="521.56" y="740.19" font-family="Geist" font-size="10.4" font-weight="400" fill="#2A2926" xml:space="preserve">minute : une PWA temps réel alimentée par</text>
     <text x="521.56" y="754.95" font-family="Geist" font-size="10.4" font-weight="400" fill="#2A2926" xml:space="preserve">Notion, que l'équipe met à jour sans redéployer.</text>
     <text x="521.56" y="773.25" font-family="Geist Mono" font-size="9.33333" font-weight="400" fill="#8C887E" xml:space="preserve">▸</text>
-    <text x="532.78" y="773.25" font-family="Geist Mono" font-size="9.33333" font-weight="400" fill="#3E6656" xml:space="preserve">En prod 2 h après le 1er commit</text>
-    <text x="521.56" y="787.23" font-family="Geist Mono" font-size="9.33333" font-weight="400" fill="#8C887E" xml:space="preserve">▸</text>
-    <text x="532.78" y="787.23" font-family="Geist Mono" font-size="9.33333" font-weight="400" fill="#3E6656" xml:space="preserve">Livrée en 7 jours, seul, sans budget</text>
-    <text x="521.56" y="804.98" font-family="Geist Mono" font-size="9.33333" font-weight="400" fill="#6F6B62" xml:space="preserve">→ fmiapp.pages.dev</text>
+    <text x="532.78" y="773.25" font-family="Geist Mono" font-size="9.33333" font-weight="400" fill="#3E6656" xml:space="preserve">Programme corrigé en direct depuis</text>
+    <text x="521.56" y="787.23" font-family="Geist Mono" font-size="9.33333" font-weight="400" fill="#3E6656" xml:space="preserve">Notion</text>
+    <text x="521.56" y="801.22" font-family="Geist Mono" font-size="9.33333" font-weight="400" fill="#8C887E" xml:space="preserve">▸</text>
+    <text x="532.78" y="801.22" font-family="Geist Mono" font-size="9.33333" font-weight="400" fill="#3E6656" xml:space="preserve">Livrée en 7 jours, seul, sans budget</text>
+    <text x="521.56" y="818.97" font-family="Geist Mono" font-size="9.33333" font-weight="400" fill="#6F6B62" xml:space="preserve">→ fmiapp.pages.dev</text>
   </g>
   <g id="produit-notion-os-service-communication">
     <rect id="filet" x="272.11" y="848.06" width="230.56" height="1" fill="#0A0A0A"/>
@@ -123,7 +124,8 @@
     <text x="521.56" y="964.98" font-family="Geist Mono" font-size="9.33333" font-weight="400" fill="#8C887E" xml:space="preserve">▸</text>
     <text x="532.78" y="964.98" font-family="Geist Mono" font-size="9.33333" font-weight="400" fill="#3E6656" xml:space="preserve">≈ 1 h gagnée par semaine</text>
     <text x="521.56" y="978.97" font-family="Geist Mono" font-size="9.33333" font-weight="400" fill="#8C887E" xml:space="preserve">▸</text>
-    <text x="532.78" y="978.97" font-family="Geist Mono" font-size="9.33333" font-weight="400" fill="#3E6656" xml:space="preserve">Agenda en production, sans supervision</text>
+    <text x="532.78" y="978.97" font-family="Geist Mono" font-size="9.33333" font-weight="400" fill="#3E6656" xml:space="preserve">Toute la prog du FMI publiée en un</text>
+    <text x="521.56" y="992.95" font-family="Geist Mono" font-size="9.33333" font-weight="400" fill="#3E6656" xml:space="preserve">batch</text>
   </g>
   <g id="pied">
     <rect id="filet" x="272.11" y="1067.95" width="480.02" height="1" fill="#D8D4C8"/>
