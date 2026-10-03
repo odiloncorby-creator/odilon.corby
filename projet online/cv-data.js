@@ -85,13 +85,22 @@ window.CV = {
       id: 'fmi',
       title: 'Festival des Médias Indépendants',
       meta: 'PWA · Ground Control',
-      teaser: 'Donner au public la programmation en temps réel, sans app à télécharger ni budget : une PWA construite seul, en une itération.',
-      impact: ['Construite seul, sans budget', "Utilisée pendant l'événement, via QR codes"],
+      teaser: "Un programme qui bouge jusqu'à la dernière minute, des visiteurs qui doivent savoir ce qui se passe maintenant : une PWA en ligne 2 h après le premier commit.",
+      impact: ['En prod 2 h après le premier commit', 'Livrée en 7 jours, seul, sans budget'],
+      shots: [
+        { src: 'img/fmi-03-plan.webp', alt: "Écran Plan de l'app FMI : plan simplifié du festival, 8 espaces numérotés", caption: "Plan : 8 espaces, chacun relié à sa page" },
+        { src: 'img/fmi-04-cathedrale-exposition.webp', alt: "Écran de l'espace Cathédrale : présentation de l'exposition (in)dépendances, boutons vers le plan, la programmation et l'expo", caption: "Page espace : l'exposition de l'édition" },
+        { src: 'img/fmi-05-manifeste.webp', alt: "Écran Manifeste de l'app FMI : le texte éditorial du festival", caption: "Manifeste : le ton éditorial dans l'app" }
+      ],
       probleme: [
-        "Donner au public du festival la programmation en temps réel, sans app à télécharger, sans budget ni campagne dédiée : la seule diffusion possible passait par la signalétique du site.",
+        "Pendant les deux jours du festival, les visiteurs doivent savoir sur place ce qui se passe maintenant, où ça se passe, et trouver les infos pratiques. Le programme bouge jusqu'à la dernière minute : l'équipe doit pouvoir le mettre à jour sans redéployer. Le délai est très court, sans budget ni campagne dédiée.",
         "En préparant la communication, j'avais centralisé toute la programmation dans une base de données. En voyant la structure, j'ai compris que j'avais tout ce qu'il fallait pour construire une app. Je l'ai fait de ma propre initiative."
       ],
-      construit: 'Une PWA accessible sans téléchargement : onglet « en ce moment » en temps réel, programme complet, plan du site, manifeste du festival, redirections réseaux et pages dédiées food et thématique de la saison de programmation.',
+      construit: [
+        'Une PWA accessible sans téléchargement : onglet « en ce moment » en temps réel, programme complet, plan du site, manifeste du festival, redirections réseaux et pages dédiées food et thématique de la saison de programmation.',
+        "Le programme est lu en direct dans Notion : l'équipe le corrige sans toucher au code, et la modification apparaît immédiatement dans l'app.",
+        'Premier commit le 18 avril, première mise en prod 2 h 14 plus tard, ouverture du festival le 25 : 37 commits et 35 déploiements en une semaine.'
+      ],
       resultat: "Déployée et utilisée pendant l'événement, distribuée uniquement via des QR codes sur la signalétique. Sans communication en amont : 30 visiteurs. Le produit a tenu, c'est la distribution qui a manqué : la prochaine itération aura une vraie campagne de déploiement.",
       stack: ['React', 'TypeScript', 'Vite', 'Tailwind CSS', 'React Router', 'Cloudflare Pages', 'Notion API'],
       link: { href: 'https://fmiapp.pages.dev', label: 'fmiapp.pages.dev' }

@@ -683,6 +683,36 @@
 
   .case-study-impact span::before { content: '▸ '; color: var(--text-faint); }
 
+  .case-study-shots {
+    display: flex;
+    gap: 14px;
+    margin-top: 22px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: thin;
+    padding-bottom: 4px;
+  }
+
+  .case-study-shot {
+    flex: 0 0 auto;
+    width: clamp(150px, 40vw, 200px);
+    margin: 0;
+    scroll-snap-align: start;
+  }
+
+  .case-study-shot a { display: block; border: var(--border-hairline-soft); line-height: 0; }
+  .case-study-shot a:hover, .case-study-shot a:focus-visible { border-color: var(--accent-primary); }
+
+  .case-study-shot img { width: 100%; height: auto; display: block; }
+
+  .case-study-shot figcaption {
+    margin-top: 8px;
+    font-family: var(--font-mono);
+    font-size: 10px;
+    line-height: 1.5;
+    color: var(--text-faint);
+  }
+
   .case-study-stack {
     font-family: var(--font-mono);
     font-size: 11px;
@@ -1563,21 +1593,37 @@
             <span class="case-study-head">
               <span class="case-study-meta">03 — PWA · Ground Control</span>
               <span class="case-study-title">Festival des Médias Indépendants</span>
-              <span class="case-study-teaser">Donner au public la programmation en temps réel, sans app à télécharger ni budget : une PWA construite seul, en une itération.</span>
-              <span class="case-study-impact"><span>Construite seul, sans budget</span><span>Utilisée pendant l'événement, via QR codes</span></span>
+              <span class="case-study-teaser">Un programme qui bouge jusqu'à la dernière minute, des visiteurs qui doivent savoir ce qui se passe maintenant : une PWA en ligne 2 h après le premier commit.</span>
+              <span class="case-study-impact"><span>En prod 2 h après le premier commit</span><span>Livrée en 7 jours, seul, sans budget</span></span>
             </span>
             <span class="case-study-label">[+] détail</span>
           </button>
+          <div class="case-study-shots">
+            <figure class="case-study-shot">
+              <a href="img/fmi-03-plan.webp" target="_blank" rel="noreferrer"><img src="img/fmi-03-plan.webp" alt="Écran Plan de l'app FMI : plan simplifié du festival, 8 espaces numérotés" width="480" height="1039" loading="lazy" decoding="async"></a>
+              <figcaption>Plan : 8 espaces, chacun relié à sa page</figcaption>
+            </figure>
+            <figure class="case-study-shot">
+              <a href="img/fmi-04-cathedrale-exposition.webp" target="_blank" rel="noreferrer"><img src="img/fmi-04-cathedrale-exposition.webp" alt="Écran de l'espace Cathédrale : présentation de l'exposition (in)dépendances, boutons vers le plan, la programmation et l'expo" width="480" height="1039" loading="lazy" decoding="async"></a>
+              <figcaption>Page espace : l'exposition de l'édition</figcaption>
+            </figure>
+            <figure class="case-study-shot">
+              <a href="img/fmi-05-manifeste.webp" target="_blank" rel="noreferrer"><img src="img/fmi-05-manifeste.webp" alt="Écran Manifeste de l'app FMI : le texte éditorial du festival" width="480" height="1039" loading="lazy" decoding="async"></a>
+              <figcaption>Manifeste : le ton éditorial dans l'app</figcaption>
+            </figure>
+          </div>
           <div class="case-study-body" id="case-fmi">
             <div class="case-study-body-inner">
               <div class="case-study-detail">
                 <div class="case-study-detail-label">Problème</div>
-                <p>Donner au public du festival la programmation en temps réel, sans app à télécharger, sans budget ni campagne dédiée : la seule diffusion possible passait par la signalétique du site.</p>
+                <p>Pendant les deux jours du festival, les visiteurs doivent savoir sur place ce qui se passe maintenant, où ça se passe, et trouver les infos pratiques. Le programme bouge jusqu'à la dernière minute : l'équipe doit pouvoir le mettre à jour sans redéployer. Le délai est très court, sans budget ni campagne dédiée.</p>
                 <p>En préparant la communication, j'avais centralisé toute la programmation dans une base de données. En voyant la structure, j'ai compris que j'avais tout ce qu'il fallait pour construire une app. Je l'ai fait de ma propre initiative.</p>
               </div>
               <div class="case-study-detail">
                 <div class="case-study-detail-label">Ce que j'ai construit</div>
                 <p>Une PWA accessible sans téléchargement : onglet « en ce moment » en temps réel, programme complet, plan du site, manifeste du festival, redirections réseaux et pages dédiées food et thématique de la saison de programmation.</p>
+                <p>Le programme est lu en direct dans Notion : l'équipe le corrige sans toucher au code, et la modification apparaît immédiatement dans l'app.</p>
+                <p>Premier commit le 18 avril, première mise en prod 2 h 14 plus tard, ouverture du festival le 25 : 37 commits et 35 déploiements en une semaine.</p>
               </div>
               <div class="case-study-detail">
                 <div class="case-study-detail-label">Impact</div>
