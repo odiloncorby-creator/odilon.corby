@@ -1599,35 +1599,39 @@
             <span class="case-study-head">
               <span class="case-study-meta">02 — Operating system · La Lune Rousse · Ground Control</span>
               <span class="case-study-title">Notion OS : service communication</span>
-              <span class="case-study-teaser">Une équipe com réduite qui suivait ses projets dans un Excel jamais à jour : un seul espace de pilotage, de la préparation à la diffusion.</span>
-              <span class="case-study-impact"><span>Excel + SharePoint → un seul espace de travail</span><span>Statut d'avancement visible pour chaque projet</span></span>
+              <span class="case-study-teaser">Des infos d'événements éparpillées entre mails, pièces jointes et SharePoint : une source de vérité commune, de l'info brute à la publication.</span>
+              <span class="case-study-impact"><span>6 statuts, de l'info brute à la publication</span><span>Calendrier éditorial et dashboard en usage</span></span>
             </span>
             <span class="case-study-label">[+] détail</span>
           </button>
-          <pre class="case-study-flow" role="img" aria-label="Schéma du Notion OS : événements reliés aux tâches, textes et calendrier de publication, validation humaine, puis diffusion newsletter, réseaux et site">événements ──┬── tâches
-             ├── textes
-             └── calendrier
-                   │
-                   │ validation humaine
-                   ▼
-  newsletter · réseaux · site
-    brevo      buffer   wordpress</pre>
+          <pre class="case-study-flow" role="img" aria-label="Workflow d'un événement dans le Notion OS : info brute reçue, traitement éditorial, validé com, production, publié, archive">info brute reçue
+   ▼
+traitement éditorial
+   ▼
+validé com ── barrière avant production
+   ▼
+production · site, réseaux, newsletter
+   ▼
+publié → archive</pre>
           <div class="case-study-body" id="case-notion">
             <div class="case-study-body-inner">
               <div class="case-study-detail">
                 <div class="case-study-detail-label">Problème</div>
-                <p>Une équipe communication réduite, avec un turnover régulier. L'information était dispersée entre événements, tâches, calendrier éditorial, newsletters et mises à jour du site. Le suivi des projets reposait sur un fichier Excel qui n'était pas tenu à jour ; les textes éditoriaux étaient éparpillés dans SharePoint.</p>
-                <p>Préparer une page événement à la main demandait 10 à 60 minutes selon les visuels disponibles, les formats et l'intégration d'outils de billetterie.</p>
+                <p>Le service communication reçoit les informations des événements par plusieurs canaux, souvent encore immatures : mails de confirmation, pièces jointes, SharePoint, programmation, artistes, partenaires. Difficile, dans ces conditions, de savoir où en est un événement, ce qui manque, ce qui est validé et ce qu'il reste à produire.</p>
+                <p>Le suivi des projets reposait sur un fichier Excel qui n'était pas tenu à jour ; les textes éditoriaux étaient éparpillés dans SharePoint. Préparer une page événement à la main demandait 10 à 60 minutes selon les visuels, les formats et la billetterie.</p>
               </div>
               <div class="case-study-detail">
                 <div class="case-study-detail-label">Ce que j'ai construit</div>
-                <p>J'ai conçu un système d'exploitation interne dans Notion qui relie les événements, les tâches, le calendrier de publication et les newsletters. Les automatisations exécutent les opérations répétitives, avec validation humaine avant diffusion. La brique dédiée au site (Notion → Make → WordPress) est détaillée dans la fiche Automations.</p>
+                <p>Une architecture relationnelle dans Notion, conçue en avril 2026 pour une équipe de six personnes : événements, publications, plans de com, projets et tâches. SharePoint reste l'espace de stockage, les outils de diffusion restent en place.</p>
+                <p>Chaque événement suit six statuts : info brute reçue, en traitement éditorial, validé com, en production, publié, archive. Règle métier : la production ne démarre qu'une fois l'information validée par la communication.</p>
+                <p>Autour de ce noyau : un calendrier de publication, un dashboard des événements Ground Control, et la création automatique des pages du site, détaillée dans la fiche Automations.</p>
               </div>
               <div class="case-study-detail">
                 <div class="case-study-detail-label">Impact</div>
-                <p>Chaque projet de communication a désormais un statut d'avancement visible. L'équipe retrouve au même endroit l'état des projets, les tâches, les textes et le calendrier de publication. Elle peut suivre le travail de la préparation à la validation, puis à la diffusion.</p>
+                <p>Le calendrier de publication et le dashboard des événements sont utilisés par l'équipe et consultés par la direction. Chaque projet a désormais un statut visible, là où l'Excel n'était jamais à jour. En septembre 2026, l'intégration d'une deuxième structure du groupe, Communale, est demandée.</p>
+                <p>Prochaine étape : brancher la barrière « validé com » sur l'automatisation du site, qui crée aujourd'hui la page dès la création de la fiche.</p>
               </div>
-              <p class="case-study-stack"><span>stack</span> Notion · Notion Worker · Make · Brevo · Buffer</p>
+              <p class="case-study-stack"><span>stack</span> Notion · Make · SharePoint</p>
             </div>
           </div>
         </div>
@@ -1692,16 +1696,16 @@
             <span class="case-study-head">
               <span class="case-study-meta">04 — Notion × Make × WordPress · Ground Control</span>
               <span class="case-study-title">Automations</span>
-              <span class="case-study-teaser">Les mises à jour manuelles du site WordPress prenaient du temps chaque semaine : un pipeline qui publie en batch et tourne sans supervision.</span>
+              <span class="case-study-teaser">Les mises à jour manuelles du site WordPress prenaient du temps chaque semaine : les pages du site se créent depuis Notion et l'agenda tourne sans supervision.</span>
               <span class="case-study-impact"><span>≈ 1 h gagnée par semaine</span><span>En production sans supervision pendant un congé paternité</span></span>
             </span>
             <span class="case-study-label">[+] détail</span>
           </button>
-          <pre class="case-study-flow" role="img" aria-label="Schéma du pipeline : base Notion des projets, Make crée les pages en batch, WordPress affiche la page Programmation triée et sans événements passés">notion · base projets
-   │ 1 trigger
+          <pre class="case-study-flow" role="img" aria-label="Schéma du pipeline : une nouvelle fiche dans la base Événements crée via Make la page projet WordPress avec ses champs et son image ; la page Programmation se construit seule">notion · base événements
+   │ nouvelle fiche
    ▼
-make · création en batch
-   │ champs ACF
+make · page projet créée
+   │ 9 champs ACF + image à la une
    ▼
 wordpress · pages projet
    │ [gc_agenda]
@@ -1716,7 +1720,7 @@ page programmation
               </div>
               <div class="case-study-detail">
                 <div class="case-study-detail-label">Ce que j'ai construit</div>
-                <p>Un pipeline Notion → Make → WordPress pour la création et la mise en ligne des pages de programmation en batch, déclenché par un seul trigger.</p>
+                <p>Un scénario Make, en place depuis mars 2026 : chaque nouvelle fiche de la base Événements crée la page projet WordPress, y reporte neuf champs (dates, horaires, lieu, billetterie, description, typologie, programmation…) et télécharge l'image principale comme image à la une.</p>
                 <p>La page Programmation se construit seule à partir des pages projet : un shortcode trie les événements par date, place les événements récurrents à leur prochaine occurrence, n'affiche que les 45 jours à venir et retire les événements passés. L'équipe remplit une fiche, le site fait le reste.</p>
               </div>
               <div class="case-study-detail">

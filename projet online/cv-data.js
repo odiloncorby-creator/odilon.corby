@@ -79,28 +79,36 @@ window.CV = {
       id: 'notion-os',
       title: 'Notion OS : service communication',
       meta: 'Operating system · La Lune Rousse · Ground Control',
-      teaser: 'Une équipe com réduite qui suivait ses projets dans un Excel jamais à jour : un seul espace de pilotage, de la préparation à la diffusion.',
-      impact: ['Excel + SharePoint → un seul espace de travail', "Statut d'avancement visible pour chaque projet"],
+      teaser: "Des infos d'événements éparpillées entre mails, pièces jointes et SharePoint : une source de vérité commune, de l'info brute à la publication.",
+      impact: ["6 statuts, de l'info brute à la publication", 'Calendrier éditorial et dashboard en usage'],
       flow: {
-        alt: 'Schéma du Notion OS : événements reliés aux tâches, textes et calendrier de publication, validation humaine, puis diffusion newsletter, réseaux et site',
+        alt: "Workflow d'un événement dans le Notion OS : info brute reçue, traitement éditorial, validé com, production, publié, archive",
         lines: [
-          'événements ──┬── tâches',
-          '             ├── textes',
-          '             └── calendrier',
-          '                   │',
-          '                   │ validation humaine',
-          '                   ▼',
-          '  newsletter · réseaux · site',
-          '    brevo      buffer   wordpress'
+          'info brute reçue',
+          '   ▼',
+          'traitement éditorial',
+          '   ▼',
+          'validé com ── barrière avant production',
+          '   ▼',
+          'production · site, réseaux, newsletter',
+          '   ▼',
+          'publié → archive'
         ]
       },
       probleme: [
-        "Une équipe communication réduite, avec un turnover régulier. L'information était dispersée entre événements, tâches, calendrier éditorial, newsletters et mises à jour du site. Le suivi des projets reposait sur un fichier Excel qui n'était pas tenu à jour ; les textes éditoriaux étaient éparpillés dans SharePoint.",
-        "Préparer une page événement à la main demandait 10 à 60 minutes selon les visuels disponibles, les formats et l'intégration d'outils de billetterie."
+        "Le service communication reçoit les informations des événements par plusieurs canaux, souvent encore immatures : mails de confirmation, pièces jointes, SharePoint, programmation, artistes, partenaires. Difficile, dans ces conditions, de savoir où en est un événement, ce qui manque, ce qui est validé et ce qu'il reste à produire.",
+        "Le suivi des projets reposait sur un fichier Excel qui n'était pas tenu à jour ; les textes éditoriaux étaient éparpillés dans SharePoint. Préparer une page événement à la main demandait 10 à 60 minutes selon les visuels, les formats et la billetterie."
       ],
-      construit: "J'ai conçu un système d'exploitation interne dans Notion qui relie les événements, les tâches, le calendrier de publication et les newsletters. Les automatisations exécutent les opérations répétitives, avec validation humaine avant diffusion. La brique dédiée au site (Notion → Make → WordPress) est détaillée dans la fiche Automations.",
-      resultat: "Chaque projet de communication a désormais un statut d'avancement visible. L'équipe retrouve au même endroit l'état des projets, les tâches, les textes et le calendrier de publication. Elle peut suivre le travail de la préparation à la validation, puis à la diffusion.",
-      stack: ['Notion', 'Notion Worker', 'Make', 'Brevo', 'Buffer']
+      construit: [
+        "Une architecture relationnelle dans Notion, conçue en avril 2026 pour une équipe de six personnes : événements, publications, plans de com, projets et tâches. SharePoint reste l'espace de stockage, les outils de diffusion restent en place.",
+        "Chaque événement suit six statuts : info brute reçue, en traitement éditorial, validé com, en production, publié, archive. Règle métier : la production ne démarre qu'une fois l'information validée par la communication.",
+        'Autour de ce noyau : un calendrier de publication, un dashboard des événements Ground Control, et la création automatique des pages du site, détaillée dans la fiche Automations.'
+      ],
+      resultat: [
+        "Le calendrier de publication et le dashboard des événements sont utilisés par l'équipe et consultés par la direction. Chaque projet a désormais un statut visible, là où l'Excel n'était jamais à jour. En septembre 2026, l'intégration d'une deuxième structure du groupe, Communale, est demandée.",
+        "Prochaine étape : brancher la barrière « validé com » sur l'automatisation du site, qui crée aujourd'hui la page dès la création de la fiche."
+      ],
+      stack: ['Notion', 'Make', 'SharePoint']
     },
     {
       id: 'fmi',
@@ -132,16 +140,16 @@ window.CV = {
       id: 'automations',
       title: 'Automations',
       meta: 'Notion × Make × WordPress · Ground Control',
-      teaser: 'Les mises à jour manuelles du site WordPress prenaient du temps chaque semaine : un pipeline qui publie en batch et tourne sans supervision.',
+      teaser: "Les mises à jour manuelles du site WordPress prenaient du temps chaque semaine : les pages du site se créent depuis Notion et l'agenda tourne sans supervision.",
       impact: ['≈ 1 h gagnée par semaine', 'En production sans supervision pendant un congé paternité'],
       flow: {
-        alt: 'Schéma du pipeline : base Notion des projets, Make crée les pages en batch, WordPress affiche la page Programmation triée et sans événements passés',
+        alt: 'Schéma du pipeline : une nouvelle fiche dans la base Événements crée via Make la page projet WordPress avec ses champs et son image ; la page Programmation se construit seule',
         lines: [
-          'notion · base projets',
-          '   │ 1 trigger',
+          'notion · base événements',
+          '   │ nouvelle fiche',
           '   ▼',
-          'make · création en batch',
-          '   │ champs ACF',
+          'make · page projet créée',
+          '   │ 9 champs ACF + image à la une',
           '   ▼',
           'wordpress · pages projet',
           '   │ [gc_agenda]',
@@ -152,7 +160,7 @@ window.CV = {
       },
       probleme: "Le service com passait un temps considérable à mettre à jour le site WordPress à la main : création des pages de programmation, mise à jour de l'agenda hebdomadaire. L'automatisation devait aussi tenir sans supervision continue, y compris pendant une absence prolongée.",
       construit: [
-        'Un pipeline Notion → Make → WordPress pour la création et la mise en ligne des pages de programmation en batch, déclenché par un seul trigger.',
+        "Un scénario Make, en place depuis mars 2026 : chaque nouvelle fiche de la base Événements crée la page projet WordPress, y reporte neuf champs (dates, horaires, lieu, billetterie, description, typologie, programmation…) et télécharge l'image principale comme image à la une.",
         "La page Programmation se construit seule à partir des pages projet : un shortcode trie les événements par date, place les événements récurrents à leur prochaine occurrence, n'affiche que les 45 jours à venir et retire les événements passés. L'équipe remplit une fiche, le site fait le reste."
       ],
       resultat: "Le script Agenda a tourné en production pendant mon congé paternité, sans supervision. Environ 1 h gagnée par semaine, zéro risque d'oubli. Prochaine itération : intégration d'une plateforme de programmation via API, gain estimé à 5–10 h par semaine.",
