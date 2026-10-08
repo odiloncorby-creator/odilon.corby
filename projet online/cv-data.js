@@ -204,6 +204,7 @@ window.CV = {
 
   contact: [
     { label: 'email', value: 'odilon.corby@proton.me', href: 'mailto:odilon.corby@proton.me' },
+    { label: 'formulaire', value: 'écrire via le formulaire', href: 'https://boom-coyote-eb6.notion.site/365016bed2dc800685faef4e72240c21' },
     { label: 'tel', value: '+33 6 50 88 16 22', href: 'tel:+33650881622' },
     { label: 'linkedin', value: 'linkedin.com/in/odiloncorby', href: 'https://www.linkedin.com/in/odiloncorby' },
     { label: 'bandcamp', value: 'odilonwav.bandcamp.com', href: 'https://odilonwav.bandcamp.com/' }
