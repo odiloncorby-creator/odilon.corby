@@ -6,7 +6,7 @@ Voir `docs/STATUS.md` (fait, en cours, prochain chantier : dépublication de Fra
 
 ## Marque
 
-**odilon.uncoded** (anciennement odilon.code). Positionnement : *Product Builder No-Code, IA & Communication expert*. Source du CV PDF : `docs/cv/cv-2026.html` (A4), rendu en `docs/cv/cv-2026.pdf` puis copié en `projet online/cv-odilon-corby.pdf` ; version Figma (SVG à texte éditable) via `node docs/cv/html-to-svg.mjs`. Les chiffres du CV suivent ceux des études de cas du site.
+**odilon.uncoded** (anciennement odilon.code). Positionnement : *Product Builder No-Code & IA*. Source du CV PDF : `docs/cv/cv-2026.html` (A4), rendu en `docs/cv/cv-2026.pdf` puis copié en `projet online/cv-odilon-corby.pdf` ; version Figma (SVG à texte éditable) via `node docs/cv/html-to-svg.mjs`. Les chiffres du CV suivent ceux des études de cas du site.
 
 ## Fichiers (`projet online/`, dossier publié)
 
@@ -47,7 +47,7 @@ Voir `docs/STATUS.md` (fait, en cours, prochain chantier : dépublication de Fra
 - Ne jamais supprimer `pointer-events: none` sur `.projet-card-bg`
 - Titres décodés au scroll (scramble), prompts `~/odilon.uncoded $ …`, scanlines CRT
 - Portrait en ASCII qui se révèle en photo au survol / tap
-- Hero : rôle « Product Builder No-Code, IA & Communication expert » + un seul bloc d'accroche (`tagline` + `intro`), orienté product sans lâcher l'éditorial. L'ancien encadré métier visé/positionnement a été fusionné dedans (sept. 2026)
+- Hero : rôle « Product Builder No-Code & IA » + un seul bloc d'accroche (`tagline` + `intro`), orienté product sans lâcher l'éditorial. L'ancien encadré métier visé/positionnement a été fusionné dedans (sept. 2026)
 - Produits : 4 études de cas (naïko, Notion OS, FMI, Automations). En-tête visible (accroche problème → résultat, 2 faits d'impact sourcés), puis captures ou schéma ASCII, puis bouton « [+] lire l'étude de cas » qui déplie Problème / Ce que j'ai construit / Impact / stack. Clic sur une capture = visionneuse `UFX.lightbox`
 
 ## Keywords éditoriaux du parcours

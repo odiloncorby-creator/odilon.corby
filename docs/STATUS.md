@@ -8,7 +8,7 @@ Dernière mise à jour : 2026-10-03
 
 | Livrable | Détail |
 |---|---|
-| Repositionnement | « Product Builder No-Code, IA & Communication expert » sur le site et le CV PDF |
+| Repositionnement | « Product Builder No-Code & IA » (identité principale) + dix ans de communication et stratégie éditoriale comme atout (oct. 2026) ; formation Uncode School ajoutée |
 | Écran de démarrage | `index.html` — boot ASCII, choix `[1] mode lecture` / `[2] mode terminal`, `?skip` → lecture |
 | Mode lecture | `odilon-corby-cv.html` — page qui défile, couche terminal (prompts, scramble, portrait ASCII, scanlines, barre de statut) |
 | Mode terminal | `terminal.html` — CV par commandes : help, whoami, parcours [n], produits, open <produit>, skills, stack, approche, music, contact, cv, lecture, clear (+ `sudo hire-me`, `glitch`) |

@@ -7,10 +7,10 @@
 window.CV = {
   brand: 'odilon.uncoded',
   name: 'Odilon Corby',
-  role: 'Product Builder No-Code, IA & Communication expert',
+  role: 'Product Builder No-Code & IA',
   eyebrow: 'Product builder · Workflows IA · Stratégie éditoriale · Communication',
-  tagline: "Construire l'outil, structurer le contenu, porter le message.",
-  intro: "Je conçois des outils no-code & IA, de l'idée à la mise en production, avec dix ans de stratégie éditoriale derrière : des produits qui tiennent aussi par leurs contenus et leur diffusion.",
+  tagline: "Je construis des outils no-code et IA, et je m'occupe de leur adoption : cadrage, construction, récit.",
+  intro: "Product Builder avec dix ans de communication et de stratégie éditoriale. Je cadre le besoin, je livre l'outil, je fais en sorte qu'on s'en serve.",
   meta: { location: 'Paris, FR', availability: 'Sur demande', experience: '+10 ans' },
   portrait: 'portrait LLR 0251387 - Grande.jpeg',
   pdf: 'cv-odilon-corby.pdf',
@@ -199,7 +199,7 @@ window.CV = {
     release: { title: 'La Longue Marche', href: 'https://odilonwav.bandcamp.com/album/la-longue-marche' }
   },
 
-  formation: ['Masters Communication · Cesacom / Cergy · 2015', 'BTS Communication · CFA SACEF · 2012'],
+  formation: ['Uncode School · Product Builder No-Code & IA · Titre RNCP · en cours · certification prévue en juin 2027', 'Masters Communication · Cesacom / Cergy · 2015', 'BTS Communication · CFA SACEF · 2012'],
   langues: ['Français · natif', 'Anglais · courant'],
 
   contact: [
