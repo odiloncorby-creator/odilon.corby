@@ -120,3 +120,51 @@ Démarrer le serveur CV : `python3 -m http.server 54550 --bind 127.0.0.1` depuis
 - **Toujours utiliser `gh` CLI** pour toutes les opérations GitHub (push, PR, Pages, tokens) — ne jamais demander à l'utilisateur de faire des manipulations manuelles que Claude peut faire lui-même
 - **Vérifier les outils disponibles avant de déléguer** — `gh`, `git`, `python3`, `curl` sont disponibles ; les utiliser directement
 - L'utilisateur ne doit pas avoir à faire de manips Git/GitHub manuellement
+
+## Figma MCP — Intégration design
+
+### Flux requis (ne pas sauter d'étape)
+
+1. `get_design_context` sur le node concerné → récupère structure + code de référence
+2. `get_screenshot` → référence visuelle pour valider la fidélité
+3. Traduire la sortie (généralement React + Tailwind) en **HTML/CSS vanilla** selon les conventions du projet
+4. Vérifier la parité visuelle avec le screenshot Figma avant de valider
+
+### Règles de traduction Figma → vanilla
+
+- **IMPORTANT : ne jamais hardcoder de couleurs hex** — toujours utiliser les variables CSS : `var(--black)`, `var(--oxide)`, `var(--white)`, etc.
+- **IMPORTANT : ne jamais hardcoder de noms de polices** — utiliser `var(--serif)`, `var(--mono)`, `var(--body)`
+- Remplacer les classes Tailwind par des styles inline dans `<style>` ou des règles CSS nommées sémantiquement
+- Réutiliser les classes CSS existantes avant d'en créer de nouvelles
+- Tout nouveau style va dans le bloc `<style>` du fichier concerné, jamais en attribut `style=""` sauf pour des valeurs dynamiques JS
+
+### Tokens design
+
+| Token | Valeur | Usage |
+|---|---|---|
+| `--black` | `#080808` | Fond global |
+| `--deep` | `#0f0f0f` | Sidebar |
+| `--surface` | `#141414` | Cartes, surfaces |
+| `--oxide` | `#c0392b` | Accent rouge principal |
+| `--oxide-dim` | `#8a2820` | Accent atténué |
+| `--oxide-glow` | `rgba(192,57,43,0.15)` | Lueur douce |
+| `--white` | `#f0ede6` | Texte principal |
+| `--white-dim` | `rgba(240,237,230,0.5)` | Texte secondaire |
+| `--white-ghost` | `rgba(240,237,230,0.08)` | Hover subtil |
+| `--serif` | `'Playfair Display'` | Titres |
+| `--mono` | `'IBM Plex Mono'` | Labels, nav, tags |
+| `--body` | `'EB Garamond'` | Corps de texte |
+
+### Assets Figma
+
+- **IMPORTANT : si le serveur Figma MCP retourne une URL localhost pour une image ou SVG, l'utiliser directement**
+- Ne pas créer de placeholders si une source localhost est disponible
+- Ne pas installer de librairies d'icônes — tout asset doit venir du payload Figma
+- Les images statiques se placent dans `projet online/` à côté du fichier HTML
+
+### Structure du fichier HTML
+
+- Tout le CSS est dans un bloc `<style>` unique en tête de fichier
+- Les sections sont délimitées par des commentaires `/* ─── NOM ─── */`
+- Le JS est en bas de fichier dans un bloc `<script>` unique
+- Respecter l'ordre de la nav : Hero → Parcours → Approche → Projets → Compétences
